@@ -8,47 +8,104 @@
 
 namespace App\Models;
 
-class Character {
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-	public $name = '';
+/**
+ * Class Character
+ * @package App\Models
+ *
+ * @property int $id
+ * @property int $user_id
+ *
+ * @property string $name
+ * @property string $nickname
+ * @property string $last_name
+ */
+class Character extends Model {
 
-	public $sex = '';
-
-	public $age = 0;
-
-	private $position;
-
-	private $abilities;
-
-	private $inventory;
-
-	private $health;
-
-	private $actionPoints = 0;
-
-	private $action;
-
-	/**
-	 * Character constructor.
-	 */
+    /**
+     * Character constructor.
+     *
+     */
 	public function __construct() {
 
-
+        parent::__construct();
 
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getPosition() {
-		return $this->position;
+    /**
+     * @return HasOne
+     */
+	public function body() {
+
+		return $this->hasOne('App\Models\Body');
+
 	}
 
-	/**
-	 * @param Position $position
-	 */
-	public function setPosition(Position $position) {
-		$this->position = $position;
+    /**
+     * @return HasOne
+     */
+	public function mind() {
+
+		return $this->hasOne('App\Models\Mind');
+
 	}
+
+    /**
+     * @return HasOne
+     */
+	public function inventory() {
+
+		return $this->hasOne('App\Models\Inventory');
+
+	}
+
+    /**
+     * @return HasMany
+     */
+    public function assets() {
+
+        return $this->hasMany('App\Models\Asset');
+
+    }
+
+    /**
+     * @return BelongsTo
+     */
+	public function squad() {
+
+		return $this->belongsTo('App\Models\Squad');
+
+	}
+
+    /**
+     * @return HasMany
+     */
+	public function relations() {
+
+	    return $this->hasMany('App\Models\Relation');
+
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function queue() {
+
+        return $this->hasOne('App\Models\Queue');
+
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function history() {
+
+        return $this->hasOne('App\Models\History');
+
+    }
 
 }

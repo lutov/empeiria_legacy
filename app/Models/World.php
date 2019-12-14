@@ -51,14 +51,24 @@ class World extends Model {
 	 * @return Size
 	 */
 	public function getSize(): Size {
+
 		return $this->size;
+
 	}
 
 	/**
 	 * @return array
 	 */
 	public function getStructure(): array {
+
 		return $this->structure;
+
 	}
+
+    public function history() {
+
+        return $this->hasOne('App\Models\History');
+
+    }
 
 }
