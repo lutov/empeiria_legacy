@@ -23,6 +23,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property string $nickname
  * @property string $last_name
+ *
+ * @property Body $body
+ * @property Mind $mind
  */
 class Character extends Model {
 

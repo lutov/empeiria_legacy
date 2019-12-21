@@ -10,6 +10,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Mind
@@ -18,11 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $character_id
  *
- * @property int $smart
- * @property int $practice
- * @property int $intelligence
- * @property int $nature
- *
+ * @property MindSpin $spin
  * @property Character $owner
  */
 class Mind extends Model {
@@ -44,5 +41,28 @@ class Mind extends Model {
 		return $this->belongsTo('App\Models\Character');
 
 	}
+
+    /**
+     * @return HasOne
+     */
+    public function spin() {
+
+        return $this->hasOne('App\Models\MindSpin');
+
+    }
+
+    /**
+     * @param array $spin
+     * @return mixed
+     */
+    public function setSpin(array $spin = array()) {
+
+        $mindSpin = new MindSpin();
+        $mindSpin->fill($spin);
+        $this->spin()->save($mindSpin);
+
+        return $this->spin();
+
+    }
 
 }

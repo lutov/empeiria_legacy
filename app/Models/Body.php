@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $character_id
  *
  * @property string $sex
- * @property float $age
+ * @property int $age
  *
  * @property int $height
  * @property int $weight
@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Size $size
  * @property Position $position
  * @property BodyPart[] $parts
+ * @property BodyFace $face
  * @property Character $owner
  *
  * @property bool $dead
@@ -84,5 +85,28 @@ class Body extends Model {
 		return $this->belongsTo('App\Models\Character');
 
 	}
+
+    /**
+     * @return HasOne
+     */
+	public function face() {
+
+	    return $this->hasOne('App\Models\BodyFace');
+
+    }
+
+    /**
+     * @param array $face
+     * @return mixed
+     */
+	public function setFace(array $face = array()) {
+
+	    $bodyFace = new BodyFace();
+	    $bodyFace->fill($face);
+        $this->face()->save($bodyFace);
+
+        return $this->face();
+
+    }
 
 }
