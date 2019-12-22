@@ -9,12 +9,12 @@
 namespace App\Models\Events;
 
 use App\Models\Body;
-use App\Models\BodyFace;
+use App\Models\BodyParams;
 use App\Models\Character;
 use App\Models\Event;
 use App\Models\LastName;
 use App\Models\Mind;
-use App\Models\MindSpin;
+use App\Models\MindParams;
 use App\Models\Name;
 use App\Models\Sex;
 
@@ -35,11 +35,11 @@ class Birth extends Event {
 
         $child = new Character();
 
-        $params = array(
+        $nameParams = array(
             'sex' => $sex,
         );
-        $child->name = (isset($this->conditions['name'])) ? $this->conditions['name'] : Name::random($params)->name;
-        $child->last_name = (isset($this->conditions['last_name'])) ? $this->conditions['last_name'] : LastName::random($params)->name;
+        $child->name = (isset($this->conditions['name'])) ? $this->conditions['name'] : Name::random($nameParams)->name;
+        $child->last_name = (isset($this->conditions['last_name'])) ? $this->conditions['last_name'] : LastName::random($nameParams)->name;
 
         $child->save();
 
@@ -49,10 +49,10 @@ class Birth extends Event {
         $body->age = 0;
         $body->sex = $sex;
 
-        $motherFace = $mother->body->face->toArray();
-        $fatherFace = $father->body->face->toArray();
-        $face = BodyFace::getAverage($motherFace, $fatherFace);
-        $body->setFace($face);
+        $motherBodyParams = $mother->body->params->toArray();
+        $fatherBodyParams = $father->body->params->toArray();
+        $bodyParams = BodyParams::getAverage($motherBodyParams, $fatherBodyParams);
+        $body->setParams($bodyParams);
 
         $child->body()->save($body);
         /* BODY */
@@ -60,10 +60,10 @@ class Birth extends Event {
         /* MIND */
         $mind = new Mind();
 
-        $motherSpin = $mother->mind->spin->toArray();
-        $fatherSpin = $father->mind->spin->toArray();
-        $spin = MindSpin::getAverage($motherSpin, $fatherSpin);
-        $mind->setSpin($spin);
+        $motherMindParams = $mother->mind->params->toArray();
+        $fatherMindParams = $father->mind->params->toArray();
+        $mindParams = MindParams::getAverage($motherMindParams, $fatherMindParams);
+        $mind->setParams($mindParams);
 
         $child->mind()->save($mind);
         /* MIND */

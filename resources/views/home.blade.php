@@ -22,7 +22,7 @@
 
                             <td class="p-1 small">
 
-                                @if($player->onPosition($x, $y)) <div class="bg-primary"></div> @endif
+                                @if(isset($player) && $player->onPosition($x, $y)) <div class="bg-primary"></div> @endif
 
                             </td>
 

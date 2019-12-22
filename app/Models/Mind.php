@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $id
  * @property int $character_id
  *
- * @property MindSpin $spin
+ * @property MindParams $params
  * @property Character $owner
  */
 class Mind extends Model {
@@ -45,21 +45,21 @@ class Mind extends Model {
     /**
      * @return HasOne
      */
-    public function spin() {
+    public function params() {
 
-        return $this->hasOne('App\Models\MindSpin');
+        return $this->hasOne('App\Models\MindParams');
 
     }
 
     /**
-     * @param array $spin
+     * @param array $params
      * @return mixed
      */
-    public function setSpin(array $spin = array()) {
+    public function setParams(array $params = array()) {
 
-        $mindSpin = new MindSpin();
-        $mindSpin->fill($spin);
-        $this->spin()->save($mindSpin);
+        $mindParams = new MindParams();
+        $mindParams->fill($params);
+        $this->params()->save($mindParams);
 
         return $this->spin();
 

@@ -14,31 +14,31 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class MindSpin
+ * Class BodyParams
  * @package App\Models
  *
  * @mixin Builder
  *
  * @property int $id
- * @property int $mind_id
+ * @property int $body_id
  *
- * @property int $smart
- * @property int $practice
- * @property int $intelligence
- * @property int $nature
+ * @property int $force
+ * @property int $appeal
+ * @property int $condition
+ * @property int $energy
  *
- * @property Mind $mind
+ * @property Body $body
  *
  */
-class MindSpin extends Model {
+class BodyParams extends Model {
 
     use AverageTrait;
 
-    protected $visible = array('smart', 'practice', 'intelligence', 'nature');
-    protected $fillable = array('smart', 'practice', 'intelligence', 'nature');
+    protected $visible = array('force', 'appeal', 'condition', 'energy');
+    protected $fillable = array('force', 'appeal', 'condition', 'energy');
 
 	/**
-	 * MindSpin constructor.
+	 * BodyFace constructor.
 	 */
 	public function __construct() {
 
@@ -49,9 +49,9 @@ class MindSpin extends Model {
     /**
      * @return BelongsTo
      */
-	public function mind() {
+	public function body() {
 
-		return $this->belongsTo('App\Models\Mind');
+		return $this->belongsTo('App\Models\Body');
 
 	}
 

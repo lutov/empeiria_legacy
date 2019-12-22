@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Size $size
  * @property Position $position
  * @property BodyPart[] $parts
- * @property BodyFace $face
+ * @property BodyParams $params
  * @property Character $owner
  *
  * @property bool $dead
@@ -89,23 +89,23 @@ class Body extends Model {
     /**
      * @return HasOne
      */
-	public function face() {
+	public function params() {
 
-	    return $this->hasOne('App\Models\BodyFace');
+	    return $this->hasOne('App\Models\BodyParams');
 
     }
 
     /**
-     * @param array $face
+     * @param array $params
      * @return mixed
      */
-	public function setFace(array $face = array()) {
+	public function setParams(array $params = array()) {
 
-	    $bodyFace = new BodyFace();
-	    $bodyFace->fill($face);
-        $this->face()->save($bodyFace);
+	    $bodyParams = new BodyParams();
+	    $bodyParams->fill($params);
+        $this->params()->save($bodyParams);
 
-        return $this->face();
+        return $this->params();
 
     }
 
