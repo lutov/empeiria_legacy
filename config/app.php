@@ -39,8 +39,8 @@ return [
     |
     */
 
-    //'debug' => env('APP_DEBUG', false),
-	'debug' => ((isset($_SERVER['REMOTE_ADDR'])) && ($_SERVER['REMOTE_ADDR'] === env('DEBUG_IP'))) ? true : false,
+    'debug' => env('APP_DEBUG', false),
+	//'debug' => ((isset($_SERVER['REMOTE_ADDR'])) && ($_SERVER['REMOTE_ADDR'] === env('DEBUG_IP'))) ? true : false,
 
     /*
     |--------------------------------------------------------------------------
