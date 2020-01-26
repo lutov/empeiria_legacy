@@ -10,8 +10,8 @@ namespace App\Models;
 
 class Size {
 
-	public $x = 0;
-	public $y = 0;
+	private $x = 0;
+	private $y = 0;
 
 	/**
 	 * Size constructor.
