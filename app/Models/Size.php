@@ -25,4 +25,18 @@ class Size {
 
 	}
 
+    /**
+     * @return int
+     */
+    public function getX(): int {
+        return $this->x;
+    }
+
+    /**
+     * @return int
+     */
+    public function getY(): int {
+        return $this->y;
+    }
+
 }

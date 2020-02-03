@@ -33,9 +33,9 @@ class World extends Model {
 
 		$structure = array();
 
-		for($y = 1; $y <= $this->size->y; $y++) {
+		for($y = 1; $y <= $this->size->getY(); $y++) {
 
-			for($x = 1; $x <= $this->size->x; $x++) {
+			for($x = 1; $x <= $this->size->getX(); $x++) {
 
 				$structure[$y][$x] = array();
 
