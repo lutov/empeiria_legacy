@@ -9,6 +9,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Item extends Model {
 
@@ -20,5 +21,23 @@ class Item extends Model {
 		parent::__construct();
 
 	}
+
+    /**
+     * @return HasOne
+     */
+	public function type() {
+
+	    return $this->hasOne('App\Models\ItemType', 'id', 'type_id');
+
+    }
+
+    /**
+     * @return HasOne
+     */
+	public function params() {
+
+	    return $this->hasOne('App\Models\ItemParams', 'item_id',);
+
+    }
 
 }

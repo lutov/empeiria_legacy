@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ItemParams extends Model {
 
+    protected $table = 'items_params';
+
     /**
      * @return BelongsTo
      */
