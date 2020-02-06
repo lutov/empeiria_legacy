@@ -33,11 +33,11 @@ class World extends Model {
 
 		$structure = array();
 
-		for($y = 1; $y <= $this->size->getY(); $y++) {
+		for($y = 1; $y <= $this->y; $y++) {
 
-			for($x = 1; $x <= $this->size->getX(); $x++) {
+			for($x = 1; $x <= $this->x; $x++) {
 
-				$structure[$y][$x] = array();
+				$structure[$y][$x] = array($y.':'.$x);
 
 			}
 
