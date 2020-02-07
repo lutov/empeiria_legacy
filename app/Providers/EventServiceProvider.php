@@ -15,9 +15,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        'App\Events\WorldCreated' => [
+            'App\Listeners\World\StartWorldHistory',
+            'App\Listeners\World\CreateWorldMap',
+            'App\Listeners\World\SetWorldToPresent',
+        ],
+
     ];
 
     /**
@@ -25,10 +33,9 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
+
         parent::boot();
 
-        //
     }
 }
