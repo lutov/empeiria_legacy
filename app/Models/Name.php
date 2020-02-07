@@ -22,8 +22,16 @@ use Illuminate\Database\Query\Builder;
  */
 class Name extends Model {
 
+    /**
+     * @param array $params
+     * @return mixed
+     */
 	public static function random(array $params = array()) {
-        return self::inRandomOrder()->first();
+        return self::select('name')
+            ->where($params)
+            ->inRandomOrder()
+            ->value('name')
+        ;
     }
 
 }

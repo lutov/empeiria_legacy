@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <example-component></example-component>
+                    <world-component></world-component>
 
                 </div>
             </div>

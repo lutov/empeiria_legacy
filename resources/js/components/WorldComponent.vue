@@ -30,20 +30,7 @@
 
             async fetchWorld() {
 
-                try {
-
-                    let world = await d3.json('/api/world');
-                    //console.log(world);
-
-                    this.loadWorld = world;
-
-                    //console.log('World fetched');
-
-                } catch(error) {
-
-                    console.log(error);
-
-                }
+                this.loadWorld = await d3.json('/world');
 
             }
 

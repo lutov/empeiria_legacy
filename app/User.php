@@ -2,12 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use Notifiable;
 
     /**
@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function world() {
+
+        return $this->hasOne('App\Models\World');
+
+    }
+
 }

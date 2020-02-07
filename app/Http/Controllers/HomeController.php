@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\World;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\View\View;
 
 class HomeController extends Controller {
 
@@ -18,7 +21,7 @@ class HomeController extends Controller {
 
 	/**
 	 * @param Request $request
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 * @return Factory|View
 	 */
     public function index(Request $request) {
 
@@ -27,11 +30,7 @@ class HomeController extends Controller {
         //$data = Redis::get('laravel:categories');
         //dd($data);
 
-		$world = new World();
-
-        return view('home', array(
-        	'world' => $world,
-		));
+        return view('home', array());
 
     }
 }

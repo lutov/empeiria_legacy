@@ -4,18 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\World;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WorldController extends Controller {
 
     /**
-     * @param Request $request
-     * @return array
+     * WorldController constructor.
      */
-    public function index(Request $request) {
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
-		$world = new World();
+    /**
+     * @return World
+     */
+    public function index() {
 
-        return $world->getStructure();
+        $user = Auth::user();
+
+        $world = $user->world;
+
+        if(!$world) {
+
+            $world = new World();
+            $world->user_id = $user->id;
+            $world->name = World::getRandomName();
+            $world->save();
+
+        }
+
+        return $world;
 
     }
+
 }
