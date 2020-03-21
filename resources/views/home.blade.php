@@ -4,20 +4,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">The World</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            <faction-component></faction-component>
 
-                    <world-component></world-component>
+            <squad-component></squad-component>
 
-                </div>
-            </div>
+            <character-component></character-component>
+
+            <inventory-component></inventory-component>
+
+            <world-component></world-component>
+
+            <history-component></history-component>
+
         </div>
     </div>
 </div>
