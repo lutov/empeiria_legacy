@@ -9,6 +9,8 @@
 
             <squad-component></squad-component>
 
+            <characters-component></characters-component>
+
             <character-component></character-component>
 
             <inventory-component></inventory-component>
