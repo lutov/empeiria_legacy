@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/world', 'WorldController@index')->name('world');
+
+Route::get('/characters', 'CharactersController@list')->name('characters');
+Route::post('/characters', 'CharactersController@add')->name('character_add');
+Route::get('/characters/{id}', 'CharactersController@get')->name('character');
+Route::post('/characters/{id}', 'CharactersController@update')->name('character_update');
+Route::delete('/characters/{id}', 'CharactersController@delete')->name('character_delete');
