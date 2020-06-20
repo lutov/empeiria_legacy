@@ -7,6 +7,8 @@
 
             <faction-component></faction-component>
 
+            <squads-component></squads-component>
+
             <squad-component></squad-component>
 
             <characters-component></characters-component>
