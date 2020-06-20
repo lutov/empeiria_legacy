@@ -16,9 +16,25 @@
                 <tr v-for="character in characters.data">
                     <td>{{character.id}}</td>
                     <td>{{character.name}}</td>
+                    <td>
+                        <form :action="'/characters/'+character.id" method="POST" class="form-inline">
+                            <button v-on:click.prevent="updateCharacter(character.id)" class="btn btn-sm btn-outline-warning">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form :action="'/characters/'+character.id" method="POST" class="form-inline">
+                            <button v-on:click.prevent="deleteCharacter(character.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>
+
+            <label for="new_character_name">Create new Character</label>
+            <form action="/characters" method="POST" class="form-inline">
+                <input v-model="new_character_name" placeholder="New character's name" class="form-control form-control-sm mr-2" id="new_character_name">
+                <button v-on:click.prevent="createCharacter()" class="btn btn-sm btn-success">Create</button>
+            </form>
 
         </div>
     </div>
@@ -30,7 +46,8 @@
         name: 'characters-component',
         data() {
             return {
-                characters: {}
+                characters: {},
+                new_character_name: ''
             };
         },
         methods: {
@@ -41,6 +58,52 @@
                 } catch (error) {
                     console.error(error);
                 }
+            },
+
+            async createCharacter() {
+
+                let params = {
+                    name: this.new_character_name
+                };
+
+                try {
+                    this.characters = await axios.post('/characters', params);
+                    this.new_character_name = '';
+                    this.fetchCharacters();
+                } catch (error) {
+                    console.error(error);
+                }
+
+            },
+
+            async updateCharacter(id) {
+
+                let params = {
+                    id: id
+                };
+
+                try {
+                    this.characters = await axios.post('/characters/'+id, params);
+                    this.fetchCharacters();
+                } catch (error) {
+                    console.error(error);
+                }
+
+            },
+
+            async deleteCharacter(id) {
+
+                let params = {
+                    id: id
+                };
+
+                try {
+                    this.characters = await axios.delete('/characters/'+id, params);
+                    this.fetchCharacters();
+                } catch (error) {
+                    console.error(error);
+                }
+
             }
 
         },
