@@ -32,3 +32,9 @@ Route::post('/squads', 'SquadsController@add')->name('squad_add');
 Route::get('/squads/{id}', 'SquadsController@get')->name('squad');
 Route::post('/squads/{id}', 'SquadsController@update')->name('squad_update');
 Route::delete('/squads/{id}', 'SquadsController@delete')->name('squad_delete');
+
+Route::get('/factions', 'FactionsController@list')->name('factions');
+Route::post('/factions', 'FactionsController@add')->name('faction_add');
+Route::get('/factions/{id}', 'FactionsController@get')->name('faction');
+Route::post('/factions/{id}', 'FactionsController@update')->name('faction_update');
+Route::delete('/factions/{id}', 'FactionsController@delete')->name('faction_delete');

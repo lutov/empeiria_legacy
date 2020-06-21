@@ -5,6 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
+            <factions-component></factions-component>
+
             <faction-component></faction-component>
 
             <squads-component></squads-component>
