@@ -19,8 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/world', 'WorldController@index')->name('world');
-
 Route::get('/characters', 'CharactersController@list')->name('characters');
 Route::post('/characters', 'CharactersController@add')->name('character_add');
 Route::get('/characters/{id}', 'CharactersController@get')->name('character');
@@ -38,3 +36,9 @@ Route::post('/factions', 'FactionsController@add')->name('faction_add');
 Route::get('/factions/{id}', 'FactionsController@get')->name('faction');
 Route::post('/factions/{id}', 'FactionsController@update')->name('faction_update');
 Route::delete('/factions/{id}', 'FactionsController@delete')->name('faction_delete');
+
+Route::get('/worlds', 'WorldsController@list')->name('worlds');
+Route::post('/worlds', 'WorldsController@add')->name('world_add');
+Route::get('/worlds/{id}', 'WorldsController@get')->name('world');
+Route::post('/worlds/{id}', 'WorldsController@update')->name('world_update');
+Route::delete('/worlds/{id}', 'WorldsController@delete')->name('world_delete');
