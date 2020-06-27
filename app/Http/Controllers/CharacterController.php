@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\World;
+use App\Models\Character;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WorldsController extends Controller {
+class CharacterController extends Controller {
 
-    private $slug = 'worlds';
-    private $model = World::class;
+    private $slug = 'characters';
+    private $model = Character::class;
 
     /**
      * HomeController constructor.
@@ -21,29 +21,29 @@ class WorldsController extends Controller {
     /**
      * @return mixed
      */
-    public function list() {
+    public function index() {
         $user = Auth::user();
         return $this->model::where('user_id', $user->id)->get();
     }
 
     /**
      * @param Request $request
-     * @return World
+     * @return Character
      */
-    public function add(Request $request) {
+    public function store(Request $request) {
 
-        $world = new World();
+        $character = new Character();
 
         $user = Auth::user();
         $name = $request->input('name');
 
         if(!empty($name)) {
-            $world->user_id = $user->id;
-            $world->name = $name;
-            $world->save();
+            $character->user_id = $user->id;
+            $character->name = $name;
+            $character->save();
         }
 
-        return $world;
+        return $character;
 
     }
 
@@ -51,7 +51,7 @@ class WorldsController extends Controller {
      * @param int $id
      * @return mixed
      */
-    public function get(int $id) {
+    public function show(int $id) {
         return $this->model::find($id);
     }
 
@@ -60,23 +60,23 @@ class WorldsController extends Controller {
      * @return mixed
      */
     public function update(int $id) {
-        $world = World::find($id);
-        if(isset($world->id)) {
+        $character = Character::find($id);
+        if(isset($character->id)) {
             //
         }
-        return $world;
+        return $character;
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function delete(int $id) {
-        $world = World::find($id);
-        if(isset($world->id)) {
-            $world->delete();
+    public function destroy(int $id) {
+        $character = Character::find($id);
+        if(isset($character->id)) {
+            $character->delete();
         }
-        return $world;
+        return $character;
     }
 
 }

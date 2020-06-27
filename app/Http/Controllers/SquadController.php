@@ -6,7 +6,7 @@ use App\Models\Squad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SquadsController extends Controller {
+class SquadController extends Controller {
 
     private $slug = 'squads';
     private $model = Squad::class;
@@ -21,7 +21,7 @@ class SquadsController extends Controller {
     /**
      * @return mixed
      */
-    public function list() {
+    public function index() {
         $user = Auth::user();
         return $this->model::where('user_id', $user->id)->get();
     }
@@ -30,7 +30,7 @@ class SquadsController extends Controller {
      * @param Request $request
      * @return Squad
      */
-    public function add(Request $request) {
+    public function store(Request $request) {
 
         $squad = new Squad();
 
@@ -51,7 +51,7 @@ class SquadsController extends Controller {
      * @param int $id
      * @return mixed
      */
-    public function get(int $id) {
+    public function show(int $id) {
         return $this->model::find($id);
     }
 
@@ -71,7 +71,7 @@ class SquadsController extends Controller {
      * @param int $id
      * @return mixed
      */
-    public function delete(int $id) {
+    public function destroy(int $id) {
         $squad = Squad::find($id);
         if(isset($squad->id)) {
             $squad->delete();

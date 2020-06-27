@@ -18,12 +18,14 @@
                     <td>{{squad.name}}</td>
                     <td>
                         <form :action="'/squads/'+squad.id" method="POST" class="form-inline">
+                            <input type="hidden" name="_method" value="PUT">
                             <button v-on:click.prevent="updateSquad(squad.id)" class="btn btn-sm btn-outline-warning">Edit</button>
                         </form>
                     </td>
                     <td>
                         <form :action="'/squads/'+squad.id" method="POST" class="form-inline">
-                            <button v-on:click.prevent="deleteSquad(squad.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button v-on:click.prevent="destroySquad(squad.id)" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -33,7 +35,7 @@
             <label for="new_squad_name">Create new Squad</label>
             <form action="/squads" method="POST" class="form-inline">
                 <input v-model="new_squad_name" placeholder="New squad's name" class="form-control form-control-sm mr-2" id="new_squad_name">
-                <button v-on:click.prevent="createSquad()" class="btn btn-sm btn-success">Create</button>
+                <button v-on:click.prevent="storeSquad()" class="btn btn-sm btn-success">Create</button>
             </form>
 
         </div>
@@ -60,7 +62,7 @@
                 }
             },
 
-            async createSquad() {
+            async storeSquad() {
 
                 let params = {
                     name: this.new_squad_name
@@ -91,7 +93,7 @@
 
             },
 
-            async deleteSquad(id) {
+            async destroySquad(id) {
 
                 let params = {
                     id: id

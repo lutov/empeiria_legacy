@@ -18,12 +18,14 @@
                     <td>{{world.name}}</td>
                     <td>
                         <form :action="'/worlds/'+world.id" method="POST" class="form-inline">
+                            <input type="hidden" name="_method" value="PUT">
                             <button v-on:click.prevent="updateWorld(world.id)" class="btn btn-sm btn-outline-warning">Edit</button>
                         </form>
                     </td>
                     <td>
                         <form :action="'/worlds/'+world.id" method="POST" class="form-inline">
-                            <button v-on:click.prevent="deleteWorld(world.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button v-on:click.prevent="destroyWorld(world.id)" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -33,7 +35,7 @@
             <label for="new_world_name">Create new World</label>
             <form action="/worlds" method="POST" class="form-inline">
                 <input v-model="new_world_name" placeholder="New world's name" class="form-control form-control-sm mr-2" id="new_world_name">
-                <button v-on:click.prevent="createWorld()" class="btn btn-sm btn-success">Create</button>
+                <button v-on:click.prevent="storeWorld()" class="btn btn-sm btn-success">Create</button>
             </form>
 
         </div>
@@ -60,7 +62,7 @@
                 }
             },
 
-            async createWorld() {
+            async storeWorld() {
 
                 let params = {
                     name: this.new_world_name
@@ -91,7 +93,7 @@
 
             },
 
-            async deleteWorld(id) {
+            async destroyWorld(id) {
 
                 let params = {
                     id: id

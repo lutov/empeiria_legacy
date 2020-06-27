@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Faction;
+use App\Models\World;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FactionsController extends Controller {
+class WorldController extends Controller {
 
-    private $slug = 'factions';
-    private $model = Faction::class;
+    private $slug = 'worlds';
+    private $model = World::class;
 
     /**
      * HomeController constructor.
@@ -21,29 +21,29 @@ class FactionsController extends Controller {
     /**
      * @return mixed
      */
-    public function list() {
+    public function index() {
         $user = Auth::user();
         return $this->model::where('user_id', $user->id)->get();
     }
 
     /**
      * @param Request $request
-     * @return Faction
+     * @return World
      */
-    public function add(Request $request) {
+    public function store(Request $request) {
 
-        $faction = new Faction();
+        $world = new World();
 
         $user = Auth::user();
         $name = $request->input('name');
 
         if(!empty($name)) {
-            $faction->user_id = $user->id;
-            $faction->name = $name;
-            $faction->save();
+            $world->user_id = $user->id;
+            $world->name = $name;
+            $world->save();
         }
 
-        return $faction;
+        return $world;
 
     }
 
@@ -51,7 +51,7 @@ class FactionsController extends Controller {
      * @param int $id
      * @return mixed
      */
-    public function get(int $id) {
+    public function show(int $id) {
         return $this->model::find($id);
     }
 
@@ -60,23 +60,23 @@ class FactionsController extends Controller {
      * @return mixed
      */
     public function update(int $id) {
-        $faction = Faction::find($id);
-        if(isset($faction->id)) {
+        $world = World::find($id);
+        if(isset($world->id)) {
             //
         }
-        return $faction;
+        return $world;
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function delete(int $id) {
-        $faction = Faction::find($id);
-        if(isset($faction->id)) {
-            $faction->delete();
+    public function destroy(int $id) {
+        $world = World::find($id);
+        if(isset($world->id)) {
+            $world->delete();
         }
-        return $faction;
+        return $world;
     }
 
 }

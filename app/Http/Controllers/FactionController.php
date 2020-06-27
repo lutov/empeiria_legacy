@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Character;
+use App\Models\Faction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CharactersController extends Controller {
+class FactionController extends Controller {
 
-    private $slug = 'characters';
-    private $model = Character::class;
+    private $slug = 'factions';
+    private $model = Faction::class;
 
     /**
      * HomeController constructor.
@@ -21,29 +21,29 @@ class CharactersController extends Controller {
     /**
      * @return mixed
      */
-    public function list() {
+    public function index() {
         $user = Auth::user();
         return $this->model::where('user_id', $user->id)->get();
     }
 
     /**
      * @param Request $request
-     * @return Character
+     * @return Faction
      */
-    public function add(Request $request) {
+    public function store(Request $request) {
 
-        $character = new Character();
+        $faction = new Faction();
 
         $user = Auth::user();
         $name = $request->input('name');
 
         if(!empty($name)) {
-            $character->user_id = $user->id;
-            $character->name = $name;
-            $character->save();
+            $faction->user_id = $user->id;
+            $faction->name = $name;
+            $faction->save();
         }
 
-        return $character;
+        return $faction;
 
     }
 
@@ -51,7 +51,7 @@ class CharactersController extends Controller {
      * @param int $id
      * @return mixed
      */
-    public function get(int $id) {
+    public function show(int $id) {
         return $this->model::find($id);
     }
 
@@ -60,23 +60,23 @@ class CharactersController extends Controller {
      * @return mixed
      */
     public function update(int $id) {
-        $character = Character::find($id);
-        if(isset($character->id)) {
+        $faction = Faction::find($id);
+        if(isset($faction->id)) {
             //
         }
-        return $character;
+        return $faction;
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function delete(int $id) {
-        $character = Character::find($id);
-        if(isset($character->id)) {
-            $character->delete();
+    public function destroy(int $id) {
+        $faction = Faction::find($id);
+        if(isset($faction->id)) {
+            $faction->delete();
         }
-        return $character;
+        return $faction;
     }
 
 }

@@ -18,12 +18,14 @@
                     <td>{{faction.name}}</td>
                     <td>
                         <form :action="'/factions/'+faction.id" method="POST" class="form-inline">
+                            <input type="hidden" name="_method" value="PUT">
                             <button v-on:click.prevent="updateFaction(faction.id)" class="btn btn-sm btn-outline-warning">Edit</button>
                         </form>
                     </td>
                     <td>
                         <form :action="'/factions/'+faction.id" method="POST" class="form-inline">
-                            <button v-on:click.prevent="deleteFaction(faction.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button v-on:click.prevent="destroyFaction(faction.id)" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -33,7 +35,7 @@
             <label for="new_faction_name">Create new Faction</label>
             <form action="/factions" method="POST" class="form-inline">
                 <input v-model="new_faction_name" placeholder="New faction's name" class="form-control form-control-sm mr-2" id="new_faction_name">
-                <button v-on:click.prevent="createFaction()" class="btn btn-sm btn-success">Create</button>
+                <button v-on:click.prevent="storeFaction()" class="btn btn-sm btn-success">Create</button>
             </form>
 
         </div>
@@ -60,7 +62,7 @@
                 }
             },
 
-            async createFaction() {
+            async storeFaction() {
 
                 let params = {
                     name: this.new_faction_name
@@ -91,7 +93,7 @@
 
             },
 
-            async deleteFaction(id) {
+            async destroyFaction(id) {
 
                 let params = {
                     id: id
