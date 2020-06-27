@@ -20,8 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resources([
-    'characters' => 'CharacterController',
-    'squads' => 'SquadController',
-    'factions' => 'FactionController',
+
     'worlds' => 'WorldController',
+    'factions' => 'FactionController',
+    'squads' => 'SquadController',
+    'characters' => 'CharacterController',
+
+    'inventories' => 'InventoryController',
+
 ]);

@@ -23,7 +23,7 @@ class CharacterController extends Controller {
      */
     public function index() {
         $user = Auth::user();
-        return $this->model::where('user_id', $user->id)->get();
+        return Character::where('user_id', $user->id)->get();
     }
 
     /**
@@ -38,9 +38,13 @@ class CharacterController extends Controller {
         $name = $request->input('name');
 
         if(!empty($name)) {
+
             $character->user_id = $user->id;
             $character->name = $name;
             $character->save();
+
+            $character->inventory()->create();
+
         }
 
         return $character;
@@ -52,7 +56,7 @@ class CharacterController extends Controller {
      * @return mixed
      */
     public function show(int $id) {
-        return $this->model::find($id);
+        return Character::find($id);
     }
 
     /**

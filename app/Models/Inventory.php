@@ -10,6 +10,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Inventory
+ * @package App\Models
+ *
+ * @property int $character_id
+ *
+ * @method static find(int $id)
+ * @method static where(string $string, $id)
+ */
 class Inventory extends Model {
 
 	/**

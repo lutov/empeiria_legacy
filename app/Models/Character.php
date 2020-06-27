@@ -27,6 +27,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property Body $body
  * @property Mind $mind
+ *
+ * @method static find(int $id)
+ * @method static where(string $string, $id)
  */
 class Character extends Model {
 
