@@ -9,6 +9,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Inventory
@@ -30,12 +32,18 @@ class Inventory extends Model {
 
 	}
 
+    /**
+     * @return BelongsToMany
+     */
     public function items() {
 
-        return $this->hasMany('App\Models\Item');
+        return $this->belongsToMany('App\Models\Item', 'inventories_items', 'inventory_id', 'item_id');
 
     }
 
+    /**
+     * @return BelongsTo
+     */
 	public function owner() {
 
 		return $this->belongsTo('App\Models\Character');

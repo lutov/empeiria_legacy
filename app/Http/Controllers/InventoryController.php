@@ -77,4 +77,36 @@ class InventoryController extends Controller {
         return $inventory;
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function items(int $id) {
+        return Inventory::find($id)->items;
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function attachItems(Request $request, int $id) {
+        $items = $request->input('items', array());
+        $inventory = Inventory::find($id);
+        $inventory->items()->attach($items);
+        return $inventory;
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function detachItems(Request $request, int $id) {
+        $items = $request->input('items', array());
+        $inventory = Inventory::find($id);
+        $inventory->items()->detach($items);
+        return $inventory;
+    }
+
 }

@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('inventories/{id}/items', 'InventoryController@items')->name('inventory_items');
+Route::post('inventories/{id}/items/attach', 'InventoryController@attachItems')->name('inventory_attach_items');
+Route::post('inventories/{id}/items/detach', 'InventoryController@detachItems')->name('inventory_detach_items');
+
 Route::resources([
 
     'worlds' => 'WorldController',
@@ -26,6 +30,7 @@ Route::resources([
     'squads' => 'SquadController',
     'characters' => 'CharacterController',
 
+    'items' => 'ItemController',
     'inventories' => 'InventoryController',
 
 ]);

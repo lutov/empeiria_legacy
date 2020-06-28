@@ -83,5 +83,21 @@
 
     </div>
 
+    <div class="row justify-content-center mb-4">
+
+        <div class="col-md-6">
+
+            <items-component></items-component>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <history-component></history-component>
+
+        </div>
+
+    </div>
+
 </div>
 @endsection
