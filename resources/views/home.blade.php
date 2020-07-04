@@ -39,6 +39,22 @@
 
         <div class="col-md-6">
 
+            <squadstypes-component></squadstypes-component>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <squad-component></squad-component>
+
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center mb-4">
+
+        <div class="col-md-6">
+
             <squads-component></squads-component>
 
         </div>
