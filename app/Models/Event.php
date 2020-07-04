@@ -10,17 +10,20 @@ namespace App\Models;
 
 use Illuminate\Support\Collection;
 
-abstract class Event {
+abstract class Event
+{
 
     protected $conditions = array();
     protected $participants;
     protected $depiction = '';
 
-    protected function setConditions(array $conditions) {
+    protected function setConditions(array $conditions)
+    {
         $this->conditions = $conditions;
     }
 
-    protected function setParticipants(Collection $participants) {
+    protected function setParticipants(Collection $participants)
+    {
         $this->participants = $participants;
     }
 

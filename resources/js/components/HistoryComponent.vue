@@ -18,9 +18,7 @@
                 loadHistory: {}
             };
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             console.log('History Component mounted');
         }

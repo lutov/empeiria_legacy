@@ -12,30 +12,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ItemType extends Model {
+class ItemType extends Model
+{
 
     protected $table = 'items_types';
 
     /**
      * @return HasMany
      */
-    public function items() {
-
+    public function items()
+    {
         return $this->hasMany('App\Models\Item', 'type_id');
-
     }
 
     /**
      * @return HasMany
      */
-    public function children() {
+    public function children()
+    {
         return $this->hasMany('App\Models\ItemType', 'parent_id');
     }
 
     /**
      * @return BelongsTo
      */
-    public function parent() {
+    public function parent()
+    {
         return $this->belongsTo('App\Models\ItemType', 'parent_id');
     }
 

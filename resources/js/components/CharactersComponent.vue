@@ -17,15 +17,19 @@
                     <td>{{character.id}}</td>
                     <td>{{character.name}}</td>
                     <td>
-                        <form :action="'/characters/'+character.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="PUT">
-                            <button v-on:click.prevent="updateCharacter(character.id)" class="btn btn-sm btn-outline-warning">Edit</button>
+                        <form :action="'/characters/'+character.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="PUT">
+                            <button class="btn btn-sm btn-outline-warning"
+                                    v-on:click.prevent="updateCharacter(character.id)">Edit
+                            </button>
                         </form>
                     </td>
                     <td>
-                        <form :action="'/characters/'+character.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button v-on:click.prevent="destroyCharacter(character.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form :action="'/characters/'+character.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-sm btn-outline-danger"
+                                    v-on:click.prevent="destroyCharacter(character.id)">Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -33,9 +37,10 @@
             </table>
 
             <label for="new_character_name">Create new Character</label>
-            <form action="/characters" method="POST" class="form-inline">
-                <input v-model="new_character_name" placeholder="New character's name" class="form-control form-control-sm mr-2" id="new_character_name">
-                <button v-on:click.prevent="storeCharacter()" class="btn btn-sm btn-success">Create</button>
+            <form action="/characters" class="form-inline" method="POST">
+                <input class="form-control form-control-sm mr-2" id="new_character_name"
+                       placeholder="New character's name" v-model="new_character_name">
+                <button class="btn btn-sm btn-success" v-on:click.prevent="storeCharacter()">Create</button>
             </form>
 
         </div>
@@ -85,7 +90,7 @@
                 };
 
                 try {
-                    this.characters = await axios.post('/characters/'+id, params);
+                    this.characters = await axios.post('/characters/' + id, params);
                     this.fetchCharacters();
                 } catch (error) {
                     console.error(error);
@@ -100,7 +105,7 @@
                 };
 
                 try {
-                    this.characters = await axios.delete('/characters/'+id, params);
+                    this.characters = await axios.delete('/characters/' + id, params);
                     this.fetchCharacters();
                 } catch (error) {
                     console.error(error);

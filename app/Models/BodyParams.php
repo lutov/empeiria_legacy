@@ -30,29 +30,28 @@ use Illuminate\Database\Query\Builder;
  * @property Body $body
  *
  */
-class BodyParams extends Model {
+class BodyParams extends Model
+{
 
     use AverageTrait;
 
     protected $visible = array('force', 'appeal', 'condition', 'energy');
     protected $fillable = array('force', 'appeal', 'condition', 'energy');
 
-	/**
-	 * BodyFace constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * BodyFace constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * @return BelongsTo
      */
-	public function body() {
-
-		return $this->belongsTo('App\Models\Body');
-
-	}
+    public function body()
+    {
+        return $this->belongsTo('App\Models\Body');
+    }
 
 }

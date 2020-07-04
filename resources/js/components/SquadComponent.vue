@@ -18,9 +18,7 @@
                 loadSquad: {}
             };
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             console.log('Squad Component mounted');
         }

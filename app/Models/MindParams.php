@@ -30,29 +30,28 @@ use Illuminate\Database\Query\Builder;
  * @property Mind $mind
  *
  */
-class MindParams extends Model {
+class MindParams extends Model
+{
 
     use AverageTrait;
 
     protected $visible = array('smart', 'practice', 'intelligence', 'nature');
     protected $fillable = array('smart', 'practice', 'intelligence', 'nature');
 
-	/**
-	 * MindSpin constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * MindSpin constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * @return BelongsTo
      */
-	public function mind() {
-
-		return $this->belongsTo('App\Models\Mind');
-
-	}
+    public function mind()
+    {
+        return $this->belongsTo('App\Models\Mind');
+    }
 
 }

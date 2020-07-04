@@ -20,18 +20,19 @@ use Illuminate\Database\Query\Builder;
  * @property string $name
  * @property string $slug
  */
-class Name extends Model {
+class Name extends Model
+{
 
     /**
-     * @param array $params
+     * @param  array  $params
      * @return mixed
      */
-	public static function random(array $params = array()) {
+    public static function random(array $params = array())
+    {
         return self::select('name')
             ->where($params)
             ->inRandomOrder()
-            ->value('name')
-        ;
+            ->value('name');
     }
 
 }

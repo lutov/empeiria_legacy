@@ -20,33 +20,31 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static where(string $string, $id)
  * @method static delete(int $id)
  */
-class Item extends Model {
-
-	/**
-	 * Item constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+class Item extends Model
+{
 
     /**
-     * @return HasOne
+     * Item constructor.
      */
-	public function type() {
-
-	    return $this->hasOne('App\Models\ItemType', 'id', 'type_id');
-
+    public function __construct()
+    {
+        parent::__construct();
     }
 
     /**
      * @return HasOne
      */
-	public function params() {
+    public function type()
+    {
+        return $this->hasOne('App\Models\ItemType', 'id', 'type_id');
+    }
 
-	    return $this->hasOne('App\Models\ItemParams', 'item_id',);
-
+    /**
+     * @return HasOne
+     */
+    public function params()
+    {
+        return $this->hasOne('App\Models\ItemParams', 'item_id',);
     }
 
 }

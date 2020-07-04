@@ -39,74 +39,68 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *
  * @property bool $dead
  */
-class Body extends Model {
-
-	/**
-	 * Body constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+class Body extends Model
+{
 
     /**
-     * @return HasOne
+     * Body constructor.
      */
-    public function size() {
-
-        return $this->hasOne('App\Models\Size');
-
+    public function __construct()
+    {
+        parent::__construct();
     }
 
     /**
      * @return HasOne
      */
-    public function position() {
+    public function size()
+    {
+        return $this->hasOne('App\Models\Size');
+    }
 
+    /**
+     * @return HasOne
+     */
+    public function position()
+    {
         return $this->hasOne('App\Models\Position');
-
     }
 
     /**
      * @return HasMany
      */
-    public function parts() {
-
+    public function parts()
+    {
         return $this->hasMany('App\Models\BodyPart');
-
     }
 
     /**
      * @return BelongsTo
      */
-	public function owner() {
+    public function owner()
+    {
+        return $this->belongsTo('App\Models\Character');
+    }
 
-		return $this->belongsTo('App\Models\Character');
+    /**
+     * @param  array  $params
+     * @return mixed
+     */
+    public function setParams(array $params = array())
+    {
+        $bodyParams = new BodyParams();
+        $bodyParams->fill($params);
+        $this->params()->save($bodyParams);
 
-	}
+        return $this->params();
+    }
 
     /**
      * @return HasOne
      */
-	public function params() {
-
-	    return $this->hasOne('App\Models\BodyParams');
-
-    }
-
-    /**
-     * @param array $params
-     * @return mixed
-     */
-	public function setParams(array $params = array()) {
-
-	    $bodyParams = new BodyParams();
-	    $bodyParams->fill($params);
-        $this->params()->save($bodyParams);
-
-        return $this->params();
-
+    public function params()
+    {
+        return $this->hasOne('App\Models\BodyParams');
     }
 
 }

@@ -10,15 +10,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Faction extends Model {
+class Faction extends Model
+{
 
-	/**
-	 * Faction constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * Faction constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 }

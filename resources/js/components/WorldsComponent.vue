@@ -17,15 +17,19 @@
                     <td>{{world.id}}</td>
                     <td>{{world.name}}</td>
                     <td>
-                        <form :action="'/worlds/'+world.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="PUT">
-                            <button v-on:click.prevent="updateWorld(world.id)" class="btn btn-sm btn-outline-warning">Edit</button>
+                        <form :action="'/worlds/'+world.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="PUT">
+                            <button class="btn btn-sm btn-outline-warning" v-on:click.prevent="updateWorld(world.id)">
+                                Edit
+                            </button>
                         </form>
                     </td>
                     <td>
-                        <form :action="'/worlds/'+world.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button v-on:click.prevent="destroyWorld(world.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form :action="'/worlds/'+world.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-sm btn-outline-danger" v-on:click.prevent="destroyWorld(world.id)">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -33,9 +37,10 @@
             </table>
 
             <label for="new_world_name">Create new World</label>
-            <form action="/worlds" method="POST" class="form-inline">
-                <input v-model="new_world_name" placeholder="New world's name" class="form-control form-control-sm mr-2" id="new_world_name">
-                <button v-on:click.prevent="storeWorld()" class="btn btn-sm btn-success">Create</button>
+            <form action="/worlds" class="form-inline" method="POST">
+                <input class="form-control form-control-sm mr-2" id="new_world_name" placeholder="New world's name"
+                       v-model="new_world_name">
+                <button class="btn btn-sm btn-success" v-on:click.prevent="storeWorld()">Create</button>
             </form>
 
         </div>
@@ -85,7 +90,7 @@
                 };
 
                 try {
-                    this.worlds = await axios.post('/worlds/'+id, params);
+                    this.worlds = await axios.post('/worlds/' + id, params);
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);
@@ -100,7 +105,7 @@
                 };
 
                 try {
-                    this.worlds = await axios.delete('/worlds/'+id, params);
+                    this.worlds = await axios.delete('/worlds/' + id, params);
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);

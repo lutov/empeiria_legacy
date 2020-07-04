@@ -17,8 +17,10 @@
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>
-                        <form :action="'/inventories/'+inventoryId+'/items/detach'" method="POST" class="form-inline">
-                            <button v-on:click.prevent="detachItems([item.id])" class="btn btn-sm btn-outline-danger">Remove</button>
+                        <form :action="'/inventories/'+inventoryId+'/items/detach'" class="form-inline" method="POST">
+                            <button class="btn btn-sm btn-outline-danger" v-on:click.prevent="detachItems([item.id])">
+                                Remove
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -27,10 +29,10 @@
 
             <label for="new_items">Add Items</label>
             <form :action="'/inventories/'+inventoryId+'/items/attach'" method="POST">
-                <select class="form-control form-control-sm mr-2" id="new_items" v-model="newItems" :multiple="true">
-                    <option v-for="item in items.data" :value="item.id">{{item.name}}</option>
+                <select :multiple="true" class="form-control form-control-sm mr-2" id="new_items" v-model="newItems">
+                    <option :value="item.id" v-for="item in items.data">{{item.name}}</option>
                 </select>
-                <button v-on:click.prevent="attachItems()" class="btn btn-sm btn-success">Add</button>
+                <button class="btn btn-sm btn-success" v-on:click.prevent="attachItems()">Add</button>
             </form>
 
         </div>
@@ -61,7 +63,7 @@
 
             async fetchInventoryItems() {
                 try {
-                    this.inventoryItems = await axios.get('/inventories/'+this.inventoryId+'/items');
+                    this.inventoryItems = await axios.get('/inventories/' + this.inventoryId + '/items');
                 } catch (error) {
                     console.error(error);
                 }
@@ -72,7 +74,7 @@
                     items: this.newItems
                 };
                 try {
-                    this.items = await axios.post('/inventories/'+this.inventoryId+'/items/attach', params);
+                    this.items = await axios.post('/inventories/' + this.inventoryId + '/items/attach', params);
                     this.fetchInventoryItems();
                     this.newItems = [];
                     this.fetchItems();
@@ -86,7 +88,7 @@
                     items: items
                 };
                 try {
-                    this.items = await axios.post('/inventories/'+this.inventoryId+'/items/detach', params);
+                    this.items = await axios.post('/inventories/' + this.inventoryId + '/items/detach', params);
                     this.fetchInventoryItems();
                     this.newItems = [];
                     this.fetchItems();

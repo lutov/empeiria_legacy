@@ -18,9 +18,7 @@
                 loadFaction: {}
             };
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             console.log('Faction Component mounted');
         }

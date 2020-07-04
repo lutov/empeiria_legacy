@@ -10,10 +10,11 @@ namespace App\Models\Items;
 
 use App\Models\Item;
 use App\Models\ItemParams;
-use App\Models\Size;
 use App\Models\Mass;
+use App\Models\Size;
 
-class Weapon extends Item {
+class Weapon extends Item
+{
 
     protected Size $size;
     protected Mass $mass;

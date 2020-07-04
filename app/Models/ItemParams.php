@@ -11,17 +11,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ItemParams extends Model {
+class ItemParams extends Model
+{
 
     protected $table = 'items_params';
 
     /**
      * @return BelongsTo
      */
-    public function item() {
-
+    public function item()
+    {
         return $this->belongsTo('App\Models\Item');
-
     }
 
 }

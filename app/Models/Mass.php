@@ -8,27 +8,29 @@
 
 namespace App\Models;
 
-class Mass {
+class Mass
+{
 
-	private float $mass = 0;
+    private float $mass = 0;
 
-	public function __construct(int $mass = 0) {
-
-	    $this->mass = $mass;
-
+    public function __construct(int $mass = 0)
+    {
+        $this->mass = $mass;
     }
 
     /**
      * @return int
      */
-    public function getMass(): int {
+    public function getMass(): int
+    {
         return $this->mass;
     }
 
     /**
-     * @param int $mass
+     * @param  int  $mass
      */
-    public function setMass(int $mass): void {
+    public function setMass(int $mass): void
+    {
         $this->mass = $mass;
     }
 

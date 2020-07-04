@@ -21,33 +21,31 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static find(int $id)
  * @method static where(string $string, $id)
  */
-class Inventory extends Model {
+class Inventory extends Model
+{
 
-	/**
-	 * Inventory constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * Inventory constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * @return BelongsToMany
      */
-    public function items() {
-
+    public function items()
+    {
         return $this->belongsToMany('App\Models\Item', 'inventories_items', 'inventory_id', 'item_id');
-
     }
 
     /**
      * @return BelongsTo
      */
-	public function owner() {
-
-		return $this->belongsTo('App\Models\Character');
-
-	}
+    public function owner()
+    {
+        return $this->belongsTo('App\Models\Character');
+    }
 
 }

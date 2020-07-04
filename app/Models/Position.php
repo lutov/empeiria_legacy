@@ -8,49 +8,50 @@
 
 namespace App\Models;
 
-class Position {
+class Position
+{
 
-	private $start;
-	private $end;
+    private $start;
+    private $end;
 
-	/**
-	 * Position constructor.
-	 * @param array $start
-	 * @param array $end
-	 */
-	public function __construct(array $start = array(), array $end = array()) {
+    /**
+     * Position constructor.
+     * @param  array  $start
+     * @param  array  $end
+     */
+    public function __construct(array $start = array(), array $end = array())
+    {
+        $this->start = $start;
+        $this->end = $end;
+    }
 
-		$this->start = $start;
-		$this->end = $end;
+    /**
+     * @return array
+     */
+    public function getStart(): array
+    {
+        return $this->start;
+    }
 
-	}
+    /**
+     * @return array
+     */
+    public function getEnd(): array
+    {
+        return $this->end;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getStart(): array {
-		return $this->start;
-	}
+    /**
+     * @return Size
+     */
+    public function getSize()
+    {
+        $x = ($this->end['x'] + 1) - $this->start['x'];
+        $y = ($this->end['y'] + 1) - $this->start['y'];
 
-	/**
-	 * @return array
-	 */
-	public function getEnd(): array {
-		return $this->end;
-	}
+        $size = new Size($x, $y);
 
-	/**
-	 * @return Size
-	 */
-	public function getSize() {
-
-		$x = ($this->end['x'] + 1) - $this->start['x'];
-		$y = ($this->end['y'] + 1) - $this->start['y'];
-
-		$size = new Size($x, $y);
-
-		return $size;
-
-	}
+        return $size;
+    }
 
 }

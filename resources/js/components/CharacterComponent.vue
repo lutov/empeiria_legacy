@@ -18,9 +18,7 @@
                 loadCharacter: {}
             };
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             console.log('Character Component mounted');
         }

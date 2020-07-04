@@ -31,7 +31,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static find(int $id)
  * @method static where(string $string, $id)
  */
-class Character extends Model {
+class Character extends Model
+{
 
     use SoftDeletes;
 
@@ -39,82 +40,73 @@ class Character extends Model {
      * Character constructor.
      *
      */
-	public function __construct() {
-
+    public function __construct()
+    {
         parent::__construct();
-
-	}
-
-    /**
-     * @return HasOne
-     */
-	public function body() {
-
-		return $this->hasOne('App\Models\Body');
-
-	}
+    }
 
     /**
      * @return HasOne
      */
-	public function mind() {
-
-		return $this->hasOne('App\Models\Mind');
-
-	}
+    public function body()
+    {
+        return $this->hasOne('App\Models\Body');
+    }
 
     /**
      * @return HasOne
      */
-	public function inventory() {
+    public function mind()
+    {
+        return $this->hasOne('App\Models\Mind');
+    }
 
-		return $this->hasOne('App\Models\Inventory');
-
-	}
+    /**
+     * @return HasOne
+     */
+    public function inventory()
+    {
+        return $this->hasOne('App\Models\Inventory');
+    }
 
     /**
      * @return HasMany
      */
-    public function assets() {
-
+    public function assets()
+    {
         return $this->hasMany('App\Models\Asset');
-
     }
 
     /**
      * @return BelongsTo
      */
-	public function squad() {
-
-		return $this->belongsTo('App\Models\Squad');
-
-	}
+    public function squad()
+    {
+        return $this->belongsTo('App\Models\Squad');
+    }
 
     /**
      * @return HasMany
      */
-	public function relations() {
-
-	    return $this->hasMany('App\Models\Relation');
-
+    public function relations()
+    {
+        return $this->hasMany('App\Models\Relation');
     }
 
     /**
      * @return HasOne
      */
-    public function queue() {
-
+    public function queue()
+    {
         return $this->hasOne('App\Models\Queue');
-
     }
 
     /**
      * @return HasOne
      */
-    public function history() {
-
+    public function history()
+    {
         return $this->hasOne('App\Models\History');
-
     }
 
 }

@@ -17,15 +17,19 @@
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>
-                        <form :action="'/items/'+item.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="PUT">
-                            <button v-on:click.prevent="updateItem(item.id)" class="btn btn-sm btn-outline-warning">Edit</button>
+                        <form :action="'/items/'+item.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="PUT">
+                            <button class="btn btn-sm btn-outline-warning" v-on:click.prevent="updateItem(item.id)">
+                                Edit
+                            </button>
                         </form>
                     </td>
                     <td>
-                        <form :action="'/items/'+item.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button v-on:click.prevent="destroyItem(item.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form :action="'/items/'+item.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-sm btn-outline-danger" v-on:click.prevent="destroyItem(item.id)">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -33,9 +37,10 @@
             </table>
 
             <label for="new_item_name">Create new Item</label>
-            <form action="/items" method="POST" class="form-inline">
-                <input v-model="new_item_name" placeholder="New item's name" class="form-control form-control-sm mr-2" id="new_item_name">
-                <button v-on:click.prevent="storeItem()" class="btn btn-sm btn-success">Create</button>
+            <form action="/items" class="form-inline" method="POST">
+                <input class="form-control form-control-sm mr-2" id="new_item_name" placeholder="New item's name"
+                       v-model="new_item_name">
+                <button class="btn btn-sm btn-success" v-on:click.prevent="storeItem()">Create</button>
             </form>
 
         </div>
@@ -85,7 +90,7 @@
                 };
 
                 try {
-                    this.items = await axios.post('/items/'+id, params);
+                    this.items = await axios.post('/items/' + id, params);
                     this.fetchItems();
                 } catch (error) {
                     console.error(error);
@@ -100,7 +105,7 @@
                 };
 
                 try {
-                    this.items = await axios.delete('/items/'+id, params);
+                    this.items = await axios.delete('/items/' + id, params);
                     this.fetchItems();
                 } catch (error) {
                     console.error(error);

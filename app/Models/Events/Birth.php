@@ -18,15 +18,16 @@ use App\Models\MindParams;
 use App\Models\Name;
 use App\Models\Sex;
 
-class Birth extends Event {
+class Birth extends Event
+{
 
     /**
      * @var Character
      */
     private $child;
 
-    protected function executeEvent() {
-
+    protected function executeEvent()
+    {
         /* PARENTS */
         $mother = $this->participants[0];
         $father = $this->participants[1];
@@ -39,7 +40,9 @@ class Birth extends Event {
             'sex' => $sex,
         );
         $child->name = (isset($this->conditions['name'])) ? $this->conditions['name'] : Name::random($nameParams)->name;
-        $child->last_name = (isset($this->conditions['last_name'])) ? $this->conditions['last_name'] : LastName::random($nameParams)->name;
+        $child->last_name = (isset($this->conditions['last_name'])) ? $this->conditions['last_name'] : LastName::random(
+            $nameParams
+        )->name;
 
         $child->save();
 
@@ -69,14 +72,15 @@ class Birth extends Event {
         /* MIND */
 
         $this->child = $child;
-
     }
 
-    protected function getConsequences() {
+    protected function getConsequences()
+    {
         return $this->child;
     }
 
-    protected function getDepiction() {
+    protected function getDepiction()
+    {
         // TODO: Implement getDepiction() method.
     }
 

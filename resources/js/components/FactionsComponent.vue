@@ -17,15 +17,19 @@
                     <td>{{faction.id}}</td>
                     <td>{{faction.name}}</td>
                     <td>
-                        <form :action="'/factions/'+faction.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="PUT">
-                            <button v-on:click.prevent="updateFaction(faction.id)" class="btn btn-sm btn-outline-warning">Edit</button>
+                        <form :action="'/factions/'+faction.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="PUT">
+                            <button class="btn btn-sm btn-outline-warning"
+                                    v-on:click.prevent="updateFaction(faction.id)">Edit
+                            </button>
                         </form>
                     </td>
                     <td>
-                        <form :action="'/factions/'+faction.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button v-on:click.prevent="destroyFaction(faction.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form :action="'/factions/'+faction.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-sm btn-outline-danger"
+                                    v-on:click.prevent="destroyFaction(faction.id)">Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -33,9 +37,10 @@
             </table>
 
             <label for="new_faction_name">Create new Faction</label>
-            <form action="/factions" method="POST" class="form-inline">
-                <input v-model="new_faction_name" placeholder="New faction's name" class="form-control form-control-sm mr-2" id="new_faction_name">
-                <button v-on:click.prevent="storeFaction()" class="btn btn-sm btn-success">Create</button>
+            <form action="/factions" class="form-inline" method="POST">
+                <input class="form-control form-control-sm mr-2" id="new_faction_name"
+                       placeholder="New faction's name" v-model="new_faction_name">
+                <button class="btn btn-sm btn-success" v-on:click.prevent="storeFaction()">Create</button>
             </form>
 
         </div>
@@ -85,7 +90,7 @@
                 };
 
                 try {
-                    this.factions = await axios.post('/factions/'+id, params);
+                    this.factions = await axios.post('/factions/' + id, params);
                     this.fetchFactions();
                 } catch (error) {
                     console.error(error);
@@ -100,7 +105,7 @@
                 };
 
                 try {
-                    this.factions = await axios.delete('/factions/'+id, params);
+                    this.factions = await axios.delete('/factions/' + id, params);
                     this.fetchFactions();
                 } catch (error) {
                     console.error(error);

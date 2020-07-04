@@ -17,15 +17,19 @@
                     <td>{{squad.id}}</td>
                     <td>{{squad.name}}</td>
                     <td>
-                        <form :action="'/squads/'+squad.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="PUT">
-                            <button v-on:click.prevent="updateSquad(squad.id)" class="btn btn-sm btn-outline-warning">Edit</button>
+                        <form :action="'/squads/'+squad.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="PUT">
+                            <button class="btn btn-sm btn-outline-warning" v-on:click.prevent="updateSquad(squad.id)">
+                                Edit
+                            </button>
                         </form>
                     </td>
                     <td>
-                        <form :action="'/squads/'+squad.id" method="POST" class="form-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button v-on:click.prevent="destroySquad(squad.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form :action="'/squads/'+squad.id" class="form-inline" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-sm btn-outline-danger" v-on:click.prevent="destroySquad(squad.id)">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -33,9 +37,10 @@
             </table>
 
             <label for="new_squad_name">Create new Squad</label>
-            <form action="/squads" method="POST" class="form-inline">
-                <input v-model="new_squad_name" placeholder="New squad's name" class="form-control form-control-sm mr-2" id="new_squad_name">
-                <button v-on:click.prevent="storeSquad()" class="btn btn-sm btn-success">Create</button>
+            <form action="/squads" class="form-inline" method="POST">
+                <input class="form-control form-control-sm mr-2" id="new_squad_name" placeholder="New squad's name"
+                       v-model="new_squad_name">
+                <button class="btn btn-sm btn-success" v-on:click.prevent="storeSquad()">Create</button>
             </form>
 
         </div>
@@ -85,7 +90,7 @@
                 };
 
                 try {
-                    this.squads = await axios.post('/squads/'+id, params);
+                    this.squads = await axios.post('/squads/' + id, params);
                     this.fetchSquads();
                 } catch (error) {
                     console.error(error);
@@ -100,7 +105,7 @@
                 };
 
                 try {
-                    this.squads = await axios.delete('/squads/'+id, params);
+                    this.squads = await axios.delete('/squads/' + id, params);
                     this.fetchSquads();
                 } catch (error) {
                     console.error(error);

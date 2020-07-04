@@ -10,15 +10,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Asset extends Model {
+class Asset extends Model
+{
 
-	/**
-	 * Item constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * Item constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 }

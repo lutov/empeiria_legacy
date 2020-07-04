@@ -20,9 +20,11 @@ use Illuminate\Database\Query\Builder;
  * @property string $name
  * @property string $slug
  */
-class LastName extends Model {
+class LastName extends Model
+{
 
-	public static function random(array $params = array()) {
+    public static function random(array $params = array())
+    {
         return self::inRandomOrder()->first();
     }
 

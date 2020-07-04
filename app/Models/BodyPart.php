@@ -10,15 +10,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BodyPart extends Model {
+class BodyPart extends Model
+{
 
-	/**
-	 * BodyPart constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * BodyPart constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 }

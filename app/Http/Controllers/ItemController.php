@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ItemController extends Controller {
+class ItemController extends Controller
+{
 
     private $slug = 'items';
     private $model = Item::class;
@@ -14,28 +14,30 @@ class ItemController extends Controller {
     /**
      * HomeController constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
     /**
      * @return mixed
      */
-    public function index() {
+    public function index()
+    {
         return Item::all();
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Item
      */
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $item = new Item();
 
         $name = $request->input('name');
 
-        if(!empty($name)) {
+        if (!empty($name)) {
             $item->type_id = 2; // TODO replace dev val
             $item->name = $name;
             $item->description = ''; // TODO replace dev val
@@ -43,36 +45,38 @@ class ItemController extends Controller {
         }
 
         return $item;
-
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return mixed
      */
-    public function show(int $id) {
+    public function show(int $id)
+    {
         return Item::find($id);
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return mixed
      */
-    public function update(int $id) {
+    public function update(int $id)
+    {
         $item = Item::find($id);
-        if(isset($item->id)) {
+        if (isset($item->id)) {
             //
         }
         return $item;
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return mixed
      */
-    public function destroy(int $id) {
+    public function destroy(int $id)
+    {
         $item = Item::find($id);
-        if(isset($item->id)) {
+        if (isset($item->id)) {
             $item->delete();
         }
         return $item;

@@ -10,14 +10,14 @@ namespace App\Models\Items\Weapons;
 
 use App\Models\Items\Weapon;
 
-class Sword extends Weapon {
+class Sword extends Weapon
+{
 
-    public function __construct() {
-
+    public function __construct()
+    {
         parent::__construct();
 
         $this->type = 'Sword';
-
     }
 
 }

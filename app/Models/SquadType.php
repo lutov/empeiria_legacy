@@ -15,20 +15,20 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @method static find(int $id)
  */
-class SquadType extends Model {
+class SquadType extends Model
+{
 
     /**
      * @var string
      */
     protected $table = 'squads_types';
 
-	/**
-	 * SquadType constructor.
-	 */
-	public function __construct() {
-
-		parent::__construct();
-
-	}
+    /**
+     * SquadType constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 }

@@ -6,7 +6,8 @@ use App\Models\World;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WorldController extends Controller {
+class WorldController extends Controller
+{
 
     private $slug = 'worlds';
     private $model = World::class;
@@ -14,66 +15,70 @@ class WorldController extends Controller {
     /**
      * HomeController constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
     /**
      * @return mixed
      */
-    public function index() {
+    public function index()
+    {
         $user = Auth::user();
         return $this->model::where('user_id', $user->id)->get();
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return World
      */
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $world = new World();
 
         $user = Auth::user();
         $name = $request->input('name');
 
-        if(!empty($name)) {
+        if (!empty($name)) {
             $world->user_id = $user->id;
             $world->name = $name;
             $world->save();
         }
 
         return $world;
-
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return mixed
      */
-    public function show(int $id) {
+    public function show(int $id)
+    {
         return $this->model::find($id);
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return mixed
      */
-    public function update(int $id) {
+    public function update(int $id)
+    {
         $world = World::find($id);
-        if(isset($world->id)) {
+        if (isset($world->id)) {
             //
         }
         return $world;
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return mixed
      */
-    public function destroy(int $id) {
+    public function destroy(int $id)
+    {
         $world = World::find($id);
-        if(isset($world->id)) {
+        if (isset($world->id)) {
             $world->delete();
         }
         return $world;

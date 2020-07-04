@@ -12,16 +12,16 @@ use App\Models\Items\Weapons\Sword;
 use App\Models\Mass;
 use App\Models\Size;
 
-class LongSword extends Sword {
+class LongSword extends Sword
+{
 
-    public function __construct() {
-
+    public function __construct()
+    {
         parent::__construct();
 
         $this->name = 'Long Sword';
         $this->size = new Size(1, 2);
         $this->mass = new Mass(2);
-
     }
 
 }

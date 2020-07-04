@@ -20,11 +20,13 @@ use Illuminate\Database\Query\Builder;
  * @property string $name
  * @property string $slug
  */
-class Sex extends Model {
+class Sex extends Model
+{
 
     public $timestamps = false;
 
-	public static function random() {
+    public static function random()
+    {
         return self::inRandomOrder()->first();
     }
 

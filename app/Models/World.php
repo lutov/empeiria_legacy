@@ -10,24 +10,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class World extends Model {
+class World extends Model
+{
 
     protected static $type = 'world';
-
-    public function history() {
-
-        return $this->hasOne('App\Models\History');
-
-    }
 
     /**
      * @return mixed
      */
-    public static function getRandomName() {
+    public static function getRandomName()
+    {
         $params = array(
             array(self::$type, 1)
         );
         return Name::random($params);
+    }
+
+    public function history()
+    {
+        return $this->hasOne('App\Models\History');
     }
 
 }
