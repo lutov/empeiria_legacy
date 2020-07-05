@@ -9,7 +9,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @method static find(int $id)
+ * @method static where(string $string, $id)
+ */
 class Squad extends Model
 {
 
@@ -31,9 +36,12 @@ class Squad extends Model
         return $this->hasOne('App\Models\Position');
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function characters()
     {
-        return $this->hasMany('App\Models\Characters');
+        return $this->belongsToMany('App\Models\Character', 'squads_characters', 'squad_id', 'character_id');
     }
 
     public function queue()

@@ -26,7 +26,7 @@ class SquadController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return $this->model::where('user_id', $user->id)->get();
+        return Squad::where('user_id', $user->id)->get();
     }
 
     /**
@@ -55,7 +55,7 @@ class SquadController extends Controller
      */
     public function show(int $id)
     {
-        return $this->model::find($id);
+        return Squad::find($id);
     }
 
     /**
@@ -81,6 +81,41 @@ class SquadController extends Controller
         if (isset($squad->id)) {
             $squad->delete();
         }
+        return $squad;
+    }
+
+    /**
+     * @param  int  $id
+     * @return mixed
+     */
+    public function characters(int $id)
+    {
+        return Squad::find($id)->characters;
+    }
+
+    /**
+     * @param  Request  $request
+     * @param  int  $id
+     * @return mixed
+     */
+    public function attachCharacters(Request $request, int $id)
+    {
+        $characters = $request->input('characters', array());
+        $squad = Squad::find($id);
+        $squad->characters()->attach($characters);
+        return $squad;
+    }
+
+    /**
+     * @param  Request  $request
+     * @param  int  $id
+     * @return mixed
+     */
+    public function detachCharacters(Request $request, int $id)
+    {
+        $characters = $request->input('characters', array());
+        $squad = Squad::find($id);
+        $squad->characters()->detach($characters);
         return $squad;
     }
 
