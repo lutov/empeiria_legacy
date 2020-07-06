@@ -26,7 +26,7 @@ class WorldController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return $this->model::where('user_id', $user->id)->get();
+        return World::where('user_id', $user->id)->get();
     }
 
     /**
@@ -55,7 +55,7 @@ class WorldController extends Controller
      */
     public function show(int $id)
     {
-        return $this->model::find($id);
+        return World::find($id);
     }
 
     /**

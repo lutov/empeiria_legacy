@@ -10,6 +10,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find(int $id)
+ * @method static where(string $string, $id)
+ */
 class World extends Model
 {
 
@@ -24,6 +28,11 @@ class World extends Model
             array(self::$type, 1)
         );
         return Name::random($params);
+    }
+
+    public function map()
+    {
+        return $this->hasOne('App\Models\Map');
     }
 
     public function history()
