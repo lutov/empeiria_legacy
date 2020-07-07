@@ -22,4 +22,9 @@ class Map extends Model
         return $this->belongsTo('App\Models\World');
     }
 
+    public function positions()
+    {
+        return $this->hasMany('App\Models\Positions');
+    }
+
 }

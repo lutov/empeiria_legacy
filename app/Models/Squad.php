@@ -10,6 +10,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
  * @method static find(int $id)
@@ -31,11 +32,6 @@ class Squad extends Model
         return $this->hasOne('App\Models\Size');
     }
 
-    public function position()
-    {
-        return $this->hasOne('App\Models\Position');
-    }
-
     /**
      * @return BelongsToMany
      */
@@ -52,6 +48,14 @@ class Squad extends Model
     public function history()
     {
         return $this->hasOne('App\Models\History');
+    }
+
+    /**
+     * @return MorphOne
+     */
+    public function position()
+    {
+        return $this->morphOne('App\Models\Position', 'entity');
     }
 
 }

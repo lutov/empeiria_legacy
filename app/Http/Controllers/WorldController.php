@@ -44,6 +44,8 @@ class WorldController extends Controller
             $world->user_id = $user->id;
             $world->name = $name;
             $world->save();
+
+            $world->map()->create();
         }
 
         return $world;

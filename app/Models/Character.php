@@ -8,10 +8,12 @@
 
 namespace App\Models;
 
+use App\Interfaces\MoveInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -27,11 +29,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property Body $body
  * @property Mind $mind
+ * @property Position position
  *
  * @method static find(int $id)
  * @method static where(string $string, $id)
  */
-class Character extends Model
+class Character extends Model implements MoveInterface
 {
 
     use SoftDeletes;
@@ -107,6 +110,30 @@ class Character extends Model
     public function history()
     {
         return $this->hasOne('App\Models\History');
+    }
+
+    /**
+     * @return MorphOne
+     */
+    public function position()
+    {
+        return $this->morphOne('App\Models\Position', 'entity');
+    }
+
+    /**
+     * @param  Position  $destination
+     * @return Position
+     */
+    public function move(Position $destination)
+    {
+        $distance = $this->position->distance($destination);
+        if(0 < $distance) {
+            $this->position->x = $destination->x;
+            $this->position->y = $destination->y;
+            $this->position->save();
+        }
+        $this->refresh();
+        return $this->position;
     }
 
 }

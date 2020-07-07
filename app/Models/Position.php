@@ -8,50 +8,36 @@
 
 namespace App\Models;
 
-class Position
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int x
+ * @property int y
+ */
+class Position extends Model
 {
 
-    private $start;
-    private $end;
-
-    /**
-     * Position constructor.
-     * @param  array  $start
-     * @param  array  $end
-     */
-    public function __construct(array $start = array(), array $end = array())
+    public function entity()
     {
-        $this->start = $start;
-        $this->end = $end;
+        return $this->morphTo();
+    }
+
+    public function map()
+    {
+        return $this->belongsTo('App\Models\Map');
     }
 
     /**
-     * @return array
+     * @param  Position  $destination
+     * @return int
      */
-    public function getStart(): array
+    public function distance(Position $destination)
     {
-        return $this->start;
-    }
-
-    /**
-     * @return array
-     */
-    public function getEnd(): array
-    {
-        return $this->end;
-    }
-
-    /**
-     * @return Size
-     */
-    public function getSize()
-    {
-        $x = ($this->end['x'] + 1) - $this->start['x'];
-        $y = ($this->end['y'] + 1) - $this->start['y'];
-
-        $size = new Size($x, $y);
-
-        return $size;
+        return (int)round(
+            sqrt(
+                (($destination->x - $this->x) ** 2) + (($destination->y - $this->y) ** 2)
+            )
+        );
     }
 
 }
