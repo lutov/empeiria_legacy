@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,6 +83,30 @@ class CharacterController extends Controller
         $character = Character::find($id);
         if (isset($character->id)) {
             $character->delete();
+        }
+        return $character;
+    }
+
+    /**
+     * @param  Request  $request
+     * @param  int  $id
+     * @return mixed
+     */
+    public function move(Request $request, int $id)
+    {
+        $character = Character::find($id);
+
+        $x = $request->input('x');
+        $y = $request->input('y');
+
+        if (isset($character->id)) {
+
+            $destination = new Position();
+            $destination->x = $x;
+            $destination->y = $y;
+
+            $character->move($destination);
+
         }
         return $character;
     }

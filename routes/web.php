@@ -31,6 +31,8 @@ Route::get('squads/{id}/characters', 'SquadController@characters')->name('squad_
 Route::post('squads/{id}/characters/attach', 'SquadController@attachCharacters')->name('squad_attach_characters');
 Route::post('squads/{id}/characters/detach', 'SquadController@detachCharacters')->name('squad_detach_characters');
 
+Route::post('/characters/{id}/move', 'CharacterController@move')->name('move_character');
+
 Route::get('inventories/{id}/items', 'InventoryController@items')->name('inventory_items');
 Route::post('inventories/{id}/items/attach', 'InventoryController@attachItems')->name('inventory_attach_items');
 Route::post('inventories/{id}/items/detach', 'InventoryController@detachItems')->name('inventory_detach_items');

@@ -19,6 +19,9 @@ class World extends Model
 
     protected static $type = 'world';
 
+    protected $with = ['map'];
+    protected $visible = ['name', 'map'];
+
     /**
      * @return mixed
      */

@@ -39,6 +39,9 @@ class Character extends Model implements MoveInterface
 
     use SoftDeletes;
 
+    protected $with = ['position'];
+    protected $visible = ['id', 'name', 'position'];
+
     /**
      * Character constructor.
      *
@@ -127,7 +130,7 @@ class Character extends Model implements MoveInterface
     public function move(Position $destination)
     {
         $distance = $this->position->distance($destination);
-        if(0 < $distance) {
+        if (0 < $distance) {
             $this->position->x = $destination->x;
             $this->position->y = $destination->y;
             $this->position->save();

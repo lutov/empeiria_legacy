@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
 class Map extends Model
 {
 
+    protected $visible = ['size_x', 'size_y'];
+
     public function world()
     {
         return $this->belongsTo('App\Models\World');
