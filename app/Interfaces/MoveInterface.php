@@ -8,9 +8,9 @@
 
 namespace App\Interfaces;
 
-use App\Models\Position;
+use Illuminate\Http\Request;
 
 interface MoveInterface
 {
-    public function move(Position $destination);
+    public function move(Request $request, int $id);
 }

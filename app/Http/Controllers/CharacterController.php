@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\MoveInterface;
 use App\Models\Character;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CharacterController extends Controller
+class CharacterController extends Controller implements MoveInterface
 {
 
     private $slug = 'characters';
@@ -95,18 +96,19 @@ class CharacterController extends Controller
     public function move(Request $request, int $id)
     {
         $character = Character::find($id);
-
         $x = $request->input('x');
         $y = $request->input('y');
-
         if (isset($character->id)) {
-
             $destination = new Position();
             $destination->x = $x;
             $destination->y = $y;
-
-            $character->move($destination);
-
+            $distance = $character->position->distance($destination);
+            if (0 < $distance) {
+                $character->position->x = $destination->x;
+                $character->position->y = $destination->y;
+                $character->position->save();
+            }
+            $character->refresh();
         }
         return $character;
     }
