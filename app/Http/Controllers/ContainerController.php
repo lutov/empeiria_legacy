@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\StorageInterface;
-use App\Models\Inventory;
+use App\Models\Container;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class InventoryController extends Controller implements StorageInterface
+class ContainerController extends Controller implements StorageInterface
 {
 
-    private $slug = 'inventories';
-    private $model = Inventory::class;
+    private $slug = 'containers';
+    private $model = Container::class;
 
     /**
-     * InventoryController constructor.
+     * ContainerController constructor.
      */
     public function __construct()
     {
@@ -26,26 +25,18 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function index()
     {
-        $user = Auth::user();
-        return Inventory::where('user_id', $user->id)->get();
+        return Container::all();
     }
 
     /**
      * @param  Request  $request
-     * @return Inventory
+     * @return Container
      */
     public function store(Request $request)
     {
-        $inventory = new Inventory();
-
-        $character_id = $request->input('character_id');
-
-        if (!empty($character_id)) {
-            $inventory->character_id = $character_id;
-            $inventory->save();
-        }
-
-        return $inventory;
+        $container = new Container();
+        $container->save();
+        return $container;
     }
 
     /**
@@ -54,7 +45,7 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function show(int $id)
     {
-        return Inventory::find($id);
+        return Container::find($id);
     }
 
     /**
@@ -63,11 +54,11 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function update(int $id)
     {
-        $inventory = Inventory::find($id);
-        if (isset($inventory->id)) {
+        $container = Container::find($id);
+        if (isset($container->id)) {
             //
         }
-        return $inventory;
+        return $container;
     }
 
     /**
@@ -76,11 +67,11 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function destroy(int $id)
     {
-        $inventory = Inventory::find($id);
-        if (isset($inventory->id)) {
-            $inventory->delete();
+        $container = Container::find($id);
+        if (isset($container->id)) {
+            $container->delete();
         }
-        return $inventory;
+        return $container;
     }
 
     /**
@@ -89,7 +80,7 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function items(int $id)
     {
-        return Inventory::find($id)->items;
+        return Container::find($id)->items;
     }
 
     /**
@@ -100,9 +91,9 @@ class InventoryController extends Controller implements StorageInterface
     public function attachItems(Request $request, int $id)
     {
         $items = $request->input('items', array());
-        $inventory = Inventory::find($id);
-        $inventory->items()->attach($items);
-        return $inventory;
+        $container = Container::find($id);
+        $container->items()->attach($items);
+        return $container;
     }
 
     /**
@@ -113,9 +104,9 @@ class InventoryController extends Controller implements StorageInterface
     public function detachItems(Request $request, int $id)
     {
         $items = $request->input('items', array());
-        $inventory = Inventory::find($id);
-        $inventory->items()->detach($items);
-        return $inventory;
+        $container = Container::find($id);
+        $container->items()->detach($items);
+        return $container;
     }
 
 }

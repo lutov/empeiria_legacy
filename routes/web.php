@@ -33,19 +33,25 @@ Route::post('squads/{id}/characters/detach', 'SquadController@detachCharacters')
 
 Route::post('/characters/{id}/move', 'CharacterController@move')->name('move_character');
 
+Route::get('containers/{id}/items', 'ContainerController@items')->name('container_items');
+Route::post('containers/{id}/items/attach', 'ContainerController@attachItems')->name('container_attach_items');
+Route::post('containers/{id}/items/detach', 'ContainerController@detachItems')->name('container_detach_items');
+
 Route::get('inventories/{id}/items', 'InventoryController@items')->name('inventory_items');
 Route::post('inventories/{id}/items/attach', 'InventoryController@attachItems')->name('inventory_attach_items');
 Route::post('inventories/{id}/items/detach', 'InventoryController@detachItems')->name('inventory_detach_items');
 
-Route::resources([
+Route::resources(
+    [
 
-    'worlds' => 'WorldController',
-    'factions' => 'FactionController',
-    'squads_types' => 'SquadTypeController',
-    'squads' => 'SquadController',
-    'characters' => 'CharacterController',
+        'worlds' => 'WorldController',
+        'factions' => 'FactionController',
+        'squads_types' => 'SquadTypeController',
+        'squads' => 'SquadController',
+        'characters' => 'CharacterController',
 
-    'items' => 'ItemController',
-    'inventories' => 'InventoryController',
+        'items' => 'ItemController',
+        'containers' => 'ContainerController',
+        'inventories' => 'InventoryController',
 
-]);
+    ]);
