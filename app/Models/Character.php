@@ -53,25 +53,33 @@ class Character extends Model
     /**
      * @return HasOne
      */
-    public function body()
-    {
-        return $this->hasOne('App\Models\Body');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function mind()
-    {
-        return $this->hasOne('App\Models\Mind');
-    }
-
-    /**
-     * @return HasOne
-     */
     public function inventory()
     {
         return $this->hasOne('App\Models\Inventory');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function quality()
+    {
+        return $this->hasOne('App\Models\Character\Quality');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function condition()
+    {
+        return $this->hasOne('App\Models\Character\Condition');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function features()
+    {
+        return $this->hasMany('App\Models\Character\Feature');
     }
 
     /**
@@ -96,22 +104,6 @@ class Character extends Model
     public function relations()
     {
         return $this->hasMany('App\Models\Relation');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function queue()
-    {
-        return $this->hasOne('App\Models\Queue');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function history()
-    {
-        return $this->hasOne('App\Models\History');
     }
 
     /**
