@@ -23,8 +23,6 @@ use Illuminate\Database\Query\Builder;
 class Sex extends Model
 {
 
-    public $timestamps = false;
-
     public static function random()
     {
         return self::inRandomOrder()->first();

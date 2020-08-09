@@ -12,7 +12,7 @@ class GroupController extends Controller
     private $model = Group::class;
 
     /**
-     * HomeController constructor.
+     * GroupController constructor.
      */
     public function __construct()
     {
