@@ -9,43 +9,17 @@
 namespace App\Models\Character;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class BodyParams
- * @package App\Models
- *
+ * Class Quality
+ * @package App\Models\Character
  */
 class Quality extends Model
 {
 
-    protected $visible = array(
-        'id',
-        'character_id',
-        'appeal',
-        'vitality',
-        'intellect',
-        'sociality',
-        'mobility',
-        'willpower'
-    );
-    protected $fillable = array(
-        'id',
-        'character_id',
-        'appeal',
-        'vitality',
-        'intellect',
-        'sociality',
-        'mobility',
-        'willpower'
-    );
+    protected $table = 'characters_qualities';
 
-    /**
-     * @return BelongsTo
-     */
-    public function character()
-    {
-        return $this->belongsTo('App\Models\Character');
-    }
+    protected $visible = array('id', 'character_id', 'quality_id');
+    protected $fillable = array('id', 'character_id', 'quality_id');
 
 }

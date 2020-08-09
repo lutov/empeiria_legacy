@@ -59,19 +59,19 @@ class Character extends Model
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function quality()
+    public function qualities()
     {
-        return $this->hasOne('App\Models\Character\Quality');
+        return $this->hasMany('App\Models\Character\Quality');
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function condition()
+    public function conditions()
     {
-        return $this->hasOne('App\Models\Character\Condition');
+        return $this->hasMany('App\Models\Character\Condition');
     }
 
     /**
