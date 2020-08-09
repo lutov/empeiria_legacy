@@ -6,7 +6,7 @@
  * Time: 14:10
  */
 
-namespace App\Models;
+namespace App\Models\Types;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,20 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @method static find(int $id)
  */
-class SquadType extends Model
+class Group extends Model
 {
 
     /**
      * @var string
      */
-    protected $table = 'squads_types';
-
-    /**
-     * SquadType constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $table = 'groups';
 
 }

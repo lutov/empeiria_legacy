@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SquadType;
+use App\Models\Types\Group;
 use Illuminate\Http\Request;
 
-class SquadTypeController extends Controller
+class GroupController extends Controller
 {
 
-    private $slug = 'squads_types';
-    private $model = SquadType::class;
+    private $slug = 'groups';
+    private $model = Group::class;
 
     /**
      * HomeController constructor.
@@ -24,25 +24,25 @@ class SquadTypeController extends Controller
      */
     public function index()
     {
-        return SquadType::all();
+        return Group::all();
     }
 
     /**
      * @param  Request  $request
-     * @return SquadType
+     * @return Group
      */
     public function store(Request $request)
     {
-        $squad_type = new SquadType();
+        $group = new Group();
 
         $name = $request->input('name');
 
         if (!empty($name)) {
-            $squad_type->name = $name;
-            $squad_type->save();
+            $group->name = $name;
+            $group->save();
         }
 
-        return $squad_type;
+        return $group;
     }
 
     /**
@@ -51,7 +51,7 @@ class SquadTypeController extends Controller
      */
     public function show(int $id)
     {
-        return SquadType::find($id);
+        return Group::find($id);
     }
 
     /**
@@ -60,11 +60,11 @@ class SquadTypeController extends Controller
      */
     public function update(int $id)
     {
-        $squad_type = SquadType::find($id);
-        if (isset($squad_type->id)) {
+        $group = Group::find($id);
+        if (isset($group->id)) {
             //
         }
-        return $squad_type;
+        return $group;
     }
 
     /**
@@ -73,11 +73,11 @@ class SquadTypeController extends Controller
      */
     public function destroy(int $id)
     {
-        $squad_type = SquadType::find($id);
-        if (isset($squad_type->id)) {
-            $squad_type->delete();
+        $group = Group::find($id);
+        if (isset($group->id)) {
+            $group->delete();
         }
-        return $squad_type;
+        return $group;
     }
 
 }
