@@ -47,6 +47,12 @@ class CharacterController extends Controller implements MoveInterface
             $character->name = $name;
             $character->save();
 
+            $character->body()->create();
+            $character->bodyparts()->create();
+            $character->qualities()->create();
+            $character->conditions()->create();
+            $character->features()->create();
+
             $character->inventory()->create();
         }
 

@@ -26,8 +26,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $nickname
  * @property string $last_name
  *
- * @property Body $body
- * @property Mind $mind
  * @property Position position
  *
  * @method static find(int $id)
@@ -48,6 +46,22 @@ class Character extends Model
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function body()
+    {
+        return $this->hasOne('App\Models\Character\Body');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function bodyparts()
+    {
+        return $this->hasMany('App\Models\Character\Bodypart');
     }
 
     /**

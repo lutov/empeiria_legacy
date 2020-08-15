@@ -9,9 +9,17 @@
 namespace App\Models\Types;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Bodypart extends Model
 {
 
+    /**
+     * @return BelongsToMany
+     */
+    public function characters()
+    {
+        return $this->belongsToMany('App\Models\Characters', 'characters_bodyparts', 'bodypart');
+    }
 
 }

@@ -11,17 +11,19 @@ namespace App\Models\Character;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Bodypart extends Model
+class Body extends Model
 {
 
-    protected $table = 'characters_bodyparts';
+    protected $table = 'characters_bodies';
+
+    protected $fillable = ['body', 'alive', 'species', 'sex', 'age', 'height', 'weight'];
 
     /**
      * @return BelongsTo
      */
     public function character()
     {
-        return $this->belongsTo('App\Models\Character', 'bodypart');
+        return $this->belongsTo('App\Models\Character', 'body');
     }
 
 }

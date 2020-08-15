@@ -6,13 +6,13 @@
  * Time: 14:10
  */
 
-namespace App\Models;
+namespace App\Models\Types;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class Sex
+ * Class Kingdom
  * @package App\Models
  * @mixin Builder
  *
@@ -20,12 +20,8 @@ use Illuminate\Database\Query\Builder;
  * @property string $name
  * @property string $slug
  */
-class Sex extends Model
+class Kingdom extends Model
 {
 
-    public static function random()
-    {
-        return self::inRandomOrder()->first();
-    }
 
 }
