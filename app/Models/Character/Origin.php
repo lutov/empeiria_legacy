@@ -11,7 +11,7 @@ namespace App\Models\Character;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Quality
+ * Class Origin
  * @package App\Models\Character
  */
 class Origin extends Model
