@@ -20,7 +20,7 @@ class World extends Model
     protected static $type = 'world';
 
     protected $with = ['map'];
-    protected $visible = ['name', 'map'];
+    protected $visible = ['id', 'name', 'map'];
 
     /**
      * @return mixed
