@@ -8,7 +8,7 @@ import {store} from "./store";
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,7 +27,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+new Vue({
     el: '#app',
     store
 });
