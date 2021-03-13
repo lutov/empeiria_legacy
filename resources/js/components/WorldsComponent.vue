@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="card-deck">
-            <world-card-component v-for="world in worlds.data" v-bind:key="world.id"
+            <world-card-component v-for="world in worlds" v-bind:key="world.id"
                                   v-bind:world="world"></world-card-component>
         </div>
-        <new-world-form-component v-bind:name="new_world_name"></new-world-form-component>
+        <new-world-form-component v-bind:new_world="new_world"></new-world-form-component>
     </div>
 </template>
 
@@ -21,13 +21,17 @@
         data() {
             return {
                 worlds: {},
-                new_world_name: ''
+                new_world: {},
+                def_world: {
+                    name: ''
+                }
             };
         },
         methods: {
             async fetchWorlds() {
                 try {
-                    this.worlds = await axios.get('/worlds');
+                    let result = await axios.get('/worlds');
+                    this.worlds = result.data;
                 } catch (error) {
                     console.error(error);
                 }
@@ -37,7 +41,7 @@
                     id: id
                 };
                 try {
-                    this.worlds = await axios.post('/worlds/' + id, params);
+                    await axios.post('/worlds/' + id, params);
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);
@@ -48,7 +52,7 @@
                     id: id
                 };
                 try {
-                    this.worlds = await axios.delete('/worlds/' + id, params);
+                    await axios.delete('/worlds/' + id, params);
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);
@@ -59,8 +63,8 @@
                     name: this.new_world_name
                 };
                 try {
-                    this.worlds = await axios.post('/worlds', params);
-                    this.new_world_name = '';
+                    await axios.post('/worlds', params);
+                    this.new_world = this.def_world;
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);
@@ -69,6 +73,7 @@
         },
         mounted() {
             console.log('Worlds Component mounted');
+            this.new_world = this.def_world;
             this.fetchWorlds();
         }
     }
