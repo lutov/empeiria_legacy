@@ -21,7 +21,8 @@
         name: 'world-card-component',
         props: {
             world: {
-                type: Object
+                type: Object,
+                required: true
             }
         }
     }
