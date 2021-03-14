@@ -4,7 +4,7 @@
         <form action="/worlds" class="form-inline" method="POST">
             <input class="form-control form-control-sm mr-2" id="new_world_name" placeholder="New world's name"
                    v-model="new_world.name">
-            <button class="btn btn-sm btn-success" v-on:click.prevent="$emit('store-world')">Create</button>
+            <button class="btn btn-sm btn-success" v-on:click.prevent="storeWorld()">Create</button>
         </form>
     </div>
 </template>
@@ -12,14 +12,22 @@
 <script>
     export default {
         name: "new-world-form-component",
-        props: {
-            new_world: {
-                type: Object,
-                default: function () {
-                    return {
-                        name: ''
-                    }
+        data() {
+            return {
+                new_world: {
+                    name: ''
                 }
+            };
+        },
+        methods: {
+            defWorld() {
+                this.new_world = {
+                    name: ''
+                };
+            },
+            storeWorld() {
+                this.$emit('store-world', this.new_world);
+                this.defWorld();
             }
         }
     }
