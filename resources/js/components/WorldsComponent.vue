@@ -2,7 +2,8 @@
     <div>
         <div class="card-deck">
             <world-card-component v-for="world in worlds" v-bind:key="world.id"
-                                  v-bind:world="world"></world-card-component>
+                                  v-bind:world="world" v-on:update-world="updateWorld"
+                                  v-on:destroy-world="destroyWorld"></world-card-component>
         </div>
         <new-world-form-component v-on:store-world="storeWorld"></new-world-form-component>
     </div>
@@ -32,23 +33,17 @@
                     console.error(error);
                 }
             },
-            async updateWorld(id) {
-                let params = {
-                    id: id
-                };
+            async updateWorld(world) {
                 try {
-                    await axios.post('/worlds/' + id, params);
+                    await axios.post('/worlds/' + world.id, world);
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);
                 }
             },
-            async destroyWorld(id) {
-                let params = {
-                    id: id
-                };
+            async destroyWorld(world) {
                 try {
-                    await axios.delete('/worlds/' + id, params);
+                    await axios.delete('/worlds/' + world.id, world);
                     this.fetchWorlds();
                 } catch (error) {
                     console.error(error);
