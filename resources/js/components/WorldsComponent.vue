@@ -4,7 +4,7 @@
             <world-card-component v-for="world in worlds" v-bind:key="world.id"
                                   v-bind:world="world"></world-card-component>
         </div>
-        <new-world-form-component v-bind:new_world="new_world"></new-world-form-component>
+        <new-world-form-component v-bind:new_world="new_world" v-on:store-world="storeWorld"></new-world-form-component>
     </div>
 </template>
 
@@ -60,10 +60,10 @@
             },
             async storeWorld() {
                 let params = {
-                    name: this.new_world_name
+                    name: this.new_world.name
                 };
                 try {
-                    await axios.post('/worlds', params);
+                    //await axios.post('/worlds', params);
                     this.new_world = this.def_world;
                     this.fetchWorlds();
                 } catch (error) {
