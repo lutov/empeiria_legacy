@@ -29,9 +29,14 @@
 <script>
     export default {
         name: 'world-component',
+        props: {
+            worldId: {
+                type: Number,
+                required: true
+            }
+        },
         data() {
             return {
-                worldId: 1,
                 world: {},
                 mainCharacterId: 1,
                 mainCharacter: {}

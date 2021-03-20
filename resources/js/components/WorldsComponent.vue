@@ -1,23 +1,28 @@
 <template>
-    <div>
-        <div class="card-deck">
-            <world-card-component v-for="world in worlds" v-bind:key="world.id"
-                                  v-bind:world="world" v-on:update-world="updateWorld"
-                                  v-on:destroy-world="destroyWorld"></world-card-component>
+    <div class="card">
+        <div class="card-header">Worlds</div>
+        <div class="card-body">
+            <div class="card-deck">
+                <world-card-component v-for="world in worlds" v-bind:key="world.id"
+                                      v-bind:world="world"
+                                      v-on:play-world="playWorld"
+                                      v-on:update-world="updateWorld"
+                                      v-on:destroy-world="destroyWorld"></world-card-component>
+            </div>
+            <new-world-form-component v-on:store-world="storeWorld"></new-world-form-component>
         </div>
-        <new-world-form-component v-on:store-world="storeWorld"></new-world-form-component>
     </div>
 </template>
 
 <script>
-    import WorldCardComponent from "./world/WorldCardComponent";
-    import NewWorldFormComponent from "./world/NewWorldFormComponent";
+    import WorldCardComponent from "./worlds/WorldCardComponent";
+    import NewWorldFormComponent from "./worlds/NewWorldFormComponent";
 
     export default {
         name: "WorldsComponent",
         components: {
             'world-card-component': WorldCardComponent,
-            'new-world-form-component': NewWorldFormComponent,
+            'new-world-form-component': NewWorldFormComponent
         },
         data() {
             return {
@@ -32,6 +37,9 @@
                 } catch (error) {
                     console.error(error);
                 }
+            },
+            playWorld(world) {
+                this.$emit('play-world', world);
             },
             async updateWorld(world) {
                 try {
