@@ -5,7 +5,6 @@
             <div class="card-deck">
                 <world-card-component v-for="world in worlds" v-bind:key="world.id"
                                       v-bind:world="world"
-                                      v-on:play-world="playWorld"
                                       v-on:update-world="updateWorld"
                                       v-on:destroy-world="destroyWorld"></world-card-component>
             </div>
@@ -15,8 +14,8 @@
 </template>
 
 <script>
-    import WorldCardComponent from "./worlds/WorldCardComponent";
-    import NewWorldFormComponent from "./worlds/NewWorldFormComponent";
+    import WorldCardComponent from "./WorldCardComponent";
+    import NewWorldFormComponent from "./NewWorldFormComponent";
 
     export default {
         name: "WorldsComponent",
@@ -37,9 +36,6 @@
                 } catch (error) {
                     console.error(error);
                 }
-            },
-            playWorld(world) {
-                this.$emit('play-world', world);
             },
             async updateWorld(world) {
                 try {
@@ -73,6 +69,6 @@
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>

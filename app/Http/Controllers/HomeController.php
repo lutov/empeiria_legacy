@@ -30,4 +30,16 @@ class HomeController extends Controller
 
         return view('home', array());
     }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Factory|View
+     */
+    public function world(Request $request, int $id = 0)
+    {
+        return view('world', array(
+            'id' => $id,
+        ));
+    }
 }

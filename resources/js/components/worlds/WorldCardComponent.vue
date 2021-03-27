@@ -8,8 +8,7 @@
             <div class="btn-group btn-group-sm" role="group" aria-label="World Actions">
                 <button type="button" class="btn btn-secondary" v-on:click.prevent="$emit('update-world', world)">Edit
                 </button>
-                <button type="button" class="btn btn-primary" v-on:click.prevent="$emit('play-world', world)">Play
-                </button>
+                <a class="btn btn-primary" :href="'/home/worlds/'+world.id">Play</a>
                 <button type="button" class="btn btn-danger" v-on:click.prevent="$emit('destroy-world', world)">Delete
                 </button>
             </div>

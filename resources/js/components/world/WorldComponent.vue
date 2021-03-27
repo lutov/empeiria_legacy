@@ -1,6 +1,6 @@
 <template>
     <div class="world">
-        <div class="world-header">World {{worldId}}</div>
+        <div class="world-header">World {{id}}</div>
         <world-map-component v-bind:world="world"></world-map-component>
     </div>
 </template>
@@ -14,7 +14,7 @@
             'world-map-component': WorldMapComponent
         },
         props: {
-            worldId: {
+            id: {
                 type: Number,
                 required: true
             }
@@ -27,7 +27,7 @@
         methods: {
             async fetchWorld() {
                 try {
-                    this.world = await axios.get('/worlds/' + this.worldId);
+                    this.world = await axios.get('/worlds/' + this.id);
                 } catch (error) {
                     console.error(error);
                 }
