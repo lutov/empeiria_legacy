@@ -6,9 +6,10 @@
  * Time: 14:10
  */
 
-namespace App\Models;
+namespace App\Models\World;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static find(int $id)
@@ -33,11 +34,17 @@ class World extends Model
         return Name::random($params);
     }
 
+    /**
+     * @return HasOne
+     */
     public function map()
     {
-        return $this->hasOne('App\Models\Map');
+        return $this->hasOne('App\Models\World\Map');
     }
 
+    /**
+     * @return HasOne
+     */
     public function history()
     {
         return $this->hasOne('App\Models\History');
