@@ -17,12 +17,14 @@ class Color
      * Color constructor.
      * @param array $color
      */
-    public function __construct(array $color = array(0, 0, 0))
+    public function __construct(array $color = array())
     {
         if (count($color)) {
             $this->red = (isset($color[0])) ? (int)$color[0] : 0;
             $this->green = (isset($color[1])) ? (int)$color[1] : 0;
             $this->blue = (isset($color[2])) ? (int)$color[2] : 0;
+        } else {
+            $this->makeRandom();
         }
     }
 
