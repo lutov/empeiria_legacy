@@ -29,26 +29,163 @@
  * SOFTWARE.
  */
 
-namespace Colors;
+namespace App\Properties;
 
 class RandomColor
 {
-    static public $dictionary = null;
+    /*
+     * h=hueRange
+     * s=saturationRange : bounds[0][0] ; bounds[-][0]
+     */
+    static public array $dictionary = array(
+        'monochrome' => array(
+            'bounds' => array(array(0, 0), array(100, 0)),
+            'h' => null,
+            's' => array(0, 100)
+        ),
+        'red' => array(
+            'bounds' => array(
+                array(20, 100),
+                array(30, 92),
+                array(40, 89),
+                array(50, 85),
+                array(60, 78),
+                array(70, 70),
+                array(80, 60),
+                array(90, 55),
+                array(100, 50)
+            ),
+            'h' => array(-26, 18),
+            's' => array(20, 100)
+        ),
+        'orange' => array(
+            'bounds' => array(
+                array(20, 100),
+                array(30, 93),
+                array(40, 88),
+                array(50, 86),
+                array(60, 85),
+                array(70, 70),
+                array(100, 70)
+            ),
+            'h' => array(19, 46),
+            's' => array(20, 100)
+        ),
+        'yellow' => array(
+            'bounds' => array(
+                array(25, 100),
+                array(40, 94),
+                array(50, 89),
+                array(60, 86),
+                array(70, 84),
+                array(80, 82),
+                array(90, 80),
+                array(100, 75)
+            ),
+            'h' => array(47, 62),
+            's' => array(25, 100)
+        ),
+        'green' => array(
+            'bounds' => array(
+                array(30, 100),
+                array(40, 90),
+                array(50, 85),
+                array(60, 81),
+                array(70, 74),
+                array(80, 64),
+                array(90, 50),
+                array(100, 40)
+            ),
+            'h' => array(63, 178),
+            's' => array(30, 100)
+        ),
+        'blue' => array(
+            'bounds' => array(
+                array(20, 100),
+                array(30, 86),
+                array(40, 80),
+                array(50, 74),
+                array(60, 60),
+                array(70, 52),
+                array(80, 44),
+                array(90, 39),
+                array(100, 35)
+            ),
+            'h' => array(179, 257),
+            's' => array(20, 100)
+        ),
+        'purple' => array(
+            'bounds' => array(
+                array(20, 100),
+                array(30, 87),
+                array(40, 79),
+                array(50, 70),
+                array(60, 65),
+                array(70, 59),
+                array(80, 52),
+                array(90, 45),
+                array(100, 42)
+            ),
+            'h' => array(258, 282),
+            's' => array(20, 100)
+        ),
+        'pink' => array(
+            'bounds' => array(
+                array(20, 100),
+                array(30, 90),
+                array(40, 86),
+                array(60, 84),
+                array(80, 80),
+                array(90, 75),
+                array(100, 73)
+            ),
+            'h' => array(283, 334),
+            's' => array(20, 100)
+        )
+    );
+
+    public static string $default_format = 'hex';
+
+    public static array $hues = array(
+        'red',
+        'orange',
+        'yellow',
+        'green',
+        'blue',
+        'purple',
+        'pink'
+    );
+
+    public static array $luminosities = array(
+        'bright',
+        'light',
+        'dark'
+    );
 
     private function __construct()
     {
     }
 
-    static public function one($options = array())
+    /**
+     * @param array $options
+     * @return array|string
+     */
+    static public function one(array $options = array())
     {
+        $format = (isset($options['format'])) ? $options['format'] : self::$default_format;
         $h = self::_pickHue($options);
         $s = self::_pickSaturation($h, $options);
         $v = self::_pickBrightness($h, $s, $options);
 
-        return self::format(compact('h', 's', 'v'), @$options['format']);
+        return self::format(compact('h', 's', 'v'), $format);
     }
 
-    static public function many($count, $options = array())
+    /**
+     * @param int $count
+     * @param array $options
+     * @return array
+     */
+    static public function many(int $count, array $options = array())
     {
         $colors = array();
 
@@ -59,7 +196,12 @@ class RandomColor
         return $colors;
     }
 
-    static public function format($hsv, $format = 'hex')
+    /**
+     * @param array $hsv
+     * @param string $format
+     * @return array|string
+     */
+    static public function format(array $hsv, string $format = 'hex')
     {
         switch ($format) {
             case 'hsv':
@@ -84,7 +226,11 @@ class RandomColor
         }
     }
 
-    static private function _pickHue($options)
+    /**
+     * @param $options
+     * @return int
+     */
+    static private function _pickHue(array $options)
     {
         $range = self::_getHueRange($options);
 
@@ -103,19 +249,27 @@ class RandomColor
         return $hue;
     }
 
-    static private function _pickSaturation($h, $options)
+    /**
+     * @param int $h
+     * @param array $options
+     * @return int
+     */
+    static private function _pickSaturation(int $h, array $options)
     {
-        if (@$options['hue'] === 'monochrome') {
+        $hue = (isset($options['hue'])) ? $options['hue'] : null;
+        $luminosity = (isset($options['luminosity'])) ? $options['luminosity'] : null;
+
+        if ($hue === 'monochrome') {
             return 0;
         }
-        if (@$options['luminosity'] === 'random') {
+        if ($luminosity === 'random') {
             return self::_rand(array(0, 100), $options);
         }
 
         $colorInfo = self::_getColorInfo($h);
         $range = $colorInfo['s'];
 
-        switch (@$options['luminosity']) {
+        switch ($luminosity) {
             case 'bright':
                 $range[0] = 55;
                 break;
@@ -132,9 +286,17 @@ class RandomColor
         return self::_rand($range, $options);
     }
 
-    static private function _pickBrightness($h, $s, $options)
+    /**
+     * @param int $h
+     * @param int $s
+     * @param array $options
+     * @return int
+     */
+    static private function _pickBrightness(int $h, int $s, array $options)
     {
-        if (@$options['luminosity'] === 'random') {
+        $luminosity = (isset($options['luminosity'])) ? $options['luminosity'] : null;
+
+        if ($luminosity === 'random') {
             $range = array(0, 100);
         } else {
             $range = array(
@@ -142,7 +304,7 @@ class RandomColor
                 100
             );
 
-            switch (@$options['luminosity']) {
+            switch ($luminosity) {
                 case 'dark':
                     $range[1] = $range[0] + 20;
                     break;
@@ -156,7 +318,11 @@ class RandomColor
         return self::_rand($range, $options);
     }
 
-    static private function _getHueRange($options)
+    /**
+     * @param array $options
+     * @return array|mixed
+     */
+    static private function _getHueRange(array $options)
     {
         $ranges = array();
 
@@ -195,7 +361,12 @@ class RandomColor
         }
     }
 
-    static private function _getMinimumBrightness($h, $s)
+    /**
+     * @param int $h
+     * @param int $s
+     * @return float|int|mixed
+     */
+    static private function _getMinimumBrightness(int $h, int $s)
     {
         $colorInfo = self::_getColorInfo($h);
         $bounds = $colorInfo['bounds'];
@@ -216,7 +387,11 @@ class RandomColor
         return 0;
     }
 
-    static private function _getColorInfo($h)
+    /**
+     * @param int $h
+     * @return array|mixed
+     */
+    static private function _getColorInfo(int $h)
     {
         // Maps red colors to make picking hue easier
         if ($h >= 334 && $h <= 360) {
@@ -228,9 +403,16 @@ class RandomColor
                 return $color;
             }
         }
+
+        return array();
     }
 
-    static private function _rand($bounds, $options)
+    /**
+     * @param array $bounds
+     * @param array $options
+     * @return int
+     */
+    static private function _rand(array $bounds, array $options)
     {
         if (isset($options['prng'])) {
             return $options['prng']($bounds[0], $bounds[1]);
@@ -239,7 +421,11 @@ class RandomColor
         }
     }
 
-    static public function hsv2hex($hsv)
+    /**
+     * @param array $hsv
+     * @return string
+     */
+    static public function hsv2hex(array $hsv)
     {
         $rgb = self::hsv2rgb($hsv);
         $hex = '#';
@@ -251,9 +437,15 @@ class RandomColor
         return $hex;
     }
 
-    static public function hsv2hsl($hsv)
+    /**
+     * @param array $hsv
+     * @return array
+     */
+    static public function hsv2hsl(array $hsv)
     {
-        extract($hsv);
+        $h = $hsv['h'];
+        $s = $hsv['s'];
+        $v = $hsv['v'];
 
         $s /= 100;
         $v /= 100;
@@ -266,9 +458,15 @@ class RandomColor
         );
     }
 
-    static public function hsv2rgb($hsv)
+    /**
+     * @param array $hsv
+     * @return array
+     */
+    static public function hsv2rgb(array $hsv)
     {
-        extract($hsv);
+        $h = $hsv['h'];
+        $s = $hsv['s'];
+        $v = $hsv['v'];
 
         $h /= 360;
         $s /= 100;
@@ -313,115 +511,25 @@ class RandomColor
             'b' => floor($b * 255),
         );
     }
-}
 
-/*
- * h=hueRange
- * s=saturationRange : bounds[0][0] ; bounds[-][0]
- */
-RandomColor::$dictionary = array(
-    'monochrome' => array(
-        'bounds' => array(array(0, 0), array(100, 0)),
-        'h' => null,
-        's' => array(0, 100)
-    ),
-    'red' => array(
-        'bounds' => array(
-            array(20, 100),
-            array(30, 92),
-            array(40, 89),
-            array(50, 85),
-            array(60, 78),
-            array(70, 70),
-            array(80, 60),
-            array(90, 55),
-            array(100, 50)
-        ),
-        'h' => array(-26, 18),
-        's' => array(20, 100)
-    ),
-    'orange' => array(
-        'bounds' => array(
-            array(20, 100),
-            array(30, 93),
-            array(40, 88),
-            array(50, 86),
-            array(60, 85),
-            array(70, 70),
-            array(100, 70)
-        ),
-        'h' => array(19, 46),
-        's' => array(20, 100)
-    ),
-    'yellow' => array(
-        'bounds' => array(
-            array(25, 100),
-            array(40, 94),
-            array(50, 89),
-            array(60, 86),
-            array(70, 84),
-            array(80, 82),
-            array(90, 80),
-            array(100, 75)
-        ),
-        'h' => array(47, 62),
-        's' => array(25, 100)
-    ),
-    'green' => array(
-        'bounds' => array(
-            array(30, 100),
-            array(40, 90),
-            array(50, 85),
-            array(60, 81),
-            array(70, 74),
-            array(80, 64),
-            array(90, 50),
-            array(100, 40)
-        ),
-        'h' => array(63, 178),
-        's' => array(30, 100)
-    ),
-    'blue' => array(
-        'bounds' => array(
-            array(20, 100),
-            array(30, 86),
-            array(40, 80),
-            array(50, 74),
-            array(60, 60),
-            array(70, 52),
-            array(80, 44),
-            array(90, 39),
-            array(100, 35)
-        ),
-        'h' => array(179, 257),
-        's' => array(20, 100)
-    ),
-    'purple' => array(
-        'bounds' => array(
-            array(20, 100),
-            array(30, 87),
-            array(40, 79),
-            array(50, 70),
-            array(60, 65),
-            array(70, 59),
-            array(80, 52),
-            array(90, 45),
-            array(100, 42)
-        ),
-        'h' => array(258, 282),
-        's' => array(20, 100)
-    ),
-    'pink' => array(
-        'bounds' => array(
-            array(20, 100),
-            array(30, 90),
-            array(40, 86),
-            array(60, 84),
-            array(80, 80),
-            array(90, 75),
-            array(100, 73)
-        ),
-        'h' => array(283, 334),
-        's' => array(20, 100)
-    )
-);
+    /**
+     * @return mixed
+     */
+    public static function getRandomHue()
+    {
+        $min = 0;
+        $max = count(self::$hues) - 1;
+        return self::$hues[rand($min, $max)];
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getRandomLuminosity()
+    {
+        $min = 0;
+        $max = count(self::$luminosities) - 1;
+        return self::$luminosities[rand($min, $max)];
+    }
+
+}
