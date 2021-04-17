@@ -10,6 +10,7 @@ use App\Models\World\Tile;
 use App\Properties\RandomColor;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -46,9 +47,17 @@ class HomeController extends Controller
     public function world(Request $request, int $id = 0)
     {
 
-        $map = MapHelper::generate();
+        //$map = MapHelper::generate();
 
-        echo MapHelper::render($map);
+        $key = 'world_map_' . $id;
+        $seconds = 60 * 60;
+        $map = Cache::remember($key, $seconds, function () {
+            return MapHelper::generate();
+        });
+
+        MapHelper::draw($map, $id);
+
+        echo MapHelper::render($map, $id);
 
         return view('world', array(
             'id' => $id,
