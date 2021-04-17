@@ -162,6 +162,18 @@ class ColorHelper
         'dark'
     );
 
+    /**
+     * @var array
+     *
+     * hex -> "#008c33"
+     * hsv -> array('h'=>142,'s'=>100,'v'=>55)
+     * hsl -> array('h'=>142,'s'=>100.0,'l'=>27.500000000000004)
+     * rgb -> array('r'=>0.0,'g'=>140.0,'b'=>51.0)
+     * hslCss -> "hsl(142,100%,27.5%)"
+     * rgbCss -> "rgb(0,140,51)"
+     */
+    public static array $formats = array('hex', 'hsv', 'hsl', 'rgb', 'hslCss', 'rgbCss');
+
     private function __construct()
     {
     }
@@ -530,6 +542,30 @@ class ColorHelper
         $min = 0;
         $max = count(self::$luminosities) - 1;
         return self::$luminosities[rand($min, $max)];
+    }
+
+    /**
+     * @param string $hex
+     * @return array
+     */
+    public static function hex2rgb(string $hex = '#000000')
+    {
+        $f = function ($x) {
+            return hexdec($x);
+        };
+        return array_map($f, str_split(str_replace("#", "", $hex), 2));
+    }
+
+    /**
+     * @param array $rgb
+     * @return string
+     */
+    public static function rgb2hex(array $rgb = array(0, 0, 0))
+    {
+        $f = function ($x) {
+            return str_pad(dechex($x), 2, "0", STR_PAD_LEFT);
+        };
+        return "#" . implode("", array_map($f, $rgb));
     }
 
     /**
