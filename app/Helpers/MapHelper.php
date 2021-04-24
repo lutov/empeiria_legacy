@@ -12,6 +12,36 @@ class MapHelper
 {
 
     /**
+     * @var array
+     */
+    public static array $areas = array(
+        'mainland' => array(
+            array('colors' => array('green', 'green'), 'weight' => 100),
+            array('colors' => array('green', 'orange'), 'weight' => 75),
+            array('colors' => array('green', 'yellow'), 'weight' => 50),
+            array('colors' => array('green', 'blue'), 'weight' => 25),
+        ),
+        'rural' => array(
+            array('colors' => array('green', 'orange'), 'weight' => 100),
+            array('colors' => array('orange', 'yellow'), 'weight' => 75),
+            array('colors' => array('green', 'blue'), 'weight' => 50),
+            array('colors' => array('blue', 'yellow'), 'weight' => 25),
+        ),
+        'borderland' => array(
+            array('colors' => array('green', 'red'), 'weight' => 100),
+            array('colors' => array('green', 'purple'), 'weight' => 75),
+            array('colors' => array('orange', 'blue'), 'weight' => 50),
+            array('colors' => array('blue', 'purple'), 'weight' => 25),
+        ),
+        'frontier' => array(
+            array('colors' => array('red', 'red'), 'weight' => 100),
+            array('colors' => array('red', 'orange'), 'weight' => 75),
+            array('colors' => array('red', 'blue'), 'weight' => 50),
+            array('colors' => array('red', 'purple'), 'weight' => 25),
+        ),
+    );
+
+    /**
      * @param int $world_size_y
      * @param int $world_size_x
      * @param int $region_size_y
@@ -26,24 +56,19 @@ class MapHelper
     ) {
         $map = array();
         $region_id = 1;
+        $region_area = self::regions();
         for ($row = 0; $row < $world_size_y; $row++) {
             for ($col = 0; $col < $world_size_x; $col++) {
                 $region = new Region();
                 $region->id = $region_id;
                 $region->name = Name::random();
                 $picker = new RandomHelper();
-                $picker->addElement(array('green', 'green'), 100);
-                $picker->addElement(array('green', 'orange'), 75);
-                $picker->addElement(array('orange', 'orange'), 50);
-                $picker->addElement(array('orange', 'yellow'), 40);
-                $picker->addElement(array('yellow', 'blue'), 30);
-                $picker->addElement(array('blue', 'blue'), 25);
-                $picker->addElement(array('blue', 'red'), 20);
-                $picker->addElement(array('red', 'red'), 15);
-                $picker->addElement(array('purple', 'purple'), 10);
-                $picker->addElement(array('red', 'purple'), 10);
+                $area = self::$areas[$region_area[$row][$col]];
+                foreach ($area as $element) {
+                    $picker->addElement($element['colors'], $element['weight']);
+                }
                 $hue = 'monochrome';
-                $luminosity = 'bright';
+                $luminosity = 'light';
                 try {
                     $hue = $picker->getRandomElement();
                 } catch (\Exception $e) {
@@ -161,6 +186,39 @@ class MapHelper
         }
         $html .= '</div>';
         return $html;
+    }
+
+    /**
+     * @param int $world_size_y
+     * @param int $world_size_x
+     * @return array
+     */
+    public static function regions(int $world_size_y = 12, int $world_size_x = 12)
+    {
+        $region_area = array();
+        $range_m = range(4, 7);
+        $range_r = range(2, 9);
+        $range_b = range(1, 10);
+        $mainland = array_fill(4, 4, $range_m);
+        $rural = array_fill(2, 8, $range_r);
+        $borderland = array_fill(1, 10, $range_b);
+        for ($y = 0; $y < $world_size_y; $y++) {
+            for ($x = 0; $x < $world_size_x; $x++) {
+                if (isset($region_area[$y][$x])) {
+                    continue;
+                }
+                if (isset($mainland[$y]) && (in_array($x, $mainland[$y]))) {
+                    $region_area[$y][$x] = 'mainland';
+                } elseif (isset($rural[$y]) && (in_array($x, $rural[$y]))) {
+                    $region_area[$y][$x] = 'rural';
+                } elseif (isset($borderland[$y]) && (in_array($x, $borderland[$y]))) {
+                    $region_area[$y][$x] = 'borderland';
+                } else {
+                    $region_area[$y][$x] = 'frontier';
+                }
+            }
+        }
+        return $region_area;
     }
 
 }
