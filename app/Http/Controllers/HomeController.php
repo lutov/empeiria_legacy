@@ -63,4 +63,16 @@ class HomeController extends Controller
             'id' => $id,
         ));
     }
+
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function squads(Request $request)
+    {
+        return view('squads', array(
+            'request' => $request,
+        ));
+    }
+
 }

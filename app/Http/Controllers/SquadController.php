@@ -26,7 +26,8 @@ class SquadController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return Squad::where('user_id', $user->id)->get();
+        //return Squad::where('user_id', $user->id)->get();
+        return Squad::get();
     }
 
     /**
@@ -41,7 +42,8 @@ class SquadController extends Controller
         $name = $request->input('name');
 
         if (!empty($name)) {
-            $squad->user_id = $user->id;
+            $squad->faction_id = 1;
+            //$squad->user_id = $user->id;
             $squad->name = $name;
             $squad->save();
         }
