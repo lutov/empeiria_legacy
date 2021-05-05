@@ -3,11 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MapHelper;
-use App\Helpers\RandomHelper;
-use App\Models\Name;
-use App\Models\World\Region;
-use App\Models\World\Tile;
-use App\Properties\RandomColor;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -60,6 +55,19 @@ class HomeController extends Controller
         echo MapHelper::render($map, $id);
 
         return view('world', array(
+            'id' => $id,
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Factory|View
+     */
+    public function faction(Request $request, int $id = 0)
+    {
+        return view('faction', array(
+            'request' => $request,
             'id' => $id,
         ));
     }

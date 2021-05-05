@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faction;
+use App\Models\Squad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FactionController extends Controller
 {
@@ -82,6 +84,49 @@ class FactionController extends Controller
             $faction->delete();
         }
         return $faction;
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function characters(Request $request, int $id)
+    {
+        if ('true' == $request->input('no_squad')) {
+            $squads = Squad::where('faction_id', '=', $id)->pluck('id')->toArray();
+            $characters = DB::table('squads_characters')->whereIn('squad_id',
+                $squads)->pluck('character_id')->toArray();
+            return Faction::find($id)->characters()->whereNotIn('characters.id', $characters)->get();
+        } else {
+            return Faction::find($id)->characters;
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function attachCharacters(Request $request, int $id)
+    {
+        $characters = $request->input('characters', array());
+        $squad = Faction::find($id);
+        $squad->characters()->attach($characters);
+        return $squad;
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function detachCharacters(Request $request, int $id)
+    {
+        $characters = $request->input('characters', array());
+        $squad = Faction::find($id);
+        $squad->characters()->detach($characters);
+        return $squad;
     }
 
 }

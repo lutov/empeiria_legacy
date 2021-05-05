@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
  * @method static find(int $id)
- * @method static where(string $string, $id)
+ * @method static where(string $field, string $operator, $value)
  */
 class Squad extends Model
 {

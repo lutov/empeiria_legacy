@@ -107,6 +107,14 @@ class Character extends Model
     /**
      * @return BelongsTo
      */
+    public function faction()
+    {
+        return $this->belongsTo('App\Models\Faction');
+    }
+
+    /**
+     * @return BelongsTo
+     */
     public function squad()
     {
         return $this->belongsTo('App\Models\Squad');
