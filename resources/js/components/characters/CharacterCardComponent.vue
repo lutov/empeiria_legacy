@@ -1,7 +1,7 @@
 <template>
     <div class="col-2 mb-2">
         <div class="card">
-            <div class="card-header">{{character.name}}</div>
+            <div class="card-header"><a :href="'/home/characters/'+character.id">{{character.name}}</a></div>
             <div class="card-body"></div>
         </div>
     </div>

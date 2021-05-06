@@ -23,6 +23,7 @@ Route::group(array('prefix' => 'home'), function () {
     Route::get('/worlds/{id}', 'HomeController@world')->name('home_world');
     Route::get('/factions/{id}', 'HomeController@faction')->name('home_faction');
     Route::get('/squads/', 'HomeController@squads')->name('home_squads');
+    Route::get('/characters/{id}', 'HomeController@character')->name('home_character');
 });
 
 Route::group(array('prefix' => 'factions'), function () {

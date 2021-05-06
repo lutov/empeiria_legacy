@@ -83,4 +83,17 @@ class HomeController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Factory|View
+     */
+    public function character(Request $request, int $id = 0)
+    {
+        return view('character', array(
+            'request' => $request,
+            'id' => $id,
+        ));
+    }
+
 }
