@@ -5,7 +5,8 @@
                 <character-doll-component v-bind:character="character"></character-doll-component>
             </div>
             <div class="col-6">
-                <character-inventory-component v-bind:character="character"></character-inventory-component>
+                <character-inventory-component v-if="character.id"
+                                               v-bind:character="character"></character-inventory-component>
             </div>
         </div>
     </div>
