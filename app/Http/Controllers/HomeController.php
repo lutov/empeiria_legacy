@@ -96,4 +96,15 @@ class HomeController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function conversations(Request $request)
+    {
+        return view('conversations', array(
+            'request' => $request,
+        ));
+    }
+
 }
