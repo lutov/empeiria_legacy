@@ -15,12 +15,35 @@ class GameHelper
 {
 
     /**
+     * Roll the dice
+     *
      * @param int $sides
      * @return int
      */
     public static function roll(int $sides = 10)
     {
         return mt_rand(1, $sides);
+    }
+
+    /**
+     * Flip a coin
+     *
+     * @return bool
+     */
+    public static function flip()
+    {
+        return (bool)mt_rand(0, 1);
+    }
+
+    /**
+     * Draw lots
+     *
+     * @param int $chance
+     * @return bool
+     */
+    public static function lots(int $chance = 50)
+    {
+        return (rand(1, 100) <= $chance) ? true : false;
     }
 
     /**
