@@ -36,12 +36,12 @@ class GameHelper
     }
 
     /**
-     * Draw lots
+     * Evaluate odds
      *
      * @param int $chance
      * @return bool
      */
-    public static function lots(int $chance = 50)
+    public static function odds(int $chance = 50)
     {
         return (rand(1, 100) <= $chance) ? true : false;
     }
