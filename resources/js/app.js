@@ -9,6 +9,7 @@ import {store} from "./store";
 require('./bootstrap');
 
 import Vue from 'vue';
+import vuetify from './vuetify';
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,5 +30,6 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 new Vue({
     el: '#app',
-    store
+    store,
+    vuetify
 });
