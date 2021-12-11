@@ -1,6 +1,26 @@
 <template>
 
     <div class="card">
+
+        <v-card>
+            <v-card-title>
+                Characters
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                :headers="headers"
+                :items="characters"
+                :search="search"
+            ></v-data-table>
+        </v-card>
+
         <div class="card-header">Characters</div>
 
         <div class="card-body">
@@ -54,7 +74,18 @@
         data() {
             return {
                 api: '/api/characters',
-                characters: {},
+                search: '',
+                headers: [
+                    {text: 'ID', value: 'id'},
+                    {
+                        text: 'Name',
+                        align: 'start',
+                        filterable: true,
+                        value: 'name',
+                    },
+                    {text: 'Delete'}
+                ],
+                characters: [],
                 new_character_name: ''
             };
         },
@@ -62,7 +93,7 @@
 
             async fetchCharacters() {
                 try {
-                    this.characters = await axios.get(this.api);
+                    axios.get(this.api).then(response => this.characters = response.data);
                 } catch (error) {
                     console.error(error);
                 }
