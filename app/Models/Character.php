@@ -36,8 +36,12 @@ class Character extends Model
 
     use SoftDeletes;
 
-    protected $with = ['position'];
-    protected $visible = ['id', 'name', 'position'];
+    //protected $with = ['position'];
+    protected $visible = [
+        'id',
+        'name',
+        //'position',
+    ];
 
     /**
      * Character constructor.

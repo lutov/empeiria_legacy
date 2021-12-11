@@ -53,6 +53,7 @@
         name: 'characters-component',
         data() {
             return {
+                api: '/api/characters',
                 characters: {},
                 new_character_name: ''
             };
@@ -61,7 +62,7 @@
 
             async fetchCharacters() {
                 try {
-                    this.characters = await axios.get('/characters');
+                    this.characters = await axios.get(this.api);
                 } catch (error) {
                     console.error(error);
                 }
@@ -74,7 +75,7 @@
                 };
 
                 try {
-                    this.characters = await axios.post('/characters', params);
+                    this.characters = await axios.post(this.api, params);
                     this.new_character_name = '';
                     this.fetchCharacters();
                 } catch (error) {
@@ -90,7 +91,7 @@
                 };
 
                 try {
-                    this.characters = await axios.post('/characters/' + id, params);
+                    this.characters = await axios.post(this.api + id, params);
                     this.fetchCharacters();
                 } catch (error) {
                     console.error(error);
@@ -105,7 +106,7 @@
                 };
 
                 try {
-                    this.characters = await axios.delete('/characters/' + id, params);
+                    this.characters = await axios.delete(this.api + id, params);
                     this.fetchCharacters();
                 } catch (error) {
                     console.error(error);

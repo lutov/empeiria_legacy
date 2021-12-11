@@ -85,6 +85,17 @@ class GameController extends Controller
 
     /**
      * @param Request $request
+     * @return Factory|View
+     */
+    public function characters(Request $request)
+    {
+        return view('game.characters', array(
+            'request' => $request,
+        ));
+    }
+
+    /**
+     * @param Request $request
      * @param int $id
      * @return Factory|View
      */

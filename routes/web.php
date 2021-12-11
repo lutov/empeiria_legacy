@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/worlds/{id}', 'GameController@world')->name('game_world');
     Route::get('/factions/{id}', 'GameController@faction')->name('game_faction');
     Route::get('/squads/', 'GameController@squads')->name('game_squads');
+    Route::get('/characters/', 'GameController@characters')->name('game_characters');
     Route::get('/characters/{id}', 'GameController@character')->name('game_character');
     Route::get('/conversations/', 'GameController@conversations')->name('game_conversations');
 });

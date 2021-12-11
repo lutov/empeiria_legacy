@@ -19,7 +19,7 @@ class CharacterController extends Controller implements MoveInterface
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
