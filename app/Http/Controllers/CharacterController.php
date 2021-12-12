@@ -47,6 +47,7 @@ class CharacterController extends Controller implements MoveInterface
             $character->name = $name;
             $character->save();
 
+            /*
             $character->body()->create();
             $character->bodyparts()->create();
             $character->qualities()->create();
@@ -54,6 +55,7 @@ class CharacterController extends Controller implements MoveInterface
             $character->features()->create();
 
             $character->inventory()->create();
+            */
         }
 
         return $character;
@@ -69,14 +71,19 @@ class CharacterController extends Controller implements MoveInterface
     }
 
     /**
-     * @param  int  $id
+     * @param int $id
+     * @param Request $request
      * @return mixed
      */
-    public function update(int $id)
+    public function update(int $id, Request $request)
     {
         $character = Character::find($id);
         if (isset($character->id)) {
-            //
+            $name = $request->input('name');
+            if (!empty($name)) {
+                $character->name = $name;
+                $character->save();
+            }
         }
         return $character;
     }

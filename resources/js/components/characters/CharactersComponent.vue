@@ -1,70 +1,116 @@
 <template>
 
-    <div class="card">
+    <v-card>
+        <v-card-title>
+            Characters
+            <v-spacer></v-spacer>
+            <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-dialog
+                v-model="dialog"
+                max-width="500px"
+            >
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                        color="primary"
+                        dark
+                        class="mb-2"
+                        v-bind="attrs"
+                        v-on="on"
+                    >
+                        New Item
+                    </v-btn>
+                </template>
+                <v-card>
+                    <v-card-title>
+                        <span class="text-h5">{{ formTitle }}</span>
+                    </v-card-title>
 
-        <v-card>
-            <v-card-title>
-                Characters
-                <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
-            </v-card-title>
-            <v-data-table
-                :headers="headers"
-                :items="characters"
-                :search="search"
-            ></v-data-table>
-        </v-card>
+                    <v-card-text>
+                        <v-container>
+                            <v-row>
+                                <v-col
+                                    cols="12"
+                                    sm="12"
+                                    md="12"
+                                >
+                                    <v-text-field
+                                        v-model="editedItem.name"
+                                        label="Character name"
+                                    ></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
 
-        <div class="card-header">Characters</div>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="blue darken-1"
+                            text
+                            @click="close"
+                        >
+                            Cancel
+                        </v-btn>
+                        <v-btn
+                            color="blue darken-1"
+                            text
+                            @click="save"
+                        >
+                            Save
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                    <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                        <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                        <v-spacer></v-spacer>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-card-title>
+        <v-data-table
+            :headers="headers"
+            :items="characters"
+            :search="search"
+        >
+            <template v-slot:item.actions="{ item }">
+                <v-icon
+                    small
+                    class="mr-2"
+                    @click="editItem(item)"
+                >
+                    mdi-pencil
+                </v-icon>
+                <v-icon
+                    small
+                    @click="deleteItem(item)"
+                >
+                    mdi-delete
+                </v-icon>
+            </template>
+            <template v-slot:no-data>
+                <v-btn
+                    color="primary"
+                    @click="fetchCharacters"
+                >
+                    Reset
+                </v-btn>
+            </template>
 
-        <div class="card-body">
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="character in characters.data">
-                    <td>{{character.id}}</td>
-                    <td>{{character.name}}</td>
-                    <td>
-                        <form :action="'/characters/'+character.id" class="form-inline" method="POST">
-                            <input name="_method" type="hidden" value="PUT">
-                            <button class="btn btn-sm btn-outline-warning"
-                                    v-on:click.prevent="updateCharacter(character.id)">Edit
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form :action="'/characters/'+character.id" class="form-inline" method="POST">
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-sm btn-outline-danger"
-                                    v-on:click.prevent="destroyCharacter(character.id)">Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <label for="new_character_name">Create new Character</label>
-            <form action="/characters" class="form-inline" method="POST">
-                <input class="form-control form-control-sm mr-2" id="new_character_name"
-                       placeholder="New character's name" v-model="new_character_name">
-                <button class="btn btn-sm btn-success" v-on:click.prevent="storeCharacter()">Create</button>
-            </form>
-
-        </div>
-    </div>
+        </v-data-table>
+    </v-card>
 
 </template>
 
@@ -74,6 +120,8 @@
         data() {
             return {
                 api: '/api/characters',
+                dialog: false,
+                dialogDelete: false,
                 search: '',
                 headers: [
                     {text: 'ID', value: 'id'},
@@ -83,12 +131,35 @@
                         filterable: true,
                         value: 'name',
                     },
-                    {text: 'Delete'}
+                    {text: 'Actions', value: 'actions', sortable: false}
                 ],
                 characters: [],
+                editedIndex: -1,
+                editedItem: {
+                    name: ''
+                },
+                defaultItem: {
+                    name: ''
+                },
                 new_character_name: ''
             };
         },
+
+        computed: {
+            formTitle() {
+                return this.editedIndex === -1 ? 'New Character' : 'Edit Character';
+            },
+        },
+
+        watch: {
+            dialog(val) {
+                val || this.close();
+            },
+            dialogDelete(val) {
+                val || this.closeDelete();
+            },
+        },
+
         methods: {
 
             async fetchCharacters() {
@@ -99,53 +170,61 @@
                 }
             },
 
-            async storeCharacter() {
-
-                let params = {
-                    name: this.new_character_name
-                };
-
-                try {
-                    this.characters = await axios.post(this.api, params);
-                    this.new_character_name = '';
-                    this.fetchCharacters();
-                } catch (error) {
-                    console.error(error);
-                }
-
+            editItem(item) {
+                this.editedIndex = this.characters.indexOf(item);
+                this.editedItem = Object.assign({}, item);
+                this.dialog = true
             },
 
-            async updateCharacter(id) {
-
-                let params = {
-                    id: id
-                };
-
-                try {
-                    this.characters = await axios.post(this.api + id, params);
-                    this.fetchCharacters();
-                } catch (error) {
-                    console.error(error);
-                }
-
+            deleteItem(item) {
+                this.editedIndex = this.characters.indexOf(item);
+                this.editedItem = Object.assign({}, item);
+                this.dialogDelete = true;
             },
 
-            async destroyCharacter(id) {
+            deleteItemConfirm() {
+                let i = this.editedIndex;
+                axios.delete(this.api + '/' + this.editedItem.id, this.editedItem).then(response => {
+                    this.editedItem = response.data;
+                    this.characters.splice(i, 1);
+                }).catch(error => console.log(error));
+                this.closeDelete();
+            },
 
-                let params = {
-                    id: id
-                };
+            close() {
+                this.dialog = false;
+                this.$nextTick(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem);
+                    this.editedIndex = -1;
+                })
+            },
 
-                try {
-                    this.characters = await axios.delete(this.api + id, params);
-                    this.fetchCharacters();
-                } catch (error) {
-                    console.error(error);
+            closeDelete() {
+                this.dialogDelete = false;
+                this.$nextTick(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem);
+                    this.editedIndex = -1;
+                })
+            },
+
+            save() {
+                if (this.editedIndex > -1) {
+                    let i = this.editedIndex;
+                    axios.put(this.api + '/' + this.editedItem.id, this.editedItem).then(response => {
+                        this.editedItem = response.data;
+                        Object.assign(this.characters[i], this.editedItem);
+                    }).catch(error => console.log(error));
+                } else {
+                    axios.post(this.api, this.editedItem).then(response => {
+                        this.editedItem = response.data;
+                        this.characters.push(this.editedItem);
+                    }).catch(error => console.log(error));
                 }
-
-            }
+                this.close();
+            },
 
         },
+
         mounted() {
             console.log('Characters Component mounted');
             this.fetchCharacters();
