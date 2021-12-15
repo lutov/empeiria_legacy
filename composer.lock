@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f56cde68c93869cd806d6ceaaacfbc6",
+    "content-hash": "01a5c20b77c9a88656d03f243581afab",
     "packages": [
         {
             "name": "brick/math",
@@ -5900,6 +5900,67 @@
                 "source": "https://github.com/beyondcode/laravel-dump-server/tree/1.7.0"
             },
             "time": "2020-12-15T10:57:43+00:00"
+        },
+        {
+            "name": "davejamesmiller/laravel-migrations-ui",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davejamesmiller/laravel-migrations-ui.git",
+                "reference": "8fb804ed708251003822106722b2dfebb285d808"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davejamesmiller/laravel-migrations-ui/zipball/8fb804ed708251003822106722b2dfebb285d808",
+                "reference": "8fb804ed708251003822106722b2dfebb285d808",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^2.0",
+                "laravel/framework": ">=5.6",
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "nunomaduro/collision": "^3.0|^4.1",
+                "orchestra/testbench": ">=3.6",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DaveJamesMiller\\MigrationsUI\\MigrationsUIServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DaveJamesMiller\\MigrationsUI\\": "classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dave James Miller",
+                    "email": "dave@davejamesmiller.com"
+                }
+            ],
+            "description": "A web-based GUI for creating and running migrations in Laravel.",
+            "homepage": "https://github.com/davejamesmiller/laravel-migrations-ui",
+            "keywords": [
+                "laravel",
+                "migrations"
+            ],
+            "support": {
+                "source": "https://github.com/davejamesmiller/laravel-migrations-ui/tree/1.0.3"
+            },
+            "abandoned": true,
+            "time": "2020-02-29T17:12:01+00:00"
         },
         {
             "name": "doctrine/instantiator",

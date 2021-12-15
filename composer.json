@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
+        "davejamesmiller/laravel-migrations-ui": "^1.0",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^5.0",
