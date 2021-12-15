@@ -28,7 +28,7 @@ class Body extends Model
      */
     public function sex()
     {
-        return $this->hasOne('App\Models\Types\Sex');
+        return $this->hasOne('App\Models\Types\Gender');
     }
 
     /**

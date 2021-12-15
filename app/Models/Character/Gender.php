@@ -6,13 +6,13 @@
  * Time: 14:10
  */
 
-namespace App\Models\Types;
+namespace App\Models\Character;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class Sex
+ * Class Gender
  * @package App\Models
  * @mixin Builder
  *
@@ -20,7 +20,7 @@ use Illuminate\Database\Query\Builder;
  * @property string $name
  * @property string $slug
  */
-class Sex extends Model
+class Gender extends Model
 {
 
     public static function random()
