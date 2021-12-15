@@ -9,6 +9,7 @@
 namespace App\Models\Character;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Query\Builder;
 
 /**
@@ -23,9 +24,30 @@ use Illuminate\Database\Query\Builder;
 class Avatar extends Model
 {
 
-    public static function random()
+    protected $visible = [
+        'id',
+        'name',
+        'gender_id',
+    ];
+
+    /**
+     * @param Gender $gender
+     * @return Avatar|Model|object|null
+     */
+    public static function random(Gender $gender)
     {
-        return self::inRandomOrder()->first();
+        return self::select('name')
+            ->where('gender_id', '=', $gender->id)
+            ->inRandomOrder()
+            ->value('name');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function gender()
+    {
+        return $this->belongsTo('App\Models\Character\Gender');
     }
 
 }

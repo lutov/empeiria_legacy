@@ -23,6 +23,12 @@ use Illuminate\Database\Query\Builder;
 class Gender extends Model
 {
 
+    protected $visible = [
+        'id',
+        'name',
+        'slug',
+    ];
+
     public static function random()
     {
         return self::inRandomOrder()->first();

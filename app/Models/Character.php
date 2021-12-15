@@ -36,10 +36,20 @@ class Character extends Model
 
     use SoftDeletes;
 
-    //protected $with = ['position'];
+    protected $with = [
+        'gender',
+        'avatar',
+        //'position',
+    ];
     protected $visible = [
         'id',
         'name',
+        'nickname',
+        'last_name',
+        'gender',
+        'age',
+        'bio',
+        'avatar',
         //'position',
     ];
 
@@ -50,6 +60,22 @@ class Character extends Model
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function gender()
+    {
+        return $this->belongsTo('App\Models\Character\Gender');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function avatar()
+    {
+        return $this->belongsTo('App\Models\Character\Avatar');
     }
 
     /**
