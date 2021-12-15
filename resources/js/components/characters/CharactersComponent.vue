@@ -131,6 +131,20 @@
                         filterable: true,
                         value: 'name',
                     },
+                    {
+                        text: 'Nickname',
+                        align: 'start',
+                        filterable: true,
+                        value: 'nickname',
+                    },
+                    {
+                        text: 'Last Name',
+                        align: 'start',
+                        filterable: true,
+                        value: 'last_name',
+                    },
+                    {text: 'Age', value: 'age'},
+                    {text: 'Gender', value: 'gender.name'},
                     {text: 'Actions', value: 'actions', sortable: false}
                 ],
                 characters: [],
