@@ -28,7 +28,9 @@ class Avatar extends Model
         'id',
         'name',
         'gender_id',
+        'path',
     ];
+    protected $appends = ['path'];
 
     /**
      * @param Gender $gender
@@ -48,6 +50,14 @@ class Avatar extends Model
     public function gender()
     {
         return $this->belongsTo('App\Models\Character\Gender');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPathAttribute()
+    {
+        return '/img/characters/avatars/' . $this->gender->slug . '/' . $this->name . '.jpg';
     }
 
 }
