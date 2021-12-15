@@ -1,5 +1,7 @@
 <?php
 
+use Database\Seeders\DatabaseSeeder;
+
 return [
 
     /*
