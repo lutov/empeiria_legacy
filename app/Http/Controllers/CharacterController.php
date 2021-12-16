@@ -7,12 +7,19 @@ use App\Models\Character;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class CharacterController extends Controller implements MoveInterface
 {
 
     private $slug = 'characters';
     private $model = Character::class;
+    private $rules = [
+        'name' => ['required', 'string', 'max:255'],
+        'nickname' => ['string', 'max:255', 'nullable'],
+        'last_name' => ['string', 'max:255', 'nullable'],
+    ];
 
     /**
      * HomeController constructor.
@@ -32,33 +39,23 @@ class CharacterController extends Controller implements MoveInterface
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @return Character
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
         $character = new Character();
-
         $user = Auth::user();
-        $name = $request->input('name');
-
-        if (!empty($name)) {
+        $validator = Validator::make($request->all(), $this->rules);
+        if ($validator->passes()) {
+            $character->fill($validator->validated());
             $character->user_id = $user->id;
-            $character->name = $name;
             $character->save();
-
-            /*
-            $character->body()->create();
-            $character->bodyparts()->create();
-            $character->qualities()->create();
-            $character->conditions()->create();
-            $character->features()->create();
-
-            $character->inventory()->create();
-            */
+        } else {
+            return response()->json($validator->messages(), 422);
         }
-
-        return $character;
+        return $character->fresh();
     }
 
     /**
@@ -74,15 +71,18 @@ class CharacterController extends Controller implements MoveInterface
      * @param int $id
      * @param Request $request
      * @return mixed
+     * @throws ValidationException
      */
     public function update(int $id, Request $request)
     {
         $character = Character::find($id);
         if (isset($character->id)) {
-            $name = $request->input('name');
-            if (!empty($name)) {
-                $character->name = $name;
+            $validator = Validator::make($request->all(), $this->rules);
+            if ($validator->passes()) {
+                $character->fill($validator->validated());
                 $character->save();
+            } else {
+                return response()->json($validator->messages(), 422);
             }
         }
         return $character;

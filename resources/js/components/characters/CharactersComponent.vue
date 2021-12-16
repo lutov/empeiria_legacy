@@ -37,12 +37,32 @@
                             <v-row>
                                 <v-col
                                     cols="12"
-                                    sm="12"
-                                    md="12"
+                                    sm="6"
+                                    md="4"
                                 >
                                     <v-text-field
                                         v-model="editedItem.name"
-                                        label="Character name"
+                                        label="Name"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                >
+                                    <v-text-field
+                                        v-model="editedItem.nickname"
+                                        label="Nickname"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                >
+                                    <v-text-field
+                                        v-model="editedItem.last_name"
+                                        label="Last Name"
                                     ></v-text-field>
                                 </v-col>
                             </v-row>
@@ -85,6 +105,17 @@
             :items="characters"
             :search="search"
         >
+            <template v-slot:item.avatar="{ item }">
+                <v-avatar>
+                    <img
+                        :src=item.avatar.path
+                        :alt=item.name
+                    >
+                </v-avatar>
+            </template>
+            <template v-slot:item.name="{ item }">
+                <a :href="'/characters/'+item.id">{{ item.name }}</a>
+            </template>
             <template v-slot:item.actions="{ item }">
                 <v-icon
                     small
@@ -125,6 +156,7 @@
                 search: '',
                 headers: [
                     {text: 'ID', value: 'id'},
+                    {text: 'Avatar', value: 'avatar', sortable: false},
                     {
                         text: 'Name',
                         align: 'start',
@@ -150,13 +182,24 @@
                 characters: [],
                 editedIndex: -1,
                 editedItem: {
-                    name: ''
+                    id: 0,
+                    name: '',
+                    nickname: '',
+                    last_name: '',
+                    age: 0,
+                    gender: 1,
+                    avatar: 1
                 },
                 defaultItem: {
-                    name: ''
-                },
-                new_character_name: ''
-            };
+                    id: 0,
+                    name: '',
+                    nickname: '',
+                    last_name: '',
+                    age: 0,
+                    gender: 1,
+                    avatar: 1
+                }
+            }
         },
 
         computed: {

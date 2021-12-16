@@ -52,6 +52,16 @@ class Character extends Model
         'avatar',
         //'position',
     ];
+    protected $fillable = [
+        'id',
+        'name',
+        'nickname',
+        'last_name',
+        'gender_id',
+        'age',
+        'bio',
+        'avatar_id',
+    ];
 
     /**
      * Character constructor.
