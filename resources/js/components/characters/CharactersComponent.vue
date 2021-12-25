@@ -65,6 +65,33 @@
                                         label="Last Name"
                                     ></v-text-field>
                                 </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                >
+                                    <v-text-field
+                                        v-model="editedItem.age"
+                                        label="Age"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                >
+                                    <v-select
+                                        v-model="editedItem.gender"
+                                        :hint="`${genderSelect.name}, ${genderSelect.id}`"
+                                        :items="genders"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Gender"
+                                        persistent-hint
+                                        return-object
+                                        single-line
+                                    ></v-select>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -150,7 +177,10 @@
         name: 'characters-component',
         data() {
             return {
-                api: '/api/characters',
+                api: {
+                    characters: '/api/characters',
+                    genders: '/api/genders'
+                },
                 dialog: false,
                 dialogDelete: false,
                 search: '',
@@ -198,7 +228,9 @@
                     age: 0,
                     gender: 1,
                     avatar: 1
-                }
+                },
+                genderSelect: {name: 'None', id: 1},
+                genders: []
             }
         },
 
@@ -221,7 +253,7 @@
 
             async fetchCharacters() {
                 try {
-                    axios.get(this.api).then(response => this.characters = response.data);
+                    axios.get(this.api.characters).then(response => this.characters = response.data);
                 } catch (error) {
                     console.error(error);
                 }
@@ -241,7 +273,7 @@
 
             deleteItemConfirm() {
                 let i = this.editedIndex;
-                axios.delete(this.api + '/' + this.editedItem.id, this.editedItem).then(response => {
+                axios.delete(this.api.characters + '/' + this.editedItem.id, this.editedItem).then(response => {
                     this.editedItem = response.data;
                     this.characters.splice(i, 1);
                 }).catch(error => console.log(error));
@@ -267,12 +299,12 @@
             save() {
                 if (this.editedIndex > -1) {
                     let i = this.editedIndex;
-                    axios.put(this.api + '/' + this.editedItem.id, this.editedItem).then(response => {
+                    axios.put(this.api.characters + '/' + this.editedItem.id, this.editedItem).then(response => {
                         this.editedItem = response.data;
                         Object.assign(this.characters[i], this.editedItem);
                     }).catch(error => console.log(error));
                 } else {
-                    axios.post(this.api, this.editedItem).then(response => {
+                    axios.post(this.api.characters, this.editedItem).then(response => {
                         this.editedItem = response.data;
                         this.characters.push(this.editedItem);
                     }).catch(error => console.log(error));
@@ -280,11 +312,20 @@
                 this.close();
             },
 
+            async fetchGenders() {
+                try {
+                    axios.get(this.api.genders).then(response => this.genders = response.data);
+                } catch (error) {
+                    console.error(error);
+                }
+            },
+
         },
 
         mounted() {
             console.log('Characters Component mounted');
             this.fetchCharacters();
+            this.fetchGenders();
         }
     }
 </script>

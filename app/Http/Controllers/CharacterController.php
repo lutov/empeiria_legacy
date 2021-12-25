@@ -19,6 +19,7 @@ class CharacterController extends Controller implements MoveInterface
         'name' => ['required', 'string', 'max:255'],
         'nickname' => ['string', 'max:255', 'nullable'],
         'last_name' => ['string', 'max:255', 'nullable'],
+        'age' => ['numeric', 'nullable'],
     ];
 
     /**
@@ -50,6 +51,9 @@ class CharacterController extends Controller implements MoveInterface
         $validator = Validator::make($request->all(), $this->rules);
         if ($validator->passes()) {
             $character->fill($validator->validated());
+            if ($request->has('gender')) {
+                $character->gender_id = $request->get('gender')['id'];
+            }
             $character->user_id = $user->id;
             $character->save();
         } else {
@@ -80,12 +84,15 @@ class CharacterController extends Controller implements MoveInterface
             $validator = Validator::make($request->all(), $this->rules);
             if ($validator->passes()) {
                 $character->fill($validator->validated());
+                if ($request->has('gender')) {
+                    $character->gender_id = $request->get('gender')['id'];
+                }
                 $character->save();
             } else {
                 return response()->json($validator->messages(), 422);
             }
         }
-        return $character;
+        return $character->fresh();
     }
 
     /**

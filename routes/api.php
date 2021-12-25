@@ -64,6 +64,8 @@ Route::resources(
         'containers' => 'ContainerController',
         'inventories' => 'InventoryController',
 
+        'genders' => 'GenderController',
+
         'conversations' => 'ConversationController',
         'messages' => 'MessageController',
     )
