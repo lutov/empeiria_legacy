@@ -51,6 +51,9 @@ class CharacterController extends Controller implements MoveInterface
         $validator = Validator::make($request->all(), $this->rules);
         if ($validator->passes()) {
             $character->fill($validator->validated());
+            if ($request->has('avatar')) {
+                $character->avatar_id = $request->get('avatar')['id'];
+            }
             if ($request->has('gender')) {
                 $character->gender_id = $request->get('gender')['id'];
             }
@@ -84,6 +87,9 @@ class CharacterController extends Controller implements MoveInterface
             $validator = Validator::make($request->all(), $this->rules);
             if ($validator->passes()) {
                 $character->fill($validator->validated());
+                if ($request->has('avatar')) {
+                    $character->avatar_id = $request->get('avatar')['id'];
+                }
                 if ($request->has('gender')) {
                     $character->gender_id = $request->get('gender')['id'];
                 }

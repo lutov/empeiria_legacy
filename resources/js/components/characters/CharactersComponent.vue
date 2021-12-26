@@ -87,7 +87,22 @@
                                         item-text="name"
                                         item-value="id"
                                         label="Gender"
-                                        persistent-hint
+                                        return-object
+                                        single-line
+                                    ></v-select>
+                                </v-col>
+                                <v-col
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                >
+                                    <v-select
+                                        v-model="editedItem.avatar"
+                                        :hint="`${avatarSelect.name}, ${avatarSelect.id}`"
+                                        :items="avatars"
+                                        item-text="name"
+                                        item-value="id"
+                                        label="Avatar"
                                         return-object
                                         single-line
                                     ></v-select>
@@ -179,6 +194,7 @@
             return {
                 api: {
                     characters: '/api/characters',
+                    avatars: '/api/avatars/random',
                     genders: '/api/genders'
                 },
                 dialog: false,
@@ -229,7 +245,9 @@
                     gender: 1,
                     avatar: 1
                 },
-                genderSelect: {name: 'None', id: 1},
+                avatarSelect: {},
+                avatars: [],
+                genderSelect: {},
                 genders: []
             }
         },
@@ -262,7 +280,10 @@
             editItem(item) {
                 this.editedIndex = this.characters.indexOf(item);
                 this.editedItem = Object.assign({}, item);
-                this.dialog = true
+                this.dialog = true;
+                this.avatarSelect = this.editedItem.avatar;
+                this.genderSelect = this.editedItem.gender;
+                this.fetchAvatars();
             },
 
             deleteItem(item) {
@@ -281,6 +302,8 @@
             },
 
             close() {
+                this.avatarSelect = {};
+                this.genderSelect = {};
                 this.dialog = false;
                 this.$nextTick(() => {
                     this.editedItem = Object.assign({}, this.defaultItem);
@@ -310,6 +333,14 @@
                     }).catch(error => console.log(error));
                 }
                 this.close();
+            },
+
+            async fetchAvatars() {
+                try {
+                    axios.get(this.api.avatars, {params: this.editedItem.gender}).then(response => this.avatars = response.data);
+                } catch (error) {
+                    console.error(error);
+                }
             },
 
             async fetchGenders() {

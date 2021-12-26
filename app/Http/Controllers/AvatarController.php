@@ -23,18 +23,12 @@ class AvatarController
 
     /**
      * @param Request $request
-     * @param int $genderId
-     * @param int $limit
      * @return mixed
      */
-    public function random(Request $request, int $genderId = 1, int $limit = 9)
+    public function random(Request $request)
     {
-        if ($request->has('gender_id')) {
-            $genderId = (int)$request->get('gender_id');
-        }
-        if ($request->has('limit')) {
-            $limit = (int)$request->get('limit');
-        }
+        $genderId = (int)$request->get('id', 1);
+        $limit = (int)$request->get('limit', 9);
         return $this->model::where('gender_id', '=', $genderId)
             ->inRandomOrder()
             ->limit($limit)
