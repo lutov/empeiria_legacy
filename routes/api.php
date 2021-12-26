@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
     Route::group(array('prefix' => 'factions'), function () {
         Route::get('/{id}/squads', 'FactionController@squads')->name('faction_squads');
         Route::post('/{id}/squads/attach', 'FactionController@attachSquads')->name('faction_attach_squads');
@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{id}/move', 'CharacterController@move')->name('move_character');
     });
 
+    Route::any('avatars/random', 'AvatarController@random')->name('avatar_random');
+
     Route::group(array('prefix' => 'containers'), function () {
         Route::get('/{id}/items', 'ContainerController@items')->name('container_items');
         Route::post('/{id}/items/attach', 'ContainerController@attachItems')->name('container_attach_items');
@@ -50,23 +52,24 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{id}/items/attach', 'InventoryController@attachItems')->name('inventory_attach_items');
         Route::post('/{id}/items/detach', 'InventoryController@detachItems')->name('inventory_detach_items');
     });
+
+    Route::resources(
+        array(
+            'worlds' => 'WorldController',
+            'factions' => 'FactionController',
+            'squads_types' => 'SquadTypeController',
+            'squads' => 'SquadController',
+            'characters' => 'CharacterController',
+
+            'items' => 'ItemController',
+            'containers' => 'ContainerController',
+            'inventories' => 'InventoryController',
+
+            'avatars' => 'AvatarController',
+            'genders' => 'GenderController',
+
+            'conversations' => 'ConversationController',
+            'messages' => 'MessageController',
+        )
+    );
 });
-
-Route::resources(
-    array(
-        'worlds' => 'WorldController',
-        'factions' => 'FactionController',
-        'squads_types' => 'SquadTypeController',
-        'squads' => 'SquadController',
-        'characters' => 'CharacterController',
-
-        'items' => 'ItemController',
-        'containers' => 'ContainerController',
-        'inventories' => 'InventoryController',
-
-        'genders' => 'GenderController',
-
-        'conversations' => 'ConversationController',
-        'messages' => 'MessageController',
-    )
-);

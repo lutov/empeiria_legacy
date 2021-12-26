@@ -33,18 +33,6 @@ class Avatar extends Model
     protected $appends = ['path'];
 
     /**
-     * @param Gender $gender
-     * @return Avatar|Model|object|null
-     */
-    public static function random(Gender $gender)
-    {
-        return self::select('name')
-            ->where('gender_id', '=', $gender->id)
-            ->inRandomOrder()
-            ->value('name');
-    }
-
-    /**
      * @return BelongsTo
      */
     public function gender()
