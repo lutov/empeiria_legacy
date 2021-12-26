@@ -105,7 +105,15 @@
                                         label="Avatar"
                                         return-object
                                         single-line
-                                    ></v-select>
+                                    >
+                                        <template v-slot:selection="{ item, index }">
+                                            {{ item.name }}
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                            <v-avatar><img :src=item.path :alt=item.name></v-avatar>
+                                            {{ item.name }}
+                                        </template>
+                                    </v-select>
                                 </v-col>
                             </v-row>
                         </v-container>
