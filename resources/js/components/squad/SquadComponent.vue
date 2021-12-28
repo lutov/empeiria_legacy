@@ -1,47 +1,70 @@
 <template>
 
-    <div class="card">
-        <div class="card-header">Squad {{ id }}</div>
-
-        <div class="card-body">
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="character in squadCharacters.data">
-                    <td>{{character.id}}</td>
-                    <td>{{character.name}}</td>
-                    <td>
-                        <form :action="'/squads/characters/detach'" class="form-inline" method="POST">
-                            <button class="btn btn-sm btn-outline-danger" v-on:click.prevent="detachCharacters([character.id])">
-                                Remove
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <label for="new_characters">Add Characters</label>
-            <form :action="'/squads/characters/attach'" method="POST">
-                <select :multiple="true" class="form-control form-control-sm mr-2" id="new_characters" v-model="newCharacters">
-                    <option :value="character.id" v-for="character in characters.data">{{character.name}}</option>
-                </select>
-                <button class="btn btn-sm btn-success" v-on:click.prevent="attachCharacters()">Add</button>
-            </form>
-
-        </div>
-    </div>
+    <v-card>
+        <v-card>
+            <v-simple-table>
+                <template v-slot:default>
+                    <thead>
+                    <tr>
+                        <th class="text-left">
+                            Name
+                        </th>
+                        <th class="text-left">
+                            Last Name
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <draggable class="draggable" :list="characters" group="squad">
+                        <tr
+                            v-for="character in characters"
+                            :key="character.id"
+                        >
+                            <td>{{ character.name }}</td>
+                            <td>{{ character.last_name }}</td>
+                        </tr>
+                    </draggable>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-card>
+        <v-card>
+            <v-simple-table>
+                <template v-slot:default>
+                    <thead>
+                    <tr>
+                        <th class="text-left">
+                            Name
+                        </th>
+                        <th class="text-left">
+                            Last Name
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <draggable class="draggable" :list="squad.characters" group="squad">
+                        <tr
+                            v-for="character in squad.characters"
+                            :key="character.id"
+                        >
+                            <td>{{ character.name }}</td>
+                            <td>{{ character.last_name }}</td>
+                        </tr>
+                    </draggable>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-card>
+    </v-card>
 
 </template>
 
 <script>
+    import draggable from 'vuedraggable';
     export default {
+        components: {
+            draggable,
+        },
         name: 'squad-component',
         props: {
             id: {
@@ -55,8 +78,8 @@
                     characters: '/api/characters',
                     squad: '/api/squads/' + this.id
                 },
-                squad: {},
-                characters: {}
+                squad: [],
+                characters: []
             };
         },
         methods: {
@@ -82,3 +105,8 @@
         }
     }
 </script>
+<style scoped>
+    .draggable {
+        min-height: 5vh;
+    }
+</style>
