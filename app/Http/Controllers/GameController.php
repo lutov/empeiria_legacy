@@ -85,6 +85,19 @@ class GameController extends Controller
 
     /**
      * @param Request $request
+     * @param int $id
+     * @return Factory|\Illuminate\Contracts\View\View
+     */
+    public function squad(Request $request, int $id)
+    {
+        return view('game.squad', array(
+            'request' => $request,
+            'id' => $id,
+        ));
+    }
+
+    /**
+     * @param Request $request
      * @return Factory|View
      */
     public function characters(Request $request)

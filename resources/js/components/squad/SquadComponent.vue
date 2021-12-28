@@ -1,7 +1,7 @@
 <template>
 
     <div class="card">
-        <div class="card-header">Squad {{squadId}}</div>
+        <div class="card-header">Squad {{ id }}</div>
 
         <div class="card-body">
 
@@ -17,7 +17,7 @@
                     <td>{{character.id}}</td>
                     <td>{{character.name}}</td>
                     <td>
-                        <form :action="'/squads/'+squadId+'/characters/detach'" class="form-inline" method="POST">
+                        <form :action="'/squads/characters/detach'" class="form-inline" method="POST">
                             <button class="btn btn-sm btn-outline-danger" v-on:click.prevent="detachCharacters([character.id])">
                                 Remove
                             </button>
@@ -28,7 +28,7 @@
             </table>
 
             <label for="new_characters">Add Characters</label>
-            <form :action="'/squads/'+squadId+'/characters/attach'" method="POST">
+            <form :action="'/squads/characters/attach'" method="POST">
                 <select :multiple="true" class="form-control form-control-sm mr-2" id="new_characters" v-model="newCharacters">
                     <option :value="character.id" v-for="character in characters.data">{{character.name}}</option>
                 </select>
@@ -43,65 +43,42 @@
 <script>
     export default {
         name: 'squad-component',
+        props: {
+            id: {
+                type: Number,
+                required: true
+            }
+        },
         data() {
             return {
-                squadId: 1,
-                characters: {},
-                squadCharacters: {},
-                newCharacters: []
+                api: {
+                    characters: '/api/characters',
+                    squad: '/api/squads/' + this.id
+                },
+                squad: {},
+                characters: {}
             };
         },
         methods: {
-
             async fetchCharacters() {
                 try {
-                    this.characters = await axios.get('/characters');
+                    axios.get(this.api.characters).then(response => this.characters = response.data);
                 } catch (error) {
                     console.error(error);
                 }
             },
-
-            async fetchSquadCharacters() {
+            async fetchSquad() {
                 try {
-                    this.squadCharacters = await axios.get('/squads/' + this.squadId + '/characters');
+                    axios.get(this.api.squad).then(response => this.squad = response.data);
                 } catch (error) {
                     console.error(error);
                 }
             },
-
-            async attachCharacters() {
-                let params = {
-                    characters: this.newCharacters
-                };
-                try {
-                    this.characters = await axios.post('/squads/' + this.squadId + '/characters/attach', params);
-                    this.fetchSquadCharacters();
-                    this.newCharacters = [];
-                    this.fetchCharacters();
-                } catch (error) {
-                    console.error(error);
-                }
-            },
-
-            async detachCharacters(characters) {
-                let params = {
-                    characters: characters
-                };
-                try {
-                    this.characters = await axios.post('/squads/' + this.squadId + '/characters/detach', params);
-                    this.fetchSquadCharacters();
-                    this.newCharacters = [];
-                    this.fetchCharacters();
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-
         },
         mounted() {
             console.log('Squad Component mounted');
             this.fetchCharacters();
-            this.fetchSquadCharacters();
+            this.fetchSquad();
         }
     }
 </script>
