@@ -52,10 +52,16 @@ class CharacterController extends Controller implements MoveInterface
         if ($validator->passes()) {
             $character->fill($validator->validated());
             if ($request->has('avatar')) {
-                $character->avatar_id = $request->get('avatar')['id'];
+                $avatar = $request->get('avatar');
+                if (isset($avatar['id'])) {
+                    $character->avatar_id = $avatar['id'];
+                }
             }
             if ($request->has('gender')) {
-                $character->gender_id = $request->get('gender')['id'];
+                $gender = $request->get('gender');
+                if (isset($gender['id'])) {
+                    $character->gender_id = $gender['id'];
+                }
             }
             $character->user_id = $user->id;
             $character->save();
@@ -80,7 +86,7 @@ class CharacterController extends Controller implements MoveInterface
      * @return mixed
      * @throws ValidationException
      */
-    public function update(int $id, Request $request)
+    public function update(Request $request, int $id)
     {
         $character = Character::find($id);
         if (isset($character->id)) {
@@ -88,10 +94,16 @@ class CharacterController extends Controller implements MoveInterface
             if ($validator->passes()) {
                 $character->fill($validator->validated());
                 if ($request->has('avatar')) {
-                    $character->avatar_id = $request->get('avatar')['id'];
+                    $avatar = $request->get('avatar');
+                    if (isset($avatar['id'])) {
+                        $character->avatar_id = $avatar['id'];
+                    }
                 }
                 if ($request->has('gender')) {
-                    $character->gender_id = $request->get('gender')['id'];
+                    $gender = $request->get('gender');
+                    if (isset($gender['id'])) {
+                        $character->gender_id = $gender['id'];
+                    }
                 }
                 $character->save();
             } else {

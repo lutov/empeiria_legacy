@@ -241,8 +241,8 @@
                     nickname: '',
                     last_name: '',
                     age: 0,
-                    gender: 1,
-                    avatar: 1
+                    gender: {},
+                    avatar: {}
                 },
                 defaultItem: {
                     id: 0,
@@ -250,8 +250,8 @@
                     nickname: '',
                     last_name: '',
                     age: 0,
-                    gender: 1,
-                    avatar: 1
+                    gender: {},
+                    avatar: {}
                 },
                 avatarSelect: {},
                 avatars: [],
