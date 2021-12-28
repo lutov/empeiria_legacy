@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Squad;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class SquadController extends Controller
 {
 
     private $slug = 'squads';
     private $model = Squad::class;
+    private $rules = [
+        'name' => ['required', 'string', 'max:255'],
+    ];
 
     /**
      * HomeController constructor.
@@ -26,29 +32,33 @@ class SquadController extends Controller
     public function index()
     {
         $user = Auth::user();
-        //return Squad::where('user_id', $user->id)->get();
-        return Squad::get();
+        return Squad::where('user_id', '=', $user->id)->get();
     }
 
     /**
-     * @param  Request  $request
-     * @return Squad
+     * @param Request $request
+     * @return Squad|JsonResponse|null
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
         $squad = new Squad();
-
         $user = Auth::user();
-        $name = $request->input('name');
-
-        if (!empty($name)) {
-            $squad->faction_id = 1;
-            //$squad->user_id = $user->id;
-            $squad->name = $name;
+        $validator = Validator::make($request->all(), $this->rules);
+        if ($validator->passes()) {
+            $squad->fill($validator->validated());
+            if ($request->has('faction')) {
+                $faction = $request->get('faction');
+                if (isset($faction['id'])) {
+                    $squad->faction_id = $faction['id'];
+                }
+            }
+            $squad->user_id = $user->id;
             $squad->save();
+        } else {
+            return response()->json($validator->messages(), 422);
         }
-
-        return $squad;
+        return $squad->fresh();
     }
 
     /**
@@ -61,16 +71,30 @@ class SquadController extends Controller
     }
 
     /**
-     * @param  int  $id
-     * @return mixed
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     * @throws ValidationException
      */
-    public function update(int $id)
+    public function update(Request $request, int $id)
     {
         $squad = Squad::find($id);
         if (isset($squad->id)) {
-            //
+            $validator = Validator::make($request->all(), $this->rules);
+            if ($validator->passes()) {
+                $squad->fill($validator->validated());
+                if ($request->has('faction')) {
+                    $faction = $request->get('faction');
+                    if (isset($faction['id'])) {
+                        $squad->faction_id = $faction['id'];
+                    }
+                }
+                $squad->save();
+            } else {
+                return response()->json($validator->messages(), 422);
+            }
         }
-        return $squad;
+        return $squad->fresh();
     }
 
     /**

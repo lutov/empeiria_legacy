@@ -64,7 +64,7 @@ class GameController extends Controller
      * @param int $id
      * @return Factory|View
      */
-    public function faction(Request $request, int $id = 0)
+    public function factions(Request $request, int $id = 0)
     {
         return view('faction', array(
             'request' => $request,
@@ -78,7 +78,7 @@ class GameController extends Controller
      */
     public function squads(Request $request)
     {
-        return view('squads', array(
+        return view('game.squads', array(
             'request' => $request,
         ));
     }

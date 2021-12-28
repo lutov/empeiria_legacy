@@ -14,6 +14,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Faction extends Model
 {
 
+    protected $with = [
+    ];
+    protected $visible = [
+        'id',
+        'name',
+    ];
+    protected $fillable = [
+        'id',
+        'name',
+    ];
+
     /**
      * Faction constructor.
      */
