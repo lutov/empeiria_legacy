@@ -22,11 +22,13 @@ class Squad extends Model
 
     protected $with = [
         'faction',
+        'characters',
     ];
     protected $visible = [
         'id',
         'name',
         'faction',
+        'characters',
     ];
     protected $fillable = [
         'id',
