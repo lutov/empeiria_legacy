@@ -1,66 +1,67 @@
 <template>
-
-    <v-card>
-        <v-card>
-            <v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                    <tr>
-                        <th class="text-left">
-                            Name
-                        </th>
-                        <th class="text-left">
-                            Last Name
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <draggable class="draggable" :list="characters" group="squad">
-                        <tr
-                            v-for="character in characters"
-                            :key="character.id"
-                        >
-                            <td>{{ character.name }}</td>
-                            <td>{{ character.last_name }}</td>
-                        </tr>
-                    </draggable>
-                    </tbody>
-                </template>
-            </v-simple-table>
-        </v-card>
-        <v-card>
-            <v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                    <tr>
-                        <th class="text-left">
-                            Name
-                        </th>
-                        <th class="text-left">
-                            Last Name
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <draggable class="draggable" :list="squad.characters" group="squad">
-                        <tr
-                            v-for="character in squad.characters"
-                            :key="character.id"
-                        >
-                            <td>{{ character.name }}</td>
-                            <td>{{ character.last_name }}</td>
-                        </tr>
-                    </draggable>
-                    </tbody>
-                </template>
-            </v-simple-table>
-        </v-card>
-    </v-card>
-
+    <v-container>
+        <v-row>
+            <v-col cols="12" sm="6" md="4">
+                <v-card>
+                    <v-card-title>
+                        Available Faction Characters
+                    </v-card-title>
+                    <v-simple-table>
+                        <template v-slot:default>
+                            <thead>
+                            <tr>
+                                <th class="text-left">
+                                    Name
+                                </th>
+                                <th class="text-left">
+                                    Last Name
+                                </th>
+                            </tr>
+                            </thead>
+                            <draggable class="draggable" :list="characters" group="squad" tag="tbody">
+                                <tr v-for="character in characters" :key="character.id">
+                                    <td>{{ character.name }}</td>
+                                    <td>{{ character.last_name }}</td>
+                                </tr>
+                            </draggable>
+                        </template>
+                    </v-simple-table>
+                </v-card>
+            </v-col>
+            <v-col cols="12" sm="6" md="8">
+                <v-card class="indigo">
+                    <v-card-title class="white--text">
+                        {{ squad.faction.name }}'s {{ squad.name }} Squad
+                    </v-card-title>
+                    <v-simple-table>
+                        <template v-slot:default>
+                            <thead>
+                            <tr>
+                                <th class="text-left">
+                                    Name
+                                </th>
+                                <th class="text-left">
+                                    Last Name
+                                </th>
+                            </tr>
+                            </thead>
+                            <draggable class="draggable" :list="squad.characters" group="squad" tag="tbody">
+                                <tr v-for="character in squad.characters" :key="character.id">
+                                    <td>{{ character.name }}</td>
+                                    <td>{{ character.last_name }}</td>
+                                </tr>
+                            </draggable>
+                        </template>
+                    </v-simple-table>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
     import draggable from 'vuedraggable';
+
     export default {
         components: {
             draggable,
