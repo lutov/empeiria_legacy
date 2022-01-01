@@ -30,7 +30,7 @@
             </v-col>
             <v-col cols="12" sm="6" md="8">
                 <v-card class="indigo">
-                    <v-card-title class="white--text">
+                    <v-card-title class="white--text" v-if="squad.faction">
                         {{ squad.faction.name }}'s {{ squad.name }} Squad
                     </v-card-title>
                     <v-simple-table>
@@ -86,7 +86,8 @@
         methods: {
             async fetchCharacters() {
                 try {
-                    axios.get(this.api.characters).then(response => this.characters = response.data);
+                    let params = {"without": 'squad'};
+                    axios.get(this.api.characters, {params}).then(response => this.characters = response.data);
                 } catch (error) {
                     console.error(error);
                 }

@@ -2,6 +2,8 @@
 
 use App\Models\Character\Avatar;
 use App\Models\Character\Gender;
+use App\Models\Faction;
+use App\Models\Squad;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +27,8 @@ class CreateCharactersTable extends Migration
             $table->smallInteger('age')->unsigned()->nullable();
             $table->foreignIdFor(Gender::class)->default(1);
             $table->foreignIdFor(Avatar::class)->default(1);
+            $table->foreignIdFor(Faction::class)->nullable();
+            $table->foreignIdFor(Squad::class)->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

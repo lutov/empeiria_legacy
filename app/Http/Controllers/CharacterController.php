@@ -31,12 +31,18 @@ class CharacterController extends Controller implements MoveInterface
     }
 
     /**
+     * @param Request $request
      * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        return Character::where('user_id', $user->id)->get();
+        if ($request->has('without')) {
+            $field = $request->get('without') . '_id';
+            return Character::whereNull($field)->where('user_id', $user->id)->get();
+        } else {
+            return Character::where('user_id', $user->id)->get();
+        }
     }
 
     /**
