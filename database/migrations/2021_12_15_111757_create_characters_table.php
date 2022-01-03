@@ -25,10 +25,12 @@ class CreateCharactersTable extends Migration
             $table->string('last_name', 256)->nullable();
             $table->text('bio')->nullable();
             $table->smallInteger('age')->unsigned()->nullable();
-            $table->foreignIdFor(Gender::class)->default(1);
-            $table->foreignIdFor(Avatar::class)->default(1);
-            $table->foreignIdFor(Faction::class)->nullable();
-            $table->foreignIdFor(Squad::class)->nullable();
+            $table->foreignIdFor(Gender::class)->unsigned()->default(1);
+            $table->foreignIdFor(Avatar::class)->unsigned()->default(1);
+            $table->foreignIdFor(Faction::class)->unsigned()->nullable();
+            $table->smallInteger('faction_order')->unsigned()->nullable();
+            $table->foreignIdFor(Squad::class)->unsigned()->nullable();
+            $table->smallInteger('squad_order')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
