@@ -50,7 +50,10 @@ class Character extends Model
         'age',
         'bio',
         'avatar',
-        //'position',
+        'faction_id',
+        'faction_order',
+        'squad_id',
+        'squad_order',
     ];
     protected $fillable = [
         'id',
@@ -61,6 +64,10 @@ class Character extends Model
         'age',
         'bio',
         'avatar_id',
+        'faction_id',
+        'faction_order',
+        'squad_id',
+        'squad_order',
     ];
 
     /**

@@ -20,6 +20,10 @@ class CharacterController extends Controller implements MoveInterface
         'nickname' => ['string', 'max:255', 'nullable'],
         'last_name' => ['string', 'max:255', 'nullable'],
         'age' => ['numeric', 'nullable'],
+        'faction_id' => ['numeric', 'nullable'],
+        'faction_order' => ['numeric', 'nullable'],
+        'squad_id' => ['numeric', 'nullable'],
+        'squad_order' => ['numeric', 'nullable'],
     ];
 
     /**
@@ -37,8 +41,8 @@ class CharacterController extends Controller implements MoveInterface
     public function index(Request $request)
     {
         $user = Auth::user();
-        if ($request->has('without')) {
-            $field = $request->get('without') . '_id';
+        if ('squad' === $request->get('without', null)) {
+            $field = 'squad_id';
             return Character::whereNull($field)->where('user_id', $user->id)->get();
         } else {
             return Character::where('user_id', $user->id)->get();

@@ -41,7 +41,7 @@ class Squad extends Model
      */
     public function characters()
     {
-        return $this->hasMany('App\Models\Character');
+        return $this->hasMany('App\Models\Character')->orderBy('squad_order');
     }
 
     /**

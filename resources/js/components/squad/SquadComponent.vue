@@ -18,8 +18,12 @@
                                 </th>
                             </tr>
                             </thead>
-                            <draggable class="draggable" :list="characters" group="squad" tag="tbody">
-                                <tr v-for="character in characters" :key="character.id">
+                            <draggable class="draggable" :list="characters" group="squad" tag="tbody"
+                                       @change="change"
+                                       @start="start"
+                                       @end="end"
+                                       :move="move">
+                                <tr v-for="character in characters" :key="character.squad_order">
                                     <td>{{ character.name }}</td>
                                     <td>{{ character.last_name }}</td>
                                 </tr>
@@ -45,8 +49,9 @@
                                 </th>
                             </tr>
                             </thead>
-                            <draggable class="draggable" :list="squad.characters" group="squad" tag="tbody">
-                                <tr v-for="character in squad.characters" :key="character.id">
+                            <draggable class="draggable" :list="squad.characters" group="squad" tag="tbody"
+                                       @sort="sort">
+                                <tr v-for="character in squad.characters" :key="character.squad_order">
                                     <td>{{ character.name }}</td>
                                     <td>{{ character.last_name }}</td>
                                 </tr>
@@ -79,7 +84,7 @@
                     characters: '/api/characters',
                     squad: '/api/squads/' + this.id
                 },
-                squad: [],
+                squad: {},
                 characters: []
             };
         },
@@ -99,6 +104,41 @@
                     console.error(error);
                 }
             },
+            change: function (evt) {
+                //console.log(evt)
+            },
+            //start, end, add, update, sort, remove all get the same
+            start: function (evt) {
+                //console.log(evt.item._underlying_vm_);
+            },
+            sort: function (evt) {
+                // TODO: Update old element's order
+                //console.log(evt);
+                let character = evt.item._underlying_vm_;
+                character.squad_order = evt.newIndex + 1;
+                axios.put(this.api.characters + '/' + character.id, character).then(response => {
+                    this.fetchSquad();
+                }).catch(error => console.log(error));
+            },
+            end: function (evt) {
+                //console.log(evt.item._underlying_vm_);
+                //console.log(evt.oldIndex);
+                //console.log(evt.from);
+                //console.log(evt.newIndex);
+                //console.log(evt.to);
+                let character = evt.item._underlying_vm_;
+                character.squad_id = this.squad.id;
+                character.squad_order = evt.newIndex + 1;
+                axios.put(this.api.characters + '/' + character.id, character).then(response => {
+                    this.fetchCharacters();
+                    this.fetchSquad();
+                }).catch(error => console.log(error));
+            },
+            move: function (evt, originalEvent) {
+                //console.log(evt)
+                //console.log(originalEvent) //Mouse position
+            }
+
         },
         mounted() {
             console.log('Squad Component mounted');
