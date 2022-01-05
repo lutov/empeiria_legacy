@@ -18,11 +18,7 @@
                                 </th>
                             </tr>
                             </thead>
-                            <draggable class="draggable" :list="characters" group="squad" tag="tbody"
-                                       @change="change"
-                                       @start="start"
-                                       @end="end"
-                                       :move="move">
+                            <draggable class="draggable" :list="characters" group="squad" tag="tbody" @end="end">
                                 <tr v-for="character in characters" :key="character.squad_order">
                                     <td>{{ character.name }}</td>
                                     <td>{{ character.last_name }}</td>
@@ -51,7 +47,7 @@
                             </thead>
                             <draggable class="draggable" :list="squad.characters" group="squad" tag="tbody"
                                        @sort="sort">
-                                <tr v-for="character in squad.characters" :key="character.squad_order">
+                                <tr v-for="(character, index) in squad.characters" :key="index">
                                     <td>{{ character.name }}</td>
                                     <td>{{ character.last_name }}</td>
                                 </tr>
@@ -105,19 +101,22 @@
                 }
             },
             change: function (evt) {
-                //console.log(evt)
+                //console.log(evt);
             },
             //start, end, add, update, sort, remove all get the same
             start: function (evt) {
                 //console.log(evt.item._underlying_vm_);
             },
             sort: function (evt) {
-                // TODO: Update old element's order
                 //console.log(evt);
-                let character = evt.item._underlying_vm_;
+                let oldCharacter = this.squad.characters[evt.oldIndex];
+                oldCharacter.squad_order = evt.oldIndex + 1;
+                let character = this.squad.characters[evt.newIndex];
                 character.squad_order = evt.newIndex + 1;
-                axios.put(this.api.characters + '/' + character.id, character).then(response => {
-                    this.fetchSquad();
+                axios.put(this.api.characters + '/' + oldCharacter.id, oldCharacter).then(response => {
+                    axios.put(this.api.characters + '/' + character.id, character).then(response => {
+                        this.fetchSquad();
+                    }).catch(error => console.log(error));
                 }).catch(error => console.log(error));
             },
             end: function (evt) {
