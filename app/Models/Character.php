@@ -39,6 +39,7 @@ class Character extends Model
     protected $with = [
         'gender',
         'avatar',
+        'qualities',
         //'position',
     ];
     protected $visible = [
@@ -49,6 +50,7 @@ class Character extends Model
         'gender',
         'age',
         'bio',
+        'qualities',
         'avatar',
         'faction_id',
         'faction_order',
@@ -120,11 +122,11 @@ class Character extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
     public function qualities()
     {
-        return $this->hasMany('App\Models\Character\Quality');
+        return $this->hasOne('App\Models\Character\Quality');
     }
 
     /**

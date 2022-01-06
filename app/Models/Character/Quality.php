@@ -18,8 +18,23 @@ class Quality extends Model
 {
 
     protected $table = 'characters_qualities';
-
-    protected $visible = array('id', 'character_id', 'quality_id');
-    protected $fillable = array('id', 'character_id', 'quality_id');
+    public $timestamps = false;
+    protected $visible = array(
+        'appeal',
+        'vitality',
+        'intellect',
+        'sociality',
+        'mobility',
+        'willpower',
+    );
+    protected $fillable = array(
+        'character_id',
+        'appeal',
+        'vitality',
+        'intellect',
+        'sociality',
+        'mobility',
+        'willpower',
+    );
 
 }

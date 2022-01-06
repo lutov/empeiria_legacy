@@ -114,7 +114,7 @@ class GameController extends Controller
      */
     public function character(Request $request, int $id = 0)
     {
-        return view('character', array(
+        return view('game.character', array(
             'request' => $request,
             'id' => $id,
         ));
