@@ -6,13 +6,14 @@
  * Time: 14:10
  */
 
-namespace App\Models\Types;
+namespace App\Models\Reference;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class Kingdom
+ * Class Species
  * @package App\Models
  * @mixin Builder
  *
@@ -20,8 +21,15 @@ use Illuminate\Database\Query\Builder;
  * @property string $name
  * @property string $slug
  */
-class Kingdom extends Model
+class Species extends Model
 {
 
+    /**
+     * @return HasOne
+     */
+    public function kingdom()
+    {
+        return $this->hasOne('App\Models\Types\Kingdom');
+    }
 
 }

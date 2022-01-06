@@ -6,15 +6,15 @@
  * Time: 14:10
  */
 
-namespace App\Models\Types;
+namespace App\Models\Reference;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Origin
+ * Class Quest
  * @package App\Models\Types
  */
-class Origin extends Model
+class Quest extends Model
 {
 
     protected $visible = array('id', 'name', 'slug', 'description');
