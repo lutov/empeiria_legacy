@@ -1,10 +1,14 @@
 <template>
     <div class="card mb-2">
-        <div class="card-header">{{character.name}}</div>
+        <div class="card-header">
+            {{character.name}}
+            {{character.nickname}}
+            {{character.last_name}}
+        </div>
         <div class="card-body">
             <div class="row m-0 text-center align-items-center">
                 <div class="col-12 col-lg-6">
-                    <img src="/img/characters/portraits/f228.jpg" :alt="character.name" class="w-50 rounded-circle"/>
+                    <img :src="character.avatar.path" :alt="character.name" class="w-50 rounded-circle"/>
                 </div>
                 <div class="col-12 col-lg-6 character-doll">
                     <div class="row align-items-end">
@@ -71,7 +75,6 @@
 </script>
 
 <style>
-
     .character-doll {
         background: url('/img/character/dummy.png');
         background-size: contain;
@@ -79,5 +82,4 @@
         background-position: center center;
         height: 500px;
     }
-
 </style>

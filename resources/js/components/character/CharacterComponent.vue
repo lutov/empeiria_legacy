@@ -30,13 +30,16 @@
         },
         data() {
             return {
+                api: {
+                    characters: '/api/characters',
+                },
                 character: {}
             };
         },
         methods: {
             async fetchCharacter() {
                 try {
-                    let result = await axios.get('/characters/' + this.id);
+                    let result = await axios.get(this.api.characters + '/' + this.id);
                     this.character = result.data;
                 } catch (error) {
                     console.error(error);
