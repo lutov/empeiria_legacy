@@ -11,6 +11,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Class Faction
+ * @package App\Models
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ *
+ * @method static find(int $id)
+ * @method static where(string $string, string $operator, string $id)
+ */
 class Faction extends Model
 {
 

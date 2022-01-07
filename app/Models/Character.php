@@ -8,6 +8,9 @@
 
 namespace App\Models;
 
+
+use App\Models\Character\Avatar;
+use App\Models\Character\Gender;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -21,11 +24,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id
  * @property int $user_id
- *
  * @property string $name
  * @property string $nickname
  * @property string $last_name
- *
+ * @property string $age
+ * @property string $bio
+ * @property int $gender_id
+ * @property Gender $gender
+ * @property int $avatar_id
+ * @property Avatar $avatar
+ * @property int $faction_id
+ * @property int $faction_order
+ * @property Faction $faction
+ * @property int $squad_id
+ * @property int $squad_order
+ * @property Squad $squad
  * @property Position position
  *
  * @method static find(int $id)

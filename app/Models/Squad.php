@@ -14,8 +14,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
+ * Class Squad
+ * @package App\Models
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ *
  * @method static find(int $id)
- * @method static where(string $field, string $operator, $value)
+ * @method static where(string $string, string $operator, string $id)
  */
 class Squad extends Model
 {

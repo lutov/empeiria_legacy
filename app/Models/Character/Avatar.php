@@ -19,6 +19,7 @@ use Illuminate\Database\Query\Builder;
  *
  * @property int $id
  * @property int $gender_id
+ * @property Gender $gender
  * @property string $name
  */
 class Avatar extends Model
@@ -46,6 +47,15 @@ class Avatar extends Model
     public function getPathAttribute()
     {
         return '/img/characters/avatars/' . $this->gender->slug . '/' . $this->name . '.jpg';
+    }
+
+    /**
+     * @param Gender $gender
+     * @return Avatar|Model|object|null
+     */
+    public static function random(Gender $gender)
+    {
+        return self::where('gender_id', '=', $gender->id)->inRandomOrder()->first();
     }
 
 }
