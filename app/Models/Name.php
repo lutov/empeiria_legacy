@@ -19,6 +19,7 @@ use Illuminate\Database\Query\Builder;
  * @property int $id
  * @property string $name
  * @property string $slug
+ * @method static create(array|false $name)
  */
 class Name extends Model
 {

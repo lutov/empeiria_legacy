@@ -8,6 +8,7 @@ use App\Models\Character\Gender;
 use App\Models\Character\Quality;
 use App\Models\Faction;
 use App\Models\Name;
+use App\Models\Reference\Qualities;
 use App\Models\Squad;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,7 @@ class DemoCharacterSeeder extends Seeder
         $gender = Gender::random();
         $faction = Faction::find(1);
         $squad = Squad::find(1);
+        $qualities = Qualities::all();
         $character->user_id = $userId;
         $character->name = Name::random();
         $character->nickname = Name::random();
@@ -38,15 +40,12 @@ class DemoCharacterSeeder extends Seeder
         $character->squad_id = $squad->id;
         $character->squad_order = 1;
         $character->save();
-        $qualities = array(
+        $characterQualities = array(
             'character_id' => $character->id,
-            'appeal' => rand(1, 10),
-            'vitality' => rand(1, 10),
-            'intellect' => rand(1, 10),
-            'sociality' => rand(1, 10),
-            'mobility' => rand(1, 10),
-            'willpower' => rand(1, 10),
         );
-        Quality::create($qualities);
+        foreach ($qualities as $quality) {
+            $characterQualities[$quality->slug] = rand(1, 10);
+        }
+        Quality::create($characterQualities);
     }
 }

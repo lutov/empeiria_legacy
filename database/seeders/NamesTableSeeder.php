@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\TextHelper;
 use App\Models\Name;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 
 class NamesTableSeeder extends Seeder
 {
@@ -14,12 +14,13 @@ class NamesTableSeeder extends Seeder
      * @return void
      */
     public function run() {
-
-        $file = File::get(storage_path('app/seeders/names.txt'));
-        $names = explode("\r\n", $file);
-        foreach($names as $name) {
-            Name::create(array('name' => $name));
+        $length = 1000;
+        $delimiter = ',';
+        $handle = fopen(storage_path('app/seeders/names.csv'), "r");
+        $headers = fgetcsv($handle, $length, $delimiter);
+        while ($row = fgetcsv($handle, $length, $delimiter)) {
+            $name = array_combine($headers, $row);
+            Name::create($name);
         }
-
     }
 }

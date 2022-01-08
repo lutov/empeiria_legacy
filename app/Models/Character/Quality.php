@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Quality
  * @package App\Models\Character
+ * @method static create(array $characterQualities)
  */
 class Quality extends Model
 {
