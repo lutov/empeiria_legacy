@@ -6,7 +6,7 @@
  * Time: 13:29
  */
 
-namespace App\Models;
+namespace App\Models\Items;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

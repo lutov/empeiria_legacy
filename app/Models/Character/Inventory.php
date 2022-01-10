@@ -6,7 +6,7 @@
  * Time: 14:10
  */
 
-namespace App\Models;
+namespace App\Models\Character;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Inventory
- * @package App\Models
+ * @package App\Models\Character
  *
  * @property int $character_id
  *

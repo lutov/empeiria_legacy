@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Character;
 use App\Models\Character\Avatar;
 use App\Models\Character\Gender;
+use App\Models\Character\Inventory;
 use App\Models\Character\Quality;
 use App\Models\Faction;
 use App\Models\Name;
@@ -47,5 +48,8 @@ class DemoCharacterSeeder extends Seeder
             $characterQualities[$quality->slug] = rand(1, 10);
         }
         Quality::create($characterQualities);
+        $inventory = new Inventory();
+        $inventory->character_id = $character->id;
+        $inventory->save();
     }
 }
