@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Character\Avatar;
+use App\Models\Characters\Avatar;
 use Illuminate\Http\Request;
 
 class AvatarController

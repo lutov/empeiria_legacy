@@ -5,8 +5,8 @@ namespace App\Helpers;
 
 
 use App\Models\Name;
-use App\Models\World\Region;
-use App\Models\World\Tile;
+use App\Models\Worlds\Region;
+use App\Models\Worlds\Tile;
 
 class MapHelper
 {

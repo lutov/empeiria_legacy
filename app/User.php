@@ -37,13 +37,4 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * @return HasOne
-     */
-    public function world() {
-
-        return $this->hasOne('App\Models\World');
-
-    }
-
 }

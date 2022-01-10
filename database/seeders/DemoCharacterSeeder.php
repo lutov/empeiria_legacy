@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Character;
-use App\Models\Character\Avatar;
-use App\Models\Character\Gender;
-use App\Models\Character\Inventory;
-use App\Models\Character\Quality;
-use App\Models\Faction;
-use App\Models\Name;
-use App\Models\Reference\Qualities;
-use App\Models\Squad;
+use App\Models\Characters\Avatar;
+use App\Models\Characters\Character;
+use App\Models\Characters\Gender;
+use App\Models\Characters\Inventory;
+use App\Models\Characters\Qualities;
+use App\Models\Characters\Quality;
+use App\Models\Factions\Faction;
+use App\Models\Names\Name;
+use App\Models\Squads\Squad;
 use Illuminate\Database\Seeder;
 
 class DemoCharacterSeeder extends Seeder
@@ -27,7 +27,7 @@ class DemoCharacterSeeder extends Seeder
         $gender = Gender::random();
         $faction = Faction::find(1);
         $squad = Squad::find(1);
-        $qualities = Qualities::all();
+        $qualities = Quality::all();
         $character->user_id = $userId;
         $character->name = Name::random(['first_name' => 1, $gender->slug => 1]);
         $character->nickname = Name::random(['nickname' => 1, $gender->slug => 1]);
@@ -47,7 +47,7 @@ class DemoCharacterSeeder extends Seeder
         foreach ($qualities as $quality) {
             $characterQualities[$quality->slug] = rand(1, 10);
         }
-        Quality::create($characterQualities);
+        Qualities::create($characterQualities);
         $inventory = new Inventory();
         $inventory->character_id = $character->id;
         $inventory->save();

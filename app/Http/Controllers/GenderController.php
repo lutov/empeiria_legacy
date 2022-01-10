@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Character\Gender;
+use App\Models\Characters\Gender;
 
 class GenderController
 {

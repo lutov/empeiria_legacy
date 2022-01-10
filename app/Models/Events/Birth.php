@@ -10,7 +10,7 @@ namespace App\Models\Events;
 
 use App\Models\Body;
 use App\Models\BodyParams;
-use App\Models\Character;
+use App\Models\Characters;
 use App\Models\Event;
 use App\Models\LastName;
 use App\Models\Mind;

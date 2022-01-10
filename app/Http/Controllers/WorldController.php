@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\World\World;
+use App\Models\Worlds\World;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

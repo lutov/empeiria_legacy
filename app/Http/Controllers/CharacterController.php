@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\MoveInterface;
-use App\Models\Character;
-use App\Models\Position;
+use App\Models\Characters\Character;
+use App\Models\Characters\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;

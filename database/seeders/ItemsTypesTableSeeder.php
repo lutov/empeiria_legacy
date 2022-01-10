@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ItemType;
+use App\Models\Items\Type;
 use Illuminate\Database\Seeder;
 
 class ItemsTypesTableSeeder extends Seeder
@@ -60,8 +60,8 @@ class ItemsTypesTableSeeder extends Seeder
         );
 
         foreach($types as $key => $values) {
-            $values['parent_id'] = ItemType::select('id')->where('name', $values['parent_id'])->limit('1')->value('id');
-            $item_type = ItemType::create($values);
+            $values['parent_id'] = Type::select('id')->where('name', $values['parent_id'])->limit('1')->value('id');
+            $item_type = Type::create($values);
         }
 
     }

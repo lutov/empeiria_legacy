@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\TextHelper;
-use App\Models\Name;
+use App\Models\Names\Name;
 use Illuminate\Database\Seeder;
 
 class NamesTableSeeder extends Seeder
