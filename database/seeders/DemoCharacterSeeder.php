@@ -28,9 +28,9 @@ class DemoCharacterSeeder extends Seeder
         $squad = Squad::find(1);
         $qualities = Qualities::all();
         $character->user_id = $userId;
-        $character->name = Name::random();
-        $character->nickname = Name::random();
-        $character->last_name = Name::random();
+        $character->name = Name::random(['first_name' => 1, $gender->slug => 1]);
+        $character->nickname = Name::random(['nickname' => 1, $gender->slug => 1]);
+        $character->last_name = Name::random(['last_name' => 1, $gender->slug => 1]);
         $character->age = rand(18, 100);
         $character->bio = '';
         $character->gender_id = $gender->id;
