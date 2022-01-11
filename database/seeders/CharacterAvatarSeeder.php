@@ -23,7 +23,7 @@ class CharacterAvatarSeeder extends Seeder
         fclose($handle);
         $handle = fopen(storage_path('app/seeders/characters_avatars_female.csv'), "r");
         while ($row = fgetcsv($handle, $length, $delimiter)) {
-            Avatar::create(array('name' => $row[0], 'gender_id' => 2));
+            Avatar::create(array('name' => $row[0], 'gender_id' => 3));
         }
         fclose($handle);
     }

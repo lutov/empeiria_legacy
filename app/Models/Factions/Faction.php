@@ -16,15 +16,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @package App\Models\Factions
  *
  * @property int $id
- * @property int $user_id
+ * @property int world_id
  * @property string $name
+ * @property string description
+ * @property int emblem_id
  *
  * @method static find(int $id)
  * @method static where(string $string, string $operator, string $id)
  */
 class Faction extends Model
 {
-
     protected $with = [
     ];
     protected $visible = [
@@ -32,8 +33,10 @@ class Faction extends Model
         'name',
     ];
     protected $fillable = [
-        'id',
+        'world_id',
         'name',
+        'description',
+        'emblem_id',
     ];
 
     /**
@@ -51,5 +54,4 @@ class Faction extends Model
     {
         return $this->belongsToMany('App\Models\Character', 'factions_characters', 'faction_id', 'character_id');
     }
-
 }

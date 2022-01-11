@@ -32,7 +32,7 @@ class World extends Model
      */
     public function map()
     {
-        return $this->hasOne('App\Models\World\Map');
+        return $this->hasOne('App\Models\Worlds\Map');
     }
 
     /**

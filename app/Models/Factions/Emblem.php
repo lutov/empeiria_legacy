@@ -15,10 +15,12 @@ use Illuminate\Database\Query\Builder;
  * @property int $world_id
  * @property string $name
  * @property string $description
+ *
+ * @method static create(array $array)
  */
 class Emblem extends Model
 {
-
+    protected $fillable = ['name'];
     protected $table = 'factions_emblems';
     protected $visible = [
         'id',
@@ -35,4 +37,11 @@ class Emblem extends Model
         return '/img/factions/emblems/' . $this->name . '.jpg';
     }
 
+    /**
+     * @return Emblem|Model|object|null
+     */
+    public static function random()
+    {
+        return self::inRandomOrder()->first();
+    }
 }

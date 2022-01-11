@@ -2,6 +2,7 @@
 
 use App\Models\Factions\Emblem;
 use App\Models\Worlds\World;
+use Database\Seeders\FactionSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,8 @@ class CreateFactionsTable extends Migration
             $table->foreignIdFor(Emblem::class)->unsigned()->default(1);
             $table->timestamps();
         });
+        $seeder = new FactionSeeder();
+        $seeder->run();
     }
 
     /**

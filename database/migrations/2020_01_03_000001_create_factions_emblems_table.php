@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\FactionEmblemSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,8 @@ class CreateFactionsEmblemsTable extends Migration
             $table->string('name', 256);
             $table->timestamps();
         });
+        $seeder = new FactionEmblemSeeder();
+        $seeder->run();
     }
 
     /**
