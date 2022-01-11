@@ -2,6 +2,7 @@
 
 use App\Models\Worlds\Picture;
 use App\User;
+use Database\Seeders\WorldSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,8 @@ class CreateWorldsTable extends Migration
             $table->foreignIdFor(Picture::class)->unsigned()->default(1);
             $table->timestamps();
         });
+        $seeder = new WorldSeeder();
+        $seeder->run();
     }
 
     /**

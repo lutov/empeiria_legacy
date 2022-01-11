@@ -12,27 +12,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * @property int user_id
+ * @property string name
+ * @property string description
+ * @property int picture_id
+ *
  * @method static find(int $id)
  * @method static where(string $string, $id)
  */
 class World extends Model
 {
-
-    protected static $type = 'world';
-
+    protected static string $type = 'world';
+    protected $fillable = ['user_id', 'name', 'description', 'picture_id'];
     protected $with = ['map'];
     protected $visible = ['id', 'name', 'map'];
-
-    /**
-     * @return mixed
-     */
-    public static function getRandomName()
-    {
-        $params = array(
-            array(self::$type, 1)
-        );
-        return Name::random($params);
-    }
 
     /**
      * @return HasOne

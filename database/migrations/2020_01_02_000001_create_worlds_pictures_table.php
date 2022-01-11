@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\WorldPictureSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,8 @@ class CreateWorldsPicturesTable extends Migration
             $table->string('name', 256);
             $table->timestamps();
         });
+        $seeder = new WorldPictureSeeder();
+        $seeder->run();
     }
 
     /**
@@ -27,6 +30,6 @@ class CreateWorldsPicturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('worlds_spictures');
+        Schema::dropIfExists('worlds_pictures');
     }
 }
