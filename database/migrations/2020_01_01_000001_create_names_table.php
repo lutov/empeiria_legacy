@@ -1,6 +1,6 @@
 <?php
 
-use Database\Seeders\NamesTableSeeder;
+use Database\Seeders\NameSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -32,7 +32,7 @@ class CreateNamesTable extends Migration
             $table->boolean('item')->nullable();
             $table->timestamps();
         });
-        $seeder = new NamesTableSeeder();
+        $seeder = new NameSeeder();
         $seeder->run();
     }
 

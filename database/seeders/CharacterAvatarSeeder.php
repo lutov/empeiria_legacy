@@ -6,7 +6,7 @@ use App\Models\Characters\Avatar;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-class CharactersAvatarsTableSeeder extends Seeder
+class CharacterAvatarSeeder extends Seeder
 {
     /**
      * Run the database seeds.

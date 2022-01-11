@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Items\Type;
 use Illuminate\Database\Seeder;
 
-class ItemsTypesTableSeeder extends Seeder
+class ItemTypeSeeder extends Seeder
 {
     /**
      * Run the database seeders.

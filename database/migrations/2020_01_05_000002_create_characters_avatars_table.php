@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Characters\Gender;
-use Database\Seeders\CharactersAvatarsTableSeeder;
+use Database\Seeders\CharacterAvatarSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +21,7 @@ class CreateCharactersAvatarsTable extends Migration
             $table->string('name', 256);
             $table->timestamps();
         });
-        $seeder = new CharactersAvatarsTableSeeder();
+        $seeder = new CharacterAvatarSeeder();
         $seeder->run();
     }
 

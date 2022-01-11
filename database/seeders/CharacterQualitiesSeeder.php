@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Characters\Quality;
 use Illuminate\Database\Seeder;
 
-class CharactersQualitiesTableSeeder extends Seeder
+class CharacterQualitiesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

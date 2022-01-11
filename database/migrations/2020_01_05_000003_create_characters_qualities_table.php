@@ -1,6 +1,6 @@
 <?php
 
-use Database\Seeders\CharactersQualitiesTableSeeder;
+use Database\Seeders\CharacterQualitiesSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +20,7 @@ class CreateCharactersQualitiesTable extends Migration
             $table->string('slug', 256)->nullable();
             $table->text('description')->nullable();
         });
-        $seeder = new CharactersQualitiesTableSeeder();
+        $seeder = new CharacterQualitiesSeeder();
         $seeder->run();
     }
 
