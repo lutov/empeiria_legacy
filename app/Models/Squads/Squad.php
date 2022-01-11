@@ -20,6 +20,9 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
  * @property int $id
  * @property int $user_id
  * @property string $name
+ * @property int faction_id
+ * @property string description
+ * @property int banner_id
  *
  * @method static find(int $id)
  * @method static where(string $string, string $operator, string $id)

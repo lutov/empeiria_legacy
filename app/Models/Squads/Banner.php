@@ -12,13 +12,21 @@ use Illuminate\Database\Query\Builder;
  * @mixin Builder
  *
  * @property int $id
- * @property int $world_id
+ * @property int $faction_id
  * @property string $name
  * @property string $description
+ * @property string $banner_id
+ *
+ * @method static create(array $array)
  */
 class Banner extends Model
 {
-
+    protected $fillable = [
+        'faction_id',
+        'name',
+        'description',
+        'banner_id',
+    ];
     protected $table = 'squads_banners';
     protected $visible = [
         'id',
@@ -32,7 +40,14 @@ class Banner extends Model
      */
     public function getPathAttribute()
     {
-        return '/img/squads/banners/' . $this->name . '.jpg';
+        return '/img/squads/banners/' . $this->name . '.png';
     }
 
+    /**
+     * @return Banner|Model|object|null
+     */
+    public static function random()
+    {
+        return self::inRandomOrder()->first();
+    }
 }
