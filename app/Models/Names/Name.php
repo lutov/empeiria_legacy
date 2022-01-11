@@ -23,7 +23,22 @@ use Illuminate\Database\Query\Builder;
  */
 class Name extends Model
 {
-
+    protected $fillable = array(
+        'name',
+        'alt_name',
+        'first_name',
+        'nickname',
+        'last_name',
+        'none',
+        'male',
+        'female',
+        'world',
+        'region',
+        'city',
+        'faction',
+        'squad',
+        'item'
+    );
     /**
      * @param  array  $params
      * @return mixed
@@ -35,5 +50,4 @@ class Name extends Model
             ->inRandomOrder()
             ->value('name');
     }
-
 }
