@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Characters\Avatar;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 
 class CharacterAvatarSeeder extends Seeder
 {
@@ -15,15 +14,17 @@ class CharacterAvatarSeeder extends Seeder
      */
     public function run()
     {
-        $file = File::get(storage_path('app/seeders/avatars_male.txt'));
-        $names = explode("\n", $file);
-        foreach ($names as $name) {
-            Avatar::create(array('name' => $name, 'gender_id' => 2));
+        $length = 1000;
+        $delimiter = ',';
+        $handle = fopen(storage_path('app/seeders/characters_avatars_male.csv'), "r");
+        while ($row = fgetcsv($handle, $length, $delimiter)) {
+            Avatar::create(array('name' => $row[0], 'gender_id' => 2));
         }
-        $file = File::get(storage_path('app/seeders/avatars_female.txt'));
-        $names = explode("\n", $file);
-        foreach ($names as $name) {
-            Avatar::create(array('name' => $name, 'gender_id' => 3));
+        fclose($handle);
+        $handle = fopen(storage_path('app/seeders/characters_avatars_female.csv'), "r");
+        while ($row = fgetcsv($handle, $length, $delimiter)) {
+            Avatar::create(array('name' => $row[0], 'gender_id' => 2));
         }
+        fclose($handle);
     }
 }

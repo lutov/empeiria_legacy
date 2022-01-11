@@ -21,6 +21,8 @@ use Illuminate\Database\Query\Builder;
  * @property int $gender_id
  * @property Gender $gender
  * @property string $name
+ *
+ * @method static create(array $array)
  */
 class Avatar extends Model
 {
