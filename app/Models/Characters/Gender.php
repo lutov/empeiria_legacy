@@ -19,19 +19,23 @@ use Illuminate\Database\Query\Builder;
  * @property int $id
  * @property string $name
  * @property string $slug
+ *
+ * @method static create($values)
  */
 class Gender extends Model
 {
-
+    protected $fillable = ['name', 'slug', 'description'];
     protected $visible = [
         'id',
         'name',
         'slug',
     ];
 
+    /**
+     * @return Gender|Model|object|null
+     */
     public static function random()
     {
         return self::inRandomOrder()->first();
     }
-
 }

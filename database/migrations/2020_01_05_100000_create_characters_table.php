@@ -4,6 +4,7 @@ use App\Models\Characters\Avatar;
 use App\Models\Characters\Gender;
 use App\Models\Factions\Faction;
 use App\Models\Squads\Squad;
+use Database\Seeders\DemoCharacterSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -34,6 +35,10 @@ class CreateCharactersTable extends Migration
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
+        $seeder = new DemoCharacterSeeder();
+        for ($i = 0; $i < 3; $i++) {
+            $seeder->run();
+        }
     }
 
     /**

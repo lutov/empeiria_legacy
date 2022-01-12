@@ -51,7 +51,7 @@ class Squad extends Model
      */
     public function characters()
     {
-        return $this->hasMany('App\Models\Character')->orderBy('squad_order');
+        return $this->hasMany('App\Models\Characters\Character')->orderBy('squad_order');
     }
 
     /**
@@ -59,7 +59,7 @@ class Squad extends Model
      */
     public function faction()
     {
-        return $this->belongsTo('App\Models\Faction');
+        return $this->belongsTo('App\Models\Factions\Faction');
     }
 
     /**

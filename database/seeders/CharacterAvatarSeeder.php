@@ -14,6 +14,7 @@ class CharacterAvatarSeeder extends Seeder
      */
     public function run()
     {
+        Avatar::create(array('name' => '001', 'gender_id' => 1));
         $length = 1000;
         $delimiter = ',';
         $handle = fopen(storage_path('app/seeders/characters_avatars_male.csv'), "r");

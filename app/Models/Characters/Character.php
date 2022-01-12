@@ -138,7 +138,7 @@ class Character extends Model
      */
     public function qualities()
     {
-        return $this->hasOne('App\Models\Characters\Quality');
+        return $this->hasOne('App\Models\Characters\Qualities');
     }
 
     /**

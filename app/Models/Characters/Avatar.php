@@ -19,14 +19,14 @@ use Illuminate\Database\Query\Builder;
  *
  * @property int $id
  * @property int $gender_id
- * @property Gender $gender
  * @property string $name
+ * @property string $path
  *
  * @method static create(array $array)
  */
 class Avatar extends Model
 {
-
+    protected $fillable = ['gender_id', 'name'];
     protected $table = 'characters_avatars';
     protected $visible = [
         'id',
@@ -60,5 +60,4 @@ class Avatar extends Model
     {
         return self::where('gender_id', '=', $gender->id)->inRandomOrder()->first();
     }
-
 }

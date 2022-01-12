@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Qualities extends Model
 {
-
     protected $table = 'character_qualities';
     public $timestamps = false;
     protected $visible = array(
@@ -31,5 +30,4 @@ class Qualities extends Model
         'mobility',
         'willpower',
     );
-
 }
