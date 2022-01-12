@@ -9,6 +9,7 @@ use App\Models\Characters\Inventory;
 use App\Models\Characters\Qualities;
 use App\Models\Characters\Quality;
 use App\Models\Factions\Faction;
+use App\Models\Items\Item;
 use App\Models\Names\Name;
 use App\Models\Squads\Squad;
 use Illuminate\Database\Seeder;
@@ -51,5 +52,9 @@ class DemoCharacterSeeder extends Seeder
         $inventory = new Inventory();
         $inventory->character_id = $character->id;
         $inventory->save();
+        $items = Item::all();
+        foreach ($items as $item) {
+            $inventory->items()->attach($item->id, ['quantity' => 1]);
+        }
     }
 }

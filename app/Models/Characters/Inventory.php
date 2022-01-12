@@ -8,6 +8,7 @@
 
 namespace App\Models\Characters;
 
+use App\Models\Items\Item;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -37,7 +38,9 @@ class Inventory extends Model
      */
     public function items()
     {
-        return $this->belongsToMany('App\Models\Item', 'inventories_items', 'inventory_id', 'item_id');
+        return $this->belongsToMany(Item::class, 'inventory_item', 'inventory_id', 'item_id')
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 
     /**
