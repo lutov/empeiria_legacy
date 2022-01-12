@@ -9,6 +9,7 @@
 namespace App\Models\Items;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -19,32 +20,37 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static find(int $id)
  * @method static where(string $string, $id)
  * @method static delete(int $id)
+ *
+ * @method static Item create(array|false $name)
  */
 class Item extends Model
 {
-
-    /**
-     * Item constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $fillable = ['type_id', 'name', 'description'];
 
     /**
      * @return HasOne
      */
     public function type()
     {
-        return $this->hasOne('App\Models\ItemType', 'id', 'type_id');
+        return $this->hasOne('App\Models\Items\Type', 'id', 'type_id');
     }
 
     /**
-     * @return HasOne
+     * @return BelongsToMany
      */
-    public function params()
+    public function parameters()
     {
-        return $this->hasOne('App\Models\ItemParams', 'item_id',);
+        return $this->belongsToMany(Parameter::class, 'item_parameter', 'item_id', 'parameter_id')
+            ->withPivot('value')
+            ->withTimestamps();
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'item_attribute', 'item_id', 'attribute_id')
+            ->withTimestamps();
+    }
 }

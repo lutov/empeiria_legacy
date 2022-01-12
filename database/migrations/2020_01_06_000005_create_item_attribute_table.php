@@ -18,7 +18,7 @@ class CreateItemAttributeTable extends Migration
         Schema::create('item_attribute', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Item::class)->unsigned();
-            $table->foreignIdFor(Attribute::class, 'parameter_id')->unsigned();
+            $table->foreignIdFor(Attribute::class, 'attribute_id')->unsigned();
             $table->timestamps();
         });
     }

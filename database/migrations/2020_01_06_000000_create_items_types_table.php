@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Items\Type;
+use Database\Seeders\ItemTypeSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,8 @@ class CreateItemsTypesTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
         });
+        $seeder = new ItemTypeSeeder();
+        $seeder->run();
     }
 
     /**

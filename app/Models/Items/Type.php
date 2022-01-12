@@ -14,9 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Type extends Model
 {
-
     protected $table = 'items_types';
-
+    protected $fillable = ['parent_id', 'name', 'description'];
     /**
      * @return HasMany
      */

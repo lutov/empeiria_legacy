@@ -11,11 +11,13 @@ namespace App\Models\Items;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @method static create($parameter)
+ */
 class Parameter extends Model
 {
-
+    protected $fillable = ['name'];
     protected $table = 'items_parameters';
-
     /**
      * @return BelongsTo
      */
@@ -23,5 +25,4 @@ class Parameter extends Model
     {
         return $this->belongsTo('App\Models\Items\Item');
     }
-
 }

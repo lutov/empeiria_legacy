@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Items\Type;
+use Database\Seeders\ItemSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsParametersTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +15,15 @@ class CreateItemsParametersTable extends Migration
      */
     public function up()
     {
-        Schema::create('items_parameters', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Type::class, 'type_id')->unsigned();
             $table->string('name', 256);
             $table->text('description')->nullable();
-            $table->smallInteger('min')->unsigned()->default(1);
-            $table->smallInteger('max')->unsigned()->default(10);
             $table->timestamps();
         });
+        $seeder = new ItemSeeder();
+        $seeder->run();
     }
 
     /**
@@ -30,6 +33,6 @@ class CreateItemsParametersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items_parameters');
+        Schema::dropIfExists('items');
     }
 }

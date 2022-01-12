@@ -9,19 +9,21 @@
 namespace App\Models\Items;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @method static create($attribute)
+ */
 class Attribute extends Model
 {
-
+    protected $fillable = ['name', 'description'];
     protected $table = 'items_attributes';
 
     /**
-     * @return BelongsTo
+     * @return BelongsToMany
      */
     public function item()
     {
-        return $this->belongsTo('App\Models\Items\Item');
+        return $this->belongsToMany('App\Models\Items\Item');
     }
-
 }
