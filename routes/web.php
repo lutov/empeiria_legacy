@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/demo/', 'GameController@demo')->name('demo');
     Route::get('/game/', 'GameController@index')->name('game');
     Route::get('/worlds/', 'GameController@worlds')->name('game_worlds');
     Route::get('/worlds/{id}', 'GameController@world')->name('game_world');
