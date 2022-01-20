@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Squad;
+use App\Models\Squads\Squad;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +32,7 @@ class SquadController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return Squad::where('user_id', '=', $user->id)->get();
+        return Squad::where('faction_id', '=', $user->world->faction->id)->get();
     }
 
     /**

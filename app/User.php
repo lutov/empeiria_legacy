@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Worlds\World;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -36,5 +37,13 @@ class User extends Authenticatable {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function world()
+    {
+        return $this->hasOne(World::class);
+    }
 
 }

@@ -101,6 +101,14 @@
             :items="squads"
             :search="search"
         >
+            <template v-slot:item.banner="{ item }">
+                <v-avatar>
+                    <img
+                        :src=item.banner.path
+                        :alt=item.name
+                    >
+                </v-avatar>
+            </template>
             <template v-slot:item.name="{ item }">
                 <a :href="'/squads/'+item.id">{{ item.name }}</a>
             </template>
@@ -147,6 +155,7 @@
                 search: '',
                 headers: [
                     {text: 'ID', value: 'id'},
+                    {text: 'Banner', value: 'banner', sortable: false},
                     {
                         text: 'Name',
                         align: 'start',

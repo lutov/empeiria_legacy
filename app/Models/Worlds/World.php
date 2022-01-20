@@ -8,6 +8,7 @@
 
 namespace App\Models\Worlds;
 
+use App\Models\Factions\Faction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -33,6 +34,14 @@ class World extends Model
     public function map()
     {
         return $this->hasOne('App\Models\Worlds\Map');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function faction()
+    {
+        return $this->hasOne(Faction::class);
     }
 
     /**

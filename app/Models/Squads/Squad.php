@@ -32,11 +32,13 @@ class Squad extends Model
 
     protected $with = [
         'faction',
+        'banner',
         'characters',
     ];
     protected $visible = [
         'id',
         'name',
+        'banner',
         'faction',
         'characters',
     ];
@@ -60,6 +62,14 @@ class Squad extends Model
     public function faction()
     {
         return $this->belongsTo('App\Models\Factions\Faction');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function banner()
+    {
+        return $this->belongsTo(Banner::class);
     }
 
     /**
