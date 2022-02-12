@@ -15,15 +15,9 @@ class ItemParametersSeeder extends Seeder
     public function run()
     {
         $parameters = array(
-            array(
-                'name' => 'Damage',
-            ),
-            array(
-                'name' => 'Armor',
-            ),
-            array(
-                'name' => 'Weight',
-            ),
+            ['name' => 'Damage', "attributes" => ['weapon']],
+            ['name' => 'Armor', "attributes" => ['armor', 'shield']],
+            ['name' => 'Weight', "attributes" => []],
         );
         foreach ($parameters as $parameter) {
             Parameter::create($parameter);
