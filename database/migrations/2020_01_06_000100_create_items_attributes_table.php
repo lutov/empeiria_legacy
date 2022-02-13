@@ -17,6 +17,7 @@ class CreateItemsAttributesTable extends Migration
         Schema::create('items_attributes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 256);
+            $table->string('slug', 256);
             $table->text('description')->nullable();
             $table->timestamps();
         });

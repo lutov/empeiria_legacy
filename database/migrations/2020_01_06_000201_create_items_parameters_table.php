@@ -17,6 +17,7 @@ class CreateItemsParametersTable extends Migration
         Schema::create('items_parameters', function (Blueprint $table) {
             $table->id();
             $table->string('name', 256);
+            $table->string('slug', 256);
             $table->text('description')->nullable();
             $table->smallInteger('min')->unsigned()->default(1);
             $table->smallInteger('max')->unsigned()->default(10);
