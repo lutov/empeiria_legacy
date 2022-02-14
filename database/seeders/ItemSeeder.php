@@ -46,7 +46,7 @@ class ItemSeeder extends Seeder
                     'universality' => '5',
                     'complexity' => '3',
                 ],
-                'attributes' => ['weapon', 'one-handed', 'sharp', 'short']
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
             ],
             'Club' => [
                 'parameters' => [
@@ -59,25 +59,217 @@ class ItemSeeder extends Seeder
                     'universality' => '5',
                     'complexity' => '2',
                 ],
-                'attributes' => ['weapon', 'one-handed', 'dull', 'short']
+                'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'light', 'sidearm']
             ],
-            'Flail' => ['parameters' => [], 'attributes' => []],
-            'Mace' => ['parameters' => [], 'attributes' => []],
-            'Morning star' => ['parameters' => [], 'attributes' => []],
-            'Quarterstaff' => ['parameters' => [], 'attributes' => []],
-            'Pernach' => ['parameters' => [], 'attributes' => []],
-            'War hammer' => ['parameters' => [], 'attributes' => []],
+            'Flail' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '6',
+                    'durability' => '5',
+                    'speed' => '4',
+                    'reach' => '7',
+                    'defense' => '3',
+                    'universality' => '1',
+                    'complexity' => '4',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'heavy', 'flexible']
+            ],
+            'Mace' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '7',
+                    'durability' => '10',
+                    'speed' => '5',
+                    'reach' => '5',
+                    'defense' => '5',
+                    'universality' => '5',
+                    'complexity' => '4',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
+            ],
+            'Morning star' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '9',
+                    'durability' => '9',
+                    'speed' => '5',
+                    'reach' => '5',
+                    'defense' => '5',
+                    'universality' => '5',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
+            ],
+            'Quarterstaff' => [
+                'parameters' => [
+                    'damage' => '6',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '7',
+                    'reach' => '7',
+                    'defense' => '7',
+                    'universality' => '7',
+                    'complexity' => '1',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'light']
+            ],
+            'Pernach' => [
+                'parameters' => [
+                    'damage' => '7',
+                    'anti-armor' => '10',
+                    'durability' => '8',
+                    'speed' => '5',
+                    'reach' => '5',
+                    'defense' => '5',
+                    'universality' => '5',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
+            ],
+            'War hammer' => [
+                'parameters' => [
+                    'damage' => '10',
+                    'anti-armor' => '10',
+                    'durability' => '8',
+                    'speed' => '5',
+                    'reach' => '5',
+                    'defense' => '5',
+                    'universality' => '5',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
+            ],
 
-            'Arming sword' => ['parameters' => [], 'attributes' => []],
-            'Dagger' => ['parameters' => [], 'attributes' => []],
-            'Estoc' => ['parameters' => [], 'attributes' => []],
-            'Falchion' => ['parameters' => [], 'attributes' => []],
-            'Katana' => ['parameters' => [], 'attributes' => []],
-            'Knife' => ['parameters' => [], 'attributes' => []],
-            'Longsword' => ['parameters' => [], 'attributes' => []],
-            'Rapier' => ['parameters' => [], 'attributes' => []],
-            'Saber' => ['parameters' => [], 'attributes' => []],
-            'Shortsword' => ['parameters' => [], 'attributes' => []],
+            'Knife' => [
+                'parameters' => [
+                    'damage' => '4',
+                    'anti-armor' => '4',
+                    'durability' => '6',
+                    'speed' => '10',
+                    'reach' => '3',
+                    'defense' => '3',
+                    'universality' => '8',
+                    'complexity' => '3',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light', 'sidearm']
+            ],
+            'Dagger' => [
+                'parameters' => [
+                    'damage' => '3',
+                    'anti-armor' => '8',
+                    'durability' => '6',
+                    'speed' => '10',
+                    'reach' => '3',
+                    'defense' => '3',
+                    'universality' => '10',
+                    'complexity' => '3',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light', 'sidearm', 'piercing']
+            ],
+            'Shortsword' => [
+                'parameters' => [
+                    'damage' => '5',
+                    'anti-armor' => '5',
+                    'durability' => '5',
+                    'speed' => '8',
+                    'reach' => '5',
+                    'defense' => '5',
+                    'universality' => '8',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light', 'sidearm']
+            ],
+            'Arming sword' => [
+                'parameters' => [
+                    'damage' => '7',
+                    'anti-armor' => '5',
+                    'durability' => '5',
+                    'speed' => '6',
+                    'reach' => '6',
+                    'defense' => '6',
+                    'universality' => '8',
+                    'complexity' => '7',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
+            ],
+            'Longsword' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '8',
+                    'durability' => '6',
+                    'speed' => '8',
+                    'reach' => '8',
+                    'defense' => '8',
+                    'universality' => '8',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light']
+            ],
+            'Katana' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '8',
+                    'reach' => '6',
+                    'defense' => '8',
+                    'universality' => '8',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'short', 'light']
+            ],
+            'Rapier' => [
+                'parameters' => [
+                    'damage' => '7',
+                    'anti-armor' => '8',
+                    'durability' => '4',
+                    'speed' => '9',
+                    'reach' => '9',
+                    'defense' => '5',
+                    'universality' => '5',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'long', 'light', 'flexible', 'piercing']
+            ],
+            'Estoc' => [
+                'parameters' => [
+                    'damage' => '7',
+                    'anti-armor' => '10',
+                    'durability' => '7',
+                    'speed' => '7',
+                    'reach' => '7',
+                    'defense' => '7',
+                    'universality' => '4',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light', 'piercing']
+            ],
+            'Saber' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '4',
+                    'durability' => '5',
+                    'speed' => '8',
+                    'reach' => '6',
+                    'defense' => '6',
+                    'universality' => '7',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
+            ],
+            'Falchion' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '5',
+                    'durability' => '6',
+                    'speed' => '7',
+                    'reach' => '5',
+                    'defense' => '6',
+                    'universality' => '7',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
+            ],
 
             'Ahlspiess' => ['parameters' => [], 'attributes' => []],
             'Bardiche' => ['parameters' => [], 'attributes' => []],
