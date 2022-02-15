@@ -35,19 +35,6 @@ class ItemSeeder extends Seeder
         fclose($handle);
 
         $items = array(
-            'Battle axe' => [
-                'parameters' => [
-                    'damage' => '8',
-                    'anti-armor' => '6',
-                    'durability' => '6',
-                    'speed' => '6',
-                    'reach' => '5',
-                    'defense' => '3',
-                    'universality' => '5',
-                    'complexity' => '3',
-                ],
-                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
-            ],
             'Club' => [
                 'parameters' => [
                     'damage' => '6',
@@ -60,19 +47,6 @@ class ItemSeeder extends Seeder
                     'complexity' => '2',
                 ],
                 'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'light', 'sidearm']
-            ],
-            'Flail' => [
-                'parameters' => [
-                    'damage' => '8',
-                    'anti-armor' => '6',
-                    'durability' => '5',
-                    'speed' => '4',
-                    'reach' => '7',
-                    'defense' => '3',
-                    'universality' => '1',
-                    'complexity' => '4',
-                ],
-                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'heavy', 'flexible']
             ],
             'Mace' => [
                 'parameters' => [
@@ -100,19 +74,6 @@ class ItemSeeder extends Seeder
                 ],
                 'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
             ],
-            'Quarterstaff' => [
-                'parameters' => [
-                    'damage' => '6',
-                    'anti-armor' => '6',
-                    'durability' => '6',
-                    'speed' => '7',
-                    'reach' => '7',
-                    'defense' => '7',
-                    'universality' => '7',
-                    'complexity' => '1',
-                ],
-                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'light']
-            ],
             'Pernach' => [
                 'parameters' => [
                     'damage' => '7',
@@ -126,6 +87,45 @@ class ItemSeeder extends Seeder
                 ],
                 'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
             ],
+            'Flail' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '6',
+                    'durability' => '5',
+                    'speed' => '4',
+                    'reach' => '7',
+                    'defense' => '3',
+                    'universality' => '1',
+                    'complexity' => '4',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'heavy', 'flexible']
+            ],
+            'Battle axe' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '6',
+                    'reach' => '5',
+                    'defense' => '3',
+                    'universality' => '5',
+                    'complexity' => '3',
+                ],
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
+            ],
+            'Bardiche' => [
+                'parameters' => [
+                    'damage' => '10',
+                    'anti-armor' => '8',
+                    'durability' => '7',
+                    'speed' => '5',
+                    'reach' => '6',
+                    'defense' => '5',
+                    'universality' => '6',
+                    'complexity' => '7',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'heavy']
+            ],
             'War hammer' => [
                 'parameters' => [
                     'damage' => '10',
@@ -138,6 +138,32 @@ class ItemSeeder extends Seeder
                     'complexity' => '6',
                 ],
                 'attributes' => ['weapon', 'one-handed', 'blunt', 'short', 'heavy']
+            ],
+            'Goedendag' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '8',
+                    'durability' => '8',
+                    'speed' => '3',
+                    'reach' => '6',
+                    'defense' => '3',
+                    'universality' => '6',
+                    'complexity' => '4',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'heavy', 'piercing']
+            ],
+            'Quarterstaff' => [
+                'parameters' => [
+                    'damage' => '6',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '7',
+                    'reach' => '7',
+                    'defense' => '7',
+                    'universality' => '7',
+                    'complexity' => '1',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'blunt', 'long', 'light']
             ],
 
             'Knife' => [
@@ -271,23 +297,149 @@ class ItemSeeder extends Seeder
                 'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
             ],
 
-            'Ahlspiess' => ['parameters' => [], 'attributes' => []],
-            'Bardiche' => ['parameters' => [], 'attributes' => []],
-            'Bill' => ['parameters' => [], 'attributes' => []],
-            'Glaive' => ['parameters' => [], 'attributes' => []],
-            'Goedendag' => ['parameters' => [], 'attributes' => []],
-            'Guisarme' => ['parameters' => [], 'attributes' => []],
-            'Halberd' => ['parameters' => [], 'attributes' => []],
-            'Lance' => ['parameters' => [], 'attributes' => []],
-            'Military fork' => ['parameters' => [], 'attributes' => []],
-            'Partisan' => ['parameters' => [], 'attributes' => []],
-            'Pike' => ['parameters' => [], 'attributes' => []],
-            'Ranseur' => ['parameters' => [], 'attributes' => []],
-            'Sovnya' => ['parameters' => [], 'attributes' => []],
-            'Spetum' => ['parameters' => [], 'attributes' => []],
-            'Swordstaff' => ['parameters' => [], 'attributes' => []],
-            'Voulge' => ['parameters' => [], 'attributes' => []],
-            'War scythe' => ['parameters' => [], 'attributes' => []],
+            'Military fork' => [
+                'parameters' => [
+                    'damage' => '3',
+                    'anti-armor' => '3',
+                    'durability' => '5',
+                    'speed' => '8',
+                    'reach' => '7',
+                    'defense' => '8',
+                    'universality' => '4',
+                    'complexity' => '2',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light', 'piercing']
+            ],
+            'War scythe' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '2',
+                    'durability' => '3',
+                    'speed' => '7',
+                    'reach' => '5',
+                    'defense' => '2',
+                    'universality' => '2',
+                    'complexity' => '2',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light']
+            ],
+            'Bill' => [
+                'parameters' => [
+                    'damage' => '6',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '6',
+                    'reach' => '7',
+                    'defense' => '5',
+                    'universality' => '4',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light']
+            ],
+            'Voulge' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '5',
+                    'reach' => '7',
+                    'defense' => '4',
+                    'universality' => '4',
+                    'complexity' => '2',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'heavy']
+            ],
+            'Halberd' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '8',
+                    'durability' => '6',
+                    'speed' => '6',
+                    'reach' => '7',
+                    'defense' => '8',
+                    'universality' => '6',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'heavy', 'piercing']
+            ],
+            'Partisan' => [
+                'parameters' => [
+                    'damage' => '6',
+                    'anti-armor' => '5',
+                    'durability' => '5',
+                    'speed' => '6',
+                    'reach' => '7',
+                    'defense' => '6',
+                    'universality' => '7',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light', 'piercing']
+            ],
+            'Glaive' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '5',
+                    'durability' => '5',
+                    'speed' => '6',
+                    'reach' => '7',
+                    'defense' => '6',
+                    'universality' => '6',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light']
+            ],
+            'Guisarme' => [
+                'parameters' => [
+                    'damage' => '6',
+                    'anti-armor' => '6',
+                    'durability' => '6',
+                    'speed' => '6',
+                    'reach' => '8',
+                    'defense' => '6',
+                    'universality' => '6',
+                    'complexity' => '6',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light', 'piercing']
+            ],
+            'Ahlspiess' => [
+                'parameters' => [
+                    'damage' => '6',
+                    'anti-armor' => '8',
+                    'durability' => '8',
+                    'speed' => '5',
+                    'reach' => '7',
+                    'defense' => '5',
+                    'universality' => '3',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'light', 'piercing']
+            ],
+            'Pike' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '8',
+                    'durability' => '6',
+                    'speed' => '5',
+                    'reach' => '10',
+                    'defense' => '4',
+                    'universality' => '4',
+                    'complexity' => '2',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'heavy', 'piercing']
+            ],
+            'Lance' => [
+                'parameters' => [
+                    'damage' => '10',
+                    'anti-armor' => '10',
+                    'durability' => '5',
+                    'speed' => '1',
+                    'reach' => '10',
+                    'defense' => '1',
+                    'universality' => '1',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'heavy', 'piercing']
+            ],
 
             'Longbow' => ['parameters' => [], 'attributes' => []],
             'Recurved bow' => ['parameters' => [], 'attributes' => []],
