@@ -281,7 +281,7 @@ class ItemSeeder extends Seeder
                     'universality' => '7',
                     'complexity' => '6',
                 ],
-                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'light']
+                'attributes' => ['weapon', 'one-handed', 'sharp', 'short', 'flexible', 'light']
             ],
             'Falchion' => [
                 'parameters' => [
@@ -441,10 +441,58 @@ class ItemSeeder extends Seeder
                 'attributes' => ['weapon', 'two-handed', 'sharp', 'long', 'heavy', 'piercing']
             ],
 
-            'Longbow' => ['parameters' => [], 'attributes' => []],
-            'Recurved bow' => ['parameters' => [], 'attributes' => []],
-            'Short bow' => ['parameters' => [], 'attributes' => []],
-            'Crossbow' => ['parameters' => [], 'attributes' => []],
+            'Short bow' => [
+                'parameters' => [
+                    'damage' => '5',
+                    'anti-armor' => '3',
+                    'durability' => '3',
+                    'speed' => '8',
+                    'reach' => '10',
+                    'defense' => '1',
+                    'universality' => '3',
+                    'complexity' => '2',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'ranged', 'flexible', 'sharp', 'short', 'light', 'piercing']
+            ],
+            'Longbow' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '8',
+                    'durability' => '3',
+                    'speed' => '5',
+                    'reach' => '10',
+                    'defense' => '1',
+                    'universality' => '1',
+                    'complexity' => '2',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'ranged', 'flexible', 'sharp', 'long', 'light', 'piercing']
+            ],
+            'Recurved bow' => [
+                'parameters' => [
+                    'damage' => '8',
+                    'anti-armor' => '8',
+                    'durability' => '5',
+                    'speed' => '7',
+                    'reach' => '10',
+                    'defense' => '1',
+                    'universality' => '5',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'ranged', 'flexible', 'sharp', 'short', 'heavy', 'piercing']
+            ],
+            'Crossbow' => [
+                'parameters' => [
+                    'damage' => '9',
+                    'anti-armor' => '9',
+                    'durability' => '5',
+                    'speed' => '3',
+                    'reach' => '10',
+                    'defense' => '2',
+                    'universality' => '3',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['weapon', 'two-handed', 'ranged', 'sharp', 'short', 'heavy', 'piercing']
+            ],
 
             'Gambeson' => ['parameters' => [], 'attributes' => []],
             'Lamellar armour' => ['parameters' => [], 'attributes' => []],
