@@ -18,13 +18,13 @@ class ItemParametersSeeder extends Seeder
             ['name' => 'Damage', 'slug' => 'damage', 'attributes' => ['weapon'], 'description' => ''],
             ['name' => 'Anti-Armor', 'slug' => 'anti-armor', 'attributes' => ['weapon'], 'description' => ''],
             ['name' => 'Durability', 'slug' => 'durability', 'attributes' => ['weapon', 'shield'], 'description' => ''],
-            ['name' => 'Speed', 'slug' => 'speed', 'attributes' => ['weapon', 'shield'], 'description' => ''],
+            ['name' => 'Speed', 'slug' => 'speed', 'attributes' => ['armor', 'weapon', 'shield'], 'description' => ''],
             ['name' => 'Reach', 'slug' => 'reach', 'attributes' => ['weapon'], 'description' => ''],
             ['name' => 'Defense', 'slug' => 'defense', 'attributes' => ['weapon', 'shield'], 'description' => ''],
             [
                 'name' => 'Universality',
                 'slug' => 'universality',
-                'attributes' => ['weapon', 'shield'],
+                'attributes' => ['armor', 'weapon', 'shield'],
                 'description' => ''
             ],
             ['name' => 'Сomplexity', 'slug' => 'complexity', 'attributes' => ['armor', 'weapon'], 'description' => ''],

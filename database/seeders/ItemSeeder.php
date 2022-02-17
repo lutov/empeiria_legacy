@@ -494,21 +494,114 @@ class ItemSeeder extends Seeder
                 'attributes' => ['weapon', 'two-handed', 'ranged', 'sharp', 'short', 'heavy', 'piercing']
             ],
 
-            'Gambeson' => ['parameters' => [], 'attributes' => []],
-            'Lamellar armour' => ['parameters' => [], 'attributes' => []],
-            'Laminar armour' => ['parameters' => [], 'attributes' => []],
-            'Scale armour' => ['parameters' => [], 'attributes' => []],
-            'Chain mail' => ['parameters' => [], 'attributes' => []],
-            'Hauberk' => ['parameters' => [], 'attributes' => []],
-            'Mail and plate armour' => ['parameters' => [], 'attributes' => []],
-            'Coat of plates' => ['parameters' => [], 'attributes' => []],
-            'Brigandine' => ['parameters' => [], 'attributes' => []],
-            'Jack of plate' => ['parameters' => [], 'attributes' => []],
-            'Splint armour' => ['parameters' => [], 'attributes' => []],
-            'Mirror armour' => ['parameters' => [], 'attributes' => []],
-            'Breastplate' => ['parameters' => [], 'attributes' => []],
-            'Plate armour' => ['parameters' => [], 'attributes' => []],
-            'Boiled leather' => ['parameters' => [], 'attributes' => []],
+            'Boiled leather' => [
+                'parameters' => [
+                    'armor' => '2',
+                    'speed' => '9',
+                    'universality' => '9',
+                    'complexity' => '3',
+                ],
+                'attributes' => ['armor', 'light']
+            ],
+            'Gambeson' => [
+                'parameters' => [
+                    'armor' => '4',
+                    'speed' => '8',
+                    'universality' => '8',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['armor', 'light']
+            ],
+            'Lamellar armour' => [
+                'parameters' => [
+                    'armor' => '5',
+                    'speed' => '7',
+                    'universality' => '6',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['armor', 'light']
+            ],
+            'Scale armour' => [
+                'parameters' => [
+                    'armor' => '6',
+                    'speed' => '6',
+                    'universality' => '6',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['armor', 'light']
+            ],
+            'Laminar armour' => [
+                'parameters' => [
+                    'armor' => '7',
+                    'speed' => '6',
+                    'universality' => '6',
+                    'complexity' => '5',
+                ],
+                'attributes' => ['armor', 'light']
+            ],
+            'Hauberk' => [
+                'parameters' => [
+                    'armor' => '6',
+                    'speed' => '8',
+                    'universality' => '7',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['armor', 'light']
+            ],
+            'Mail and plate armour' => [
+                'parameters' => [
+                    'armor' => '8',
+                    'speed' => '6',
+                    'universality' => '5',
+                    'complexity' => '9',
+                ],
+                'attributes' => ['armor', 'heavy']
+            ],
+            'Mirror armour' => [
+                'parameters' => [
+                    'armor' => '8',
+                    'speed' => '5',
+                    'universality' => '4',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['armor', 'heavy']
+            ],
+            'Coat of plates' => [
+                'parameters' => [
+                    'armor' => '8',
+                    'speed' => '6',
+                    'universality' => '7',
+                    'complexity' => '7',
+                ],
+                'attributes' => ['armor', 'heavy']
+            ],
+            'Brigandine' => [
+                'parameters' => [
+                    'armor' => '7',
+                    'speed' => '8',
+                    'universality' => '8',
+                    'complexity' => '7',
+                ],
+                'attributes' => ['armor', 'heavy']
+            ],
+            'Breastplate' => [
+                'parameters' => [
+                    'armor' => '7',
+                    'speed' => '5',
+                    'universality' => '5',
+                    'complexity' => '8',
+                ],
+                'attributes' => ['armor', 'heavy']
+            ],
+            'Plate armour' => [
+                'parameters' => [
+                    'armor' => '10',
+                    'speed' => '3',
+                    'universality' => '6',
+                    'complexity' => '10',
+                ],
+                'attributes' => ['armor', 'heavy']
+            ],
         );
     }
 }
