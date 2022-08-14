@@ -68,6 +68,9 @@
                                     <a class="dropdown-item" href="{{ route('game_squads') }}">
                                         {{ __('Squads') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ url('/migrations') }}">
+                                        {{ __('Migrations') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

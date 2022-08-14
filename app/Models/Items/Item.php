@@ -25,7 +25,18 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Item extends Model
 {
-    protected $fillable = ['type_id', 'name', 'description'];
+    protected $visible = [
+        'id',
+        'type_id',
+        'name',
+        'description',
+        'values'
+    ];
+    protected $fillable = [
+        'type_id',
+        'name',
+        'description'
+    ];
 
     /**
      * @return HasOne

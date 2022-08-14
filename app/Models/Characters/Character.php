@@ -52,6 +52,7 @@ class Character extends Model
         'gender',
         'avatar',
         'qualities',
+        'inventory',
         //'position',
     ];
     protected $visible = [
@@ -68,6 +69,7 @@ class Character extends Model
         'faction_order',
         'squad_id',
         'squad_order',
+        'inventory',
     ];
     protected $fillable = [
         'id',
@@ -130,7 +132,7 @@ class Character extends Model
      */
     public function inventory()
     {
-        return $this->hasOne('App\Models\Items\Inventory');
+        return $this->hasOne('App\Models\Characters\Inventory');
     }
 
     /**

@@ -8,6 +8,7 @@
 
 namespace App\Models\Characters;
 
+use App\Models\Items\InventoryItem;
 use App\Models\Items\Item;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Inventory extends Model
 {
 
+    protected $visible = [
+        'id',
+        'size',
+    ];
+
     /**
      * Inventory constructor.
      */
@@ -39,8 +45,10 @@ class Inventory extends Model
     public function items()
     {
         return $this->belongsToMany(Item::class, 'inventory_item', 'inventory_id', 'item_id')
-            ->withPivot('quantity')
-            ->withTimestamps();
+            ->as('values')
+            ->using(InventoryItem::class)
+            ->withPivot('quantity')//->withTimestamps()
+            ;
     }
 
     /**

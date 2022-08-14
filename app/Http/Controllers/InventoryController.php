@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\StorageInterface;
-use App\Models\Inventory;
+use App\Models\Characters\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

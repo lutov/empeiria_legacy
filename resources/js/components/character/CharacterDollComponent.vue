@@ -8,7 +8,8 @@
         <div class="card-body">
             <div class="row m-0 text-center align-items-center">
                 <div class="col-12 col-lg-6">
-                    <img :src="character.avatar.path" :alt="character.name" class="w-50 rounded-circle"/>
+                    <img v-if="character.avatar" :src="character.avatar.path" :alt="character.name"
+                         class="w-50 rounded-circle"/>
                 </div>
                 <div class="col-12 col-lg-6 character-doll">
                     <div class="row align-items-end">
