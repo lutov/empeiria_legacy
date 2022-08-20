@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/items', 'InventoryController@items')->name('inventory_items');
         Route::post('/{id}/items/attach', 'InventoryController@attachItems')->name('inventory_attach_items');
         Route::post('/{id}/items/detach', 'InventoryController@detachItems')->name('inventory_detach_items');
+        Route::put('/{id}/items/{itemId}', 'InventoryController@setItemValues')->name('inventory_set_item_values');
     });
 
     Route::resources(

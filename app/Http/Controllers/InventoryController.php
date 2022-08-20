@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\StorageInterface;
 use App\Models\Characters\Inventory;
+use App\Models\Items\InventoryItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller implements StorageInterface
@@ -89,7 +91,12 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function items(int $id)
     {
-        return Inventory::find($id)->items()->orderBy('sort')->get();
+        $items = new Collection();
+        $inventory = Inventory::find($id);
+        if (isset($inventory->id)) {
+            $items = $inventory->items()->orderBy('sort')->get();
+        }
+        return $items;
     }
 
     /**
@@ -116,6 +123,23 @@ class InventoryController extends Controller implements StorageInterface
         $inventory = Inventory::find($id);
         $inventory->items()->detach($items);
         return $inventory;
+    }
+
+    public function setItemValues(Request $request, int $id, int $itemId)
+    {
+        $values = array();
+        if ($request->has('quantity')) {
+            $values['quantity'] = $request->get('quantity');
+        }
+        if ($request->has('sort')) {
+            $values['sort'] = $request->get('sort');
+        }
+        $item = new InventoryItem();
+        $inventory = Inventory::find($id);
+        if (isset($inventory->id)) {
+            $item = $inventory->items()->updateExistingPivot($itemId, $values);
+        }
+        return $item;
     }
 
 }

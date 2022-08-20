@@ -53,6 +53,16 @@
             },
             sort: function (evt) {
                 //console.log(evt);
+                let oldItem = this.items[evt.oldIndex];
+                oldItem.sort = evt.oldIndex + 1;
+                let item = this.items[evt.newIndex];
+                item.sort = evt.newIndex + 1;
+                let itemsPath = this.api.inventories + '/' + this.character.inventory.id + '/items';
+                axios.put(itemsPath + '/' + oldItem.id, oldItem).then(response => {
+                    axios.put(itemsPath + '/' + item.id, item).then(response => {
+                        this.fetchItems();
+                    }).catch(error => console.log(error));
+                }).catch(error => console.log(error));
             },
             end: function (evt) {
                 //console.log(evt.item._underlying_vm_);
