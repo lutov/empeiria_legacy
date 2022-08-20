@@ -89,7 +89,7 @@ class InventoryController extends Controller implements StorageInterface
      */
     public function items(int $id)
     {
-        return Inventory::find($id)->items;
+        return Inventory::find($id)->items()->orderBy('sort')->get();
     }
 
     /**

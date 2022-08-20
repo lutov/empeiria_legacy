@@ -10,5 +10,6 @@ class InventoryItem extends Pivot
 {
     protected $visible = [
         'quantity',
+        'sort',
     ];
 }

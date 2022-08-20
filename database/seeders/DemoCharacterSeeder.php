@@ -53,8 +53,8 @@ class DemoCharacterSeeder extends Seeder
         $inventory->character_id = $character->id;
         $inventory->save();
         $items = Item::all();
-        foreach ($items as $item) {
-            $inventory->items()->attach($item->id, ['quantity' => 1]);
+        foreach ($items as $key => $item) {
+            $inventory->items()->attach($item->id, ['quantity' => 1, 'sort' => $key + 1]);
         }
     }
 }

@@ -47,7 +47,7 @@ class Inventory extends Model
         return $this->belongsToMany(Item::class, 'inventory_item', 'inventory_id', 'item_id')
             ->as('values')
             ->using(InventoryItem::class)
-            ->withPivot('quantity')//->withTimestamps()
+            ->withPivot(array('quantity', 'sort'))//->withTimestamps()
             ;
     }
 

@@ -20,6 +20,7 @@ class CreateInventoryItemTable extends Migration
             $table->foreignIdFor(Inventory::class)->unsigned();
             $table->foreignIdFor(Item::class)->unsigned();
             $table->smallInteger('quantity')->unsigned()->default(1);
+            $table->smallInteger('sort')->unsigned()->default(1);
             $table->timestamps();
         });
     }
