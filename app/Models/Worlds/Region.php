@@ -42,6 +42,7 @@ class Region extends Model
         'start_x',
         'size_y',
         'size_x',
+        'tiles',
     ];
 
     /**

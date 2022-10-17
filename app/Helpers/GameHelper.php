@@ -9,7 +9,7 @@
 namespace App\Helpers;
 
 
-use App\Models\Name;
+use App\Models\Names\Name;
 
 class GameHelper
 {

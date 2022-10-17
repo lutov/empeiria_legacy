@@ -27,7 +27,7 @@ class Map extends Model
      */
     public function world()
     {
-        return $this->belongsTo('App\Models\World\World');
+        return $this->belongsTo('App\Models\Worlds\World');
     }
 
     /**
@@ -35,7 +35,7 @@ class Map extends Model
      */
     public function regions()
     {
-        return $this->hasMany('App\Models\World\Region');
+        return $this->hasMany('App\Models\Worlds\Region');
     }
 
 }

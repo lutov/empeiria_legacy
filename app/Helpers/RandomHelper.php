@@ -60,7 +60,6 @@ class RandomHelper
         if ($weight < 1) {
             throw new InvalidArgumentException('Weight must be a positive integer.');
         }
-
         $this->elements[] = $value;
         $this->weights[] = $weight;
         $this->totalWeight += $weight;
@@ -86,6 +85,14 @@ class RandomHelper
     }
 
     /**
+     * @return array
+     */
+    public function getElements()
+    {
+        return $this->elements;
+    }
+
+    /**
      * @return mixed
      *
      * @throws RuntimeException If no elements have been added.
@@ -97,7 +104,6 @@ class RandomHelper
             arsort($this->weights);
             $this->isSorted = true;
         }
-
         if ($this->totalWeight !== 0) {
             $value = random_int(1, $this->totalWeight);
 
@@ -109,7 +115,6 @@ class RandomHelper
                 }
             }
         }
-
         throw new RuntimeException('No elements have been added.');
     }
 }
