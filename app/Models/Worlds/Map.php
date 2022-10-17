@@ -19,8 +19,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Map extends Model
 {
 
-    protected $with = ['regions'];
-    protected $visible = ['size_x', 'size_y'];
+    protected $with = [
+        'tiles',
+        'regions'
+    ];
+    protected $visible = [
+        'size_x',
+        'size_y'
+    ];
 
     /**
      * @return BelongsTo
@@ -28,6 +34,14 @@ class Map extends Model
     public function world()
     {
         return $this->belongsTo('App\Models\Worlds\World');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tiles()
+    {
+        return $this->hasMany('App\Models\World\Tile');
     }
 
     /**

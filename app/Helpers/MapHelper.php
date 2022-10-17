@@ -71,6 +71,17 @@ class MapHelper
                 $regionId++;
             }
         }
+        $map['tiles'] = array();
+        foreach($map['regions'] as $row) {
+            foreach($row as $region) {
+                foreach($region->tiles as $tiles) {
+                    foreach($tiles as $tile) {
+                        $map['tiles'][$tile->global_y][$tile->global_x] = $tile;
+                    }
+                }
+            }
+        }
+        //dd($map['tiles']);
         return $map;
     }
 
@@ -115,6 +126,8 @@ class MapHelper
         $region->color = $regionColor;
         $tiles = array();
         $tilesColors = ColorHelper::many($regionSizeX, array('luminosity' => $luminosity, 'hue' => $hue));
+        $offsetY = ($row * $regionSizeY);
+        $offsetX = ($col * $regionSizeX);
         for ($y = 0; $y < $regionSizeY; $y++) {
             if(GameHelper::odds(75)) {
                 // с шансом в 25% формируем следующий ряд из тех же цветов, чтобы создать кластеры
@@ -135,10 +148,10 @@ class MapHelper
                 }
                 $tiles[$y][$x] = self::generateTile(
                     $regionId,
-                    $regionSizeY,
-                    $regionSizeX,
-                    $row,
-                    $col,
+                    $y,
+                    $x,
+                    $offsetY,
+                    $offsetX,
                     $tileColor
                 );
             }
@@ -151,8 +164,8 @@ class MapHelper
      * @param int $regionId
      * @param int $y
      * @param int $x
-     * @param int $row
-     * @param int $col
+     * @param int $offsetY
+     * @param int $offsetX
      * @param string $color
      * @return Tile
      */
@@ -160,16 +173,16 @@ class MapHelper
         int $regionId = 0,
         int $y = 12,
         int $x = 12,
-        int $row = 0,
-        int $col = 0,
+        int $offsetY = 0,
+        int $offsetX = 0,
         string $color = ''
     ) {
         $tile = new Tile();
         $tile->region_id = $regionId;
         $tile->local_y = $y;
         $tile->local_x = $x;
-        $tile->global_y = $row + $y;
-        $tile->global_x = $col + $x;
+        $tile->global_y = $offsetY + $y;
+        $tile->global_x = $offsetX + $x;
         $tile->color = $color;
         return $tile;
     }
