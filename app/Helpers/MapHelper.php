@@ -76,12 +76,12 @@ class MapHelper
             foreach($row as $region) {
                 foreach($region->tiles as $tiles) {
                     foreach($tiles as $tile) {
-                        $map['tiles'][$tile->global_y][$tile->global_x] = $tile;
+                        $map['tiles'][$tile->global_y][$tile->global_x] = $tile->color;
                     }
                 }
             }
         }
-        //dd($map['tiles']);
+        //dd($map['tiles'][12]);
         return $map;
     }
 
@@ -297,6 +297,26 @@ class MapHelper
                     }
                     $html .= '</div>';
                 }
+                $html .= '</div>';
+            }
+            $html .= '</div>';
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    /**
+     * @param array $map
+     * @return string
+     */
+    public static function render2D(array $map)
+    {
+        $html = '';
+        $html .= '<div class="container">';
+        foreach($map['tiles'] as $rowKey => $row) {
+            $html .= '<div class="row no-gutters" id="row_'.$rowKey.'" style="border: 0px solid grey; border-left: 0; border-top: 0;">';
+            foreach($row as $tile) {
+                $html .= '<div class="" style="background-color: '.$tile.'; height: 12px; width: 12px;">';
                 $html .= '</div>';
             }
             $html .= '</div>';
