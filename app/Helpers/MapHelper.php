@@ -188,36 +188,6 @@ class MapHelper
     }
 
     /**
-     * @param int $sizeY
-     * @param int $sizeX
-     * @return array
-     */
-    public static function generateRiver(int $sizeY, int $sizeX)
-    {
-        $soilColor = 'none';
-        $waterColor = 'blue';
-        $river = array();
-        $topRow = array_fill(0, $sizeX, $soilColor);
-        $topRow[0] = $waterColor;
-        for ($y = 0; $y < $sizeY; $y++) {
-            $left = $soilColor;
-            for($x = 0; $x < $sizeX; $x++) {
-                $chance = ($topRow[$x] == $waterColor) ? 50 : 10;
-                $chance = ($left == $waterColor) ? 25 : $chance;
-                if(GameHelper::odds($chance)) {
-                    $color = $waterColor;
-                } else {
-                    $color = $soilColor;
-                }
-                $river[$y][$x] = $color;
-                $left = $color;
-            }
-            $topRow = $river[$y];
-        }
-        return $river;
-    }
-
-    /**
      * @param array $map
      * @param int $world_id
      */
@@ -344,26 +314,6 @@ class MapHelper
         $html = '';
         $html .= '<div class="container"  style="position: absolute;">';
         foreach($map['tiles'] as $rowKey => $row) {
-            $html .= '<div class="row no-gutters" id="row_'.$rowKey.'" style="border: 0px solid grey; border-left: 0; border-top: 0;">';
-            foreach($row as $tile) {
-                $html .= '<div class="" style="background-color: '.$tile.'; height: 12px; width: 12px;">';
-                $html .= '</div>';
-            }
-            $html .= '</div>';
-        }
-        $html .= '</div>';
-        return $html;
-    }
-
-    /**
-     * @param array $map
-     * @return string
-     */
-    public static function render2DRiver(array $map)
-    {
-        $html = '';
-        $html .= '<div class="container" style="position: absolute;">';
-        foreach($map as $rowKey => $row) {
             $html .= '<div class="row no-gutters" id="row_'.$rowKey.'" style="border: 0px solid grey; border-left: 0; border-top: 0;">';
             foreach($row as $tile) {
                 $html .= '<div class="" style="background-color: '.$tile.'; height: 12px; width: 12px;">';
