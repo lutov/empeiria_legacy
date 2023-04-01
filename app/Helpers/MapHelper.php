@@ -7,6 +7,7 @@ namespace App\Helpers;
 use App\Models\Names\Name;
 use App\Models\Worlds\Region;
 use App\Models\Worlds\Tile;
+use Exception;
 
 class MapHelper
 {
@@ -14,32 +15,77 @@ class MapHelper
     /**
      * @var array
      */
-    public static array $areas = array(
+    public static array $regionsPalettes = array(
         'mainland' => array(
             array('colors' => array('green', 'green'), 'weight' => 100),
             array('colors' => array('green', 'orange'), 'weight' => 75),
             array('colors' => array('green', 'yellow'), 'weight' => 50),
-            array('colors' => array('green', 'blue'), 'weight' => 25),
+            array('colors' => array('orange', 'yellow'), 'weight' => 25),
         ),
         'rural' => array(
             array('colors' => array('green', 'orange'), 'weight' => 100),
             array('colors' => array('orange', 'yellow'), 'weight' => 75),
-            array('colors' => array('green', 'blue'), 'weight' => 50),
-            array('colors' => array('blue', 'yellow'), 'weight' => 25),
+            array('colors' => array('green', 'orange'), 'weight' => 50),
+            array('colors' => array('green', 'yellow'), 'weight' => 25),
         ),
         'borderland' => array(
             array('colors' => array('green', 'red'), 'weight' => 100),
             array('colors' => array('green', 'purple'), 'weight' => 75),
-            array('colors' => array('orange', 'blue'), 'weight' => 50),
-            array('colors' => array('blue', 'purple'), 'weight' => 25),
+            array('colors' => array('orange', 'yellow'), 'weight' => 50),
+            array('colors' => array('yellow', 'purple'), 'weight' => 25),
         ),
         'frontier' => array(
             array('colors' => array('red', 'red'), 'weight' => 100),
             array('colors' => array('red', 'orange'), 'weight' => 75),
-            array('colors' => array('red', 'blue'), 'weight' => 50),
+            array('colors' => array('red', 'yellow'), 'weight' => 50),
             array('colors' => array('red', 'purple'), 'weight' => 25),
         ),
     );
+
+    /**
+     * @param int $worldSizeY
+     * @param int $worldSizeX
+     * @param int $regionSizeY
+     * @param int $regionSizeX
+     * @throws Exception
+     */
+    public static function generate2(
+        int $worldSizeY     = 12,
+        int $worldSizeX     = 12,
+        int $regionSizeY    = 12,
+        int $regionSizeX    = 12
+    ) {
+        $luminosity = 'light';
+
+        $map = array();
+        $regions = self::getMapRegions();
+        //dd($regions);
+        for ($worldRow = 0; $worldRow < $worldSizeY; $worldRow++) {
+            for ($worldCol = 0; $worldCol < $worldSizeX; $worldCol++) {
+                $region = $regions[$worldRow][$worldCol];
+                $regionPalette = self::$regionsPalettes[$region];
+
+                $picker = new RandomHelper();
+                foreach ($regionPalette as $element) {
+                    $picker->addElement($element['colors'], $element['weight']);
+                }
+
+                for ($regionRow = 0; $regionRow < $regionSizeY; $regionRow++) {
+                    for ($regionCol = 0; $regionCol < $regionSizeX; $regionCol++) {
+                        $x = ($worldCol * $regionSizeX) + $regionCol;
+                        $y = ($worldRow * $regionSizeY) + $regionRow;
+
+                        $hue = $picker->getRandomElement();
+                        $color = ColorHelper::one(array('luminosity' => $luminosity, 'hue' => $hue));
+
+                        $map['tiles'][$x][$y]['region'] = $region;
+                        $map['tiles'][$x][$y]['color'] = $color;
+                    }
+                }
+            }
+        }
+        return $map;
+    }
 
     /**
      * @param int $worldSizeY
@@ -119,7 +165,7 @@ class MapHelper
             $hue = $picker->getRandomElement();
         } catch (\RuntimeException $e) {
             dump($e->getMessage());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             dump($e->getMessage());
         }
         $regionColor = ColorHelper::one(array('luminosity' => $luminosity, 'hue' => $hue));
@@ -316,7 +362,7 @@ class MapHelper
         foreach($map['tiles'] as $rowKey => $row) {
             $html .= '<div class="row no-gutters" id="row_'.$rowKey.'" style="border: 0px solid grey; border-left: 0; border-top: 0;">';
             foreach($row as $tile) {
-                $html .= '<div class="" style="background-color: '.$tile.'; height: 12px; width: 12px;">';
+                $html .= '<div class="" style="background-color: '.$tile['color'].'; height: 12px; width: 12px;">';
                 $html .= '</div>';
             }
             $html .= '</div>';
@@ -330,9 +376,9 @@ class MapHelper
      * @param int $worldSizeX
      * @return array
      */
-    public static function regions(int $worldSizeY = 12, int $worldSizeX = 12)
+    public static function getMapRegions(int $worldSizeY = 12, int $worldSizeX = 12)
     {
-        $region_area = array();
+        $regions = array();
         $range_m = range(4, 7);
         $range_r = range(2, 9);
         $range_b = range(1, 10);
@@ -341,21 +387,21 @@ class MapHelper
         $borderland = array_fill(1, 10, $range_b);
         for ($y = 0; $y < $worldSizeY; $y++) {
             for ($x = 0; $x < $worldSizeX; $x++) {
-                if (isset($region_area[$y][$x])) {
+                if (isset($regions[$y][$x])) {
                     continue;
                 }
                 if (isset($mainland[$y]) && (in_array($x, $mainland[$y]))) {
-                    $region_area[$y][$x] = 'mainland';
+                    $regions[$y][$x] = 'mainland';
                 } elseif (isset($rural[$y]) && (in_array($x, $rural[$y]))) {
-                    $region_area[$y][$x] = 'rural';
+                    $regions[$y][$x] = 'rural';
                 } elseif (isset($borderland[$y]) && (in_array($x, $borderland[$y]))) {
-                    $region_area[$y][$x] = 'borderland';
+                    $regions[$y][$x] = 'borderland';
                 } else {
-                    $region_area[$y][$x] = 'frontier';
+                    $regions[$y][$x] = 'frontier';
                 }
             }
         }
-        return $region_area;
+        return $regions;
     }
 
 }

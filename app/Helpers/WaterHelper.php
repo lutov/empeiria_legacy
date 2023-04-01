@@ -4,8 +4,50 @@
 namespace App\Helpers;
 
 
-class RiverHelper
+class WaterHelper
 {
+    /**
+     * @param array $map
+     * @return array
+     */
+    public static function addWater(array $map)
+    {
+        $luminosity = 'light';
+        $hue = 'blue';
+        foreach($map['tiles'] as $y => $tileRow) {
+            foreach($tileRow as $x => $tileCol) {
+                $nw = (isset($map['tiles'][$x-1][$y-1]['terrain']) && ('water' == $map['tiles'][$x-1][$y-1]['terrain']));
+                $nn = (isset($map['tiles'][$x][$y-1]['terrain']) && ('water' == $map['tiles'][$x][$y-1]['terrain']));
+                $ne = (isset($map['tiles'][$x+1][$y-1]['terrain']) && ('water' == $map['tiles'][$x+1][$y-1]['terrain']));
+                $ww = (isset($map['tiles'][$x-1][$y]['terrain']) && ('water' == $map['tiles'][$x-1][$y]['terrain']));
+                if(($nw && $nn && $ne) || ($nw && $nn && $ww)) {
+                    $chance = rand(75, 100);
+                } elseif(($nw && $nn) || ($nw && $ww) || ($nw && $ne) || ($nn && $ne) || ($nn && $ww)) {
+                    $chance = rand(25, 50);
+                } elseif($nw || $nn) {
+                    $chance = rand(25, 50);
+                } elseif($ne || $ww) {
+                    $chance = rand(25, 50);
+                } else {
+                    $chance = 5;
+                }
+                if (GameHelper::odds($chance)) {
+                    $waterColor = ColorHelper::one(
+                        array(
+                            'luminosity' => $luminosity,
+                            'hue' => $hue
+                        )
+                    );
+                    $map['tiles'][$x][$y]['terrain'] = 'water';
+                    $map['tiles'][$x][$y]['color'] = $waterColor;
+                } else {
+                    $map['tiles'][$x][$y]['terrain'] = 'land';
+                }
+            }
+        }
+        return $map;
+    }
+
     /**
      * @param int $width
      * @param int $height

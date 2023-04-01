@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BiomeHelper;
 use App\Helpers\ColorHelper;
+use App\Helpers\LandscapeHelper;
 use App\Helpers\MapHelper;
+use App\Helpers\PerlinNoiseHelper;
+use App\Helpers\WaterHelper;
+use App\Models\Worlds\Biome;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -22,9 +29,30 @@ class GameController extends Controller
 
     /**
      * @param Request $request
+     * @return Application|Factory|\Illuminate\Contracts\View\View
+     * @throws Exception
      */
     public function demo(Request $request)
     {
+        /*
+        $biomes = Biome::all();
+        $map['tiles'] = BiomeHelper::calculateHeight(10, 10, 0.005, $biomes);
+        //dd($map);
+        return view('demo', array(
+            'map' => BiomeHelper::renderBiomes($map),
+        ));
+        */
+        //$map = BiomeHelper::generateMap();
+        //dd($map);
+        $map = MapHelper::generate2();
+        $map = WaterHelper::addWater($map);
+        $map = LandscapeHelper::addHeight($map);
+        //$river = RiverHelper::generate(144, 144);
+        return view('demo', array(
+            'map' => MapHelper::render2D($map),
+            //'river' => RiverHelper::render2D($river),
+        ));
+        /*
         $x = $y = 4;
         $pixel = 16;
         $luminosity = 'dark';
@@ -59,6 +87,7 @@ class GameController extends Controller
         $path = 'img/squads/banners/003.png';
         imagepng($gd, public_path($path));
         imagedestroy($gd);
+        */
     }
 
     /**
@@ -79,7 +108,7 @@ class GameController extends Controller
      * @param Request $request
      * @param int $id
      * @return Factory|View
-     * @throws \Exception
+     * @throws Exception
      */
     public function world(Request $request, int $id = 0)
     {
